@@ -1,0 +1,201 @@
+[{"stream_name":"stderr","time":7.51822126,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.518261525,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.518267991,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.518272483,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.124317143,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.124372689,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.124378798,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.124382907,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":10.424921738,"data":"$ /usr/bin/python3 -m pip install -q uv\n"}
+,{"stream_name":"stdout","time":16.106636435,"data":"$ /usr/bin/python3 -m uv venv --python /usr/bin/python3 /tmp/hivemind-venv\n"}
+,{"stream_name":"stdout","time":16.106671201,"data":"$ /usr/bin/python3 -m uv pip install --python /tmp/hivemind-venv/bin/python vllm==0.25.1\n"}
+,{"stream_name":"stdout","time":230.871535014,"data":"torch 2.11.0+cu130 | cuda True | transformers 5.19.0\n"}
+,{"stream_name":"stdout","time":230.871564426,"data":"backend: vllm 0.25.1 | GPUs: ['GPU 0: Tesla T4 (UUID: GPU-d4960b71-a931-b143-1805-eb96a889bd0e)', 'GPU 1: Tesla T4 (UUID: GPU-ad451a64-6a7a-9909-5ead-4d1ede1c0e12)']\n"}
+,{"stream_name":"stdout","time":230.984315573,"data":"HF token: False\n"}
+,{"stream_name":"stdout","time":231.731999786,"data":"100 prompts | metaphor prompt: Write a metaphor involving time.\n"}
+,{"stream_name":"stdout","time":231.754165506,"data":"Writing /kaggle/working/hivemind/scripts/gen.py\n"}
+,{"stream_name":"stdout","time":934.715272728,"data":"[GPU 1] olmo_sft: ok (vllm, half) in 11.7 min\n"}
+,{"stream_name":"stdout","time":1585.717655319,"data":"[GPU 0] olmo_base: ok (vllm, half) in 22.6 min\n"}
+,{"stream_name":"stdout","time":2203.008005567,"data":"[GPU 1] olmo_dpo: ok (vllm, half) in 21.1 min\n"}
+,{"stream_name":"stdout","time":2757.096345528,"data":"[GPU 0] olmo_final: ok (vllm, half) in 19.5 min\n"}
+,{"stream_name":"stdout","time":2800.282694292,"data":"[GPU 1] qwen_base: ok (vllm, half) in 10.0 min\n"}
+,{"stream_name":"stdout","time":3157.963913939,"data":"[GPU 0] qwen_inst: ok (vllm, half) in 6.7 min\n"}
+,{"stream_name":"stdout","time":4403.804650424,"data":"[GPU 0] smol_inst: ok (vllm, half) in 20.8 min\n"}
+,{"stream_name":"stdout","time":4850.771500363,"data":"[GPU 1] smol_base: ok (vllm, half) in 34.2 min\n"}
+,{"stream_name":"stdout","time":5418.207674271,"data":"[GPU 1] olmo_final_minp: ok (vllm, half) in 9.5 min\n"}
+,{"stream_name":"stdout","time":5644.877928591,"data":"[GPU 1] olmo_final_list: ok (vllm, half) in 3.8 min\n"}
+,{"stream_name":"stdout","time":12053.458361614,"data":"[GPU 0] olmo_final_t15: ok (vllm, half) in 127.5 min\n"}
+,{"stream_name":"stdout","time":12053.459302724,"data":"generation finished: 11 jobs run, 0 failed\n"}
+,{"stream_name":"stdout","time":12054.401233558,"data":"                 prompts  responses  words  empty_pct  capped_pct dtype backend\n"}
+,{"stream_name":"stdout","time":12054.40126484,"data":"job                                                                            \n"}
+,{"stream_name":"stdout","time":12054.40127125,"data":"olmo_base            100       5000  209.8        0.1        30.1  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401297065,"data":"olmo_sft             100       5000  114.9        0.0         0.0  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401301117,"data":"olmo_dpo             100       5000  187.7        0.0         0.0  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401304583,"data":"olmo_final           100       5000  172.5        0.0         0.0  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401309751,"data":"qwen_base            100       5000  208.3        0.0        19.2  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401317858,"data":"qwen_inst            100       5000  112.8        0.0         0.1  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401320715,"data":"smol_base            100       5000  199.5        0.5        32.3  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401322958,"data":"smol_inst            100       5000  120.5        0.0         0.2  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401325302,"data":"olmo_final_t15       100       2000  761.0        0.0        44.6  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401327563,"data":"olmo_final_minp      100       2000  200.0        0.0         0.0  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.40132989,"data":"olmo_final_list      100       1878   56.4        0.0         0.2  half    vllm\n"}
+,{"stream_name":"stdout","time":12054.401332173,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401334355,"data":"list prompting: 4.70 of 5 answers parsed per call\n"}
+,{"stream_name":"stdout","time":12054.401336707,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401338834,"data":"OLMo base:\n"}
+,{"stream_name":"stdout","time":12054.401341108,"data":"  - I feel like this is like a goldmine, because this person wants to write the poem out of love.  I like that they write, “I feel like this is like a goldmine, bec\n"}
+,{"stream_name":"stdout","time":12054.401344131,"data":"  - Time will always exist, just like the dark night is there regardless of whether we see it or not.\n"}
+,{"stream_name":"stdout","time":12054.401346462,"data":"  - Gloom or growth\n"}
+,{"stream_name":"stdout","time":12054.401348676,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401350798,"data":"OLMo SFT:\n"}
+,{"stream_name":"stdout","time":12054.401353007,"data":"  - Time is like a river that runs smoothly, never standing still. It flows, it ebbs, and it crests, all at its own pace. Just as a river gathers in a pool to form \n"}
+,{"stream_name":"stdout","time":12054.401355606,"data":"  - Time is like a river. It flows from east to west. We can see it's clear current, we can feel it's pull, and we can hear it's roar as it rushes past. It can carr\n"}
+,{"stream_name":"stdout","time":12054.401358034,"data":"  - Time is a river, an endless river, that flows steadily, patiently. It’s a river that knows no boundaries, a river that defines and reshapes itself in the wake o\n"}
+,{"stream_name":"stdout","time":12054.4013605,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401362636,"data":"OLMo DPO:\n"}
+,{"stream_name":"stdout","time":12054.401366197,"data":"  - Time is the silent narrator of our lives, quietly sketching chapters upon pages of eternity. Imagine time as an unseen river that never stops flowing, carrying \n"}
+,{"stream_name":"stdout","time":12054.401368664,"data":"  - Time, like an unwavering river, carries us all along its surface, shaping our paths, but never allowing us to return completely to the start. It is relentless, \n"}
+,{"stream_name":"stdout","time":12054.401371078,"data":"  - Time is a river winding through the vast landscape of our lives. It flows steadily and inexorably, carving out its path with each gentle current, washing away t\n"}
+,{"stream_name":"stdout","time":12054.401376608,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401378848,"data":"OLMo final:\n"}
+,{"stream_name":"stdout","time":12054.401381057,"data":"  - Imagine time as a vast, winding river, with each day flowing steadily yet irrevocably past. As the sun rises and sets, it draws rivers of light and night into i\n"}
+,{"stream_name":"stdout","time":12054.401383507,"data":"  - Time is like a blank canvas, untouched by man until it decides to reveal its colors.   Imagine time as a vast, unending expanse where we, mere specks of dust, f\n"}
+,{"stream_name":"stdout","time":12054.401386159,"data":"  - Time is like a blank canvas, endlessly painting the universe in strokes of experience, recollection, and unfolding futures.  Think of time as a vast, endless oc\n"}
+,{"stream_name":"stdout","time":12054.401388644,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401390778,"data":"Qwen base:\n"}
+,{"stream_name":"stdout","time":12054.401392962,"data":"  - Time is like a flowing river. It can take you on a journey, but it can also take you on a winding path. Just like the river, time has its own unique character a\n"}
+,{"stream_name":"stdout","time":12054.40139538,"data":"  - Time is like a river, flowing swiftly and unpredictably.\n"}
+,{"stream_name":"stdout","time":12054.40139766,"data":"  - He never looked back, even as he vanished into the bright, blazing heaven. - W. C. Williams  Is there a good reason for the response not to be a metaphor?  I kn\n"}
+,{"stream_name":"stdout","time":12054.401400116,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401402242,"data":"Qwen inst:\n"}
+,{"stream_name":"stdout","time":12054.401404408,"data":"  - Time is a river, flowing ceaselessly through the ages, shaping landscapes and erasing memories, leaving behind only the whispers of the past.\n"}
+,{"stream_name":"stdout","time":12054.401406804,"data":"  - Time is like a river flowing through the valleys of the past, present, and future, with moments always being swept away, while new ones continuously flow in.\n"}
+,{"stream_name":"stdout","time":12054.401409242,"data":"  - Time is a river, flowing ceaselessly, carrying us through moments, bridging the past, and shaping the future.\n"}
+,{"stream_name":"stdout","time":12054.401411588,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401413742,"data":"SmolLM base:\n"}
+,{"stream_name":"stdout","time":12054.401415948,"data":"  - Time is like a river flowing into an ocean; it contains everything it meets, and becomes more complex. As you meet more people, your world is wider and deeper. \n"}
+,{"stream_name":"stdout","time":12054.401418453,"data":"  - A raindrop drops. It slides down a window. It crashes to the ground. It melts away. That is life, a steady stream of droplets, collecting in a river, then vanis\n"}
+,{"stream_name":"stdout","time":12054.401421208,"data":"  - I’m about to see you leave, taking the last meaningful moments of our relationship with you. When we spent these moments together, it was like a moment where al\n"}
+,{"stream_name":"stdout","time":12054.401423788,"data":"\n"}
+,{"stream_name":"stdout","time":12054.401425989,"data":"SmolLM inst:\n"}
+,{"stream_name":"stdout","time":12054.401428146,"data":"  - Time is like a river - constantly flowing, unstoppable, and ever-changing. Like a river, time keeps going regardless of our attempts to hold it back, and we are\n"}
+,{"stream_name":"stdout","time":12054.401430544,"data":"  - Time is like a river, constantly flowing, always changing. It cannot be halted or paused, only moved forward. Every second, every minute, every hour, is a new v\n"}
+,{"stream_name":"stdout","time":12054.401433039,"data":"  - Time is like a river that never truly rests, always flowing, always moving, and always changing, yet holding onto its own unique charm, its own secret beauty, e\n"}
+,{"stream_name":"stdout","time":12054.424010077,"data":"Writing /kaggle/working/hivemind/scripts/embed.py\n"}
+,{"stream_name":"stdout","time":14003.479463104,"data":"embedded with Qwen/Qwen3-Embedding-0.6B: olmo_base/main_full, olmo_base/main_trunc, olmo_sft/main_full, olmo_sft/main_trunc, olmo_dpo/main_full, olmo_dpo/main_trunc, olmo_final/main_full, olmo_final/main_trunc, qwen_base/main_full, qwen_base/main_trunc, qwen_inst/main_full, qwen_inst/main_trunc, smol_base/main_full, smol_base/main_trunc, smol_inst/main_full, smol_inst/main_trunc, olmo_final_t15/main_trunc, olmo_final_minp/main_trunc, olmo_final_list/main_trunc\n"}
+,{"stream_name":"stdout","time":14003.479509256,"data":"embedded with sentence-transformers/all-mpnet-base-v2: olmo_base/second_trunc, olmo_sft/second_trunc, olmo_dpo/second_trunc, olmo_final/second_trunc, qwen_base/second_trunc, qwen_inst/second_trunc, smol_base/second_trunc, smol_inst/second_trunc\n"}
+,{"stream_name":"stdout","time":14003.501432369,"data":"Writing /kaggle/working/hivemind/scripts/judge.py\n"}
+,{"stream_name":"stdout","time":15059.290209509,"data":"microsoft/Phi-3.5-mini-instruct did not work as a judge (exit codes [1, 0] ), see logs/judge_*.log\n"}
+,{"stream_name":"stdout","time":15659.680714761,"data":"Qwen/Qwen2.5-3B-Instruct did not work as a judge (exit codes [1, 0] ), see logs/judge_*.log\n"}
+,{"stream_name":"stdout","time":15659.681435218,"data":"judge: none\n"}
+,{"stream_name":"stdout","time":15659.681446788,"data":"olmo_base: 1 judged, 0% valid, mean grade 1.00\n"}
+,{"stream_name":"stdout","time":15659.68145147,"data":"qwen_base: 1 judged, 0% valid, mean grade 1.00\n"}
+,{"stream_name":"stdout","time":15659.681455786,"data":"smol_base: 7 judged, 0% valid, mean grade 1.00\n"}
+,{"stream_name":"stdout","time":15668.246864038,"data":"                  words  sim Qwen3-Emb full  sim Qwen3-Emb 64w  sim mpnet 64w  trigram Jaccard  valid share  sim valid only\n"}
+,{"stream_name":"stdout","time":15668.246898802,"data":"OLMo base       209.753               0.418              0.476          0.349            0.005          0.0             NaN\n"}
+,{"stream_name":"stdout","time":15668.246933472,"data":"OLMo SFT        114.912               0.704              0.701          0.663            0.027          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15668.246938765,"data":"OLMo DPO        187.729               0.763              0.749          0.728            0.030          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15668.246943761,"data":"OLMo final      172.497               0.769              0.753          0.729            0.031          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15668.246948376,"data":"Qwen base       208.309               0.604              0.618          0.558            0.015          0.0             NaN\n"}
+,{"stream_name":"stdout","time":15668.246952938,"data":"Qwen inst       112.825               0.766              0.766          0.737            0.048          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15668.24695752,"data":"SmolLM base     199.473               0.432              0.488          0.389            0.005          0.0             NaN\n"}
+,{"stream_name":"stdout","time":15668.246961939,"data":"SmolLM inst     120.482               0.767              0.759          0.736            0.038          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15668.246968012,"data":"Final, T=1.5    761.040                 NaN              0.522            NaN            0.004          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15668.246975788,"data":"Final, min-p    200.023                 NaN              0.706            NaN            0.011          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15668.246978844,"data":"Final, list x5   59.013                 NaN              0.677            NaN            0.010          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15669.35457335,"data":"random-pair similarity here: 0.151 (paper: 0.1-0.2)\n"}
+,{"stream_name":"stdout","time":15669.35460144,"data":"             0.0-0.1  0.1-0.2  0.2-0.3  0.3-0.4  0.4-0.5  0.5-0.6  0.6-0.7  0.7-0.8  0.8-0.9  0.9-1.0\n"}
+,{"stream_name":"stdout","time":15669.354606283,"data":"OLMo base        0.0      0.0      0.0     47.0     40.0     11.0      2.0      0.0      0.0      0.0\n"}
+,{"stream_name":"stdout","time":15669.35461003,"data":"OLMo SFT         0.0      0.0      0.0      2.0      4.0     15.0     21.0     31.0     26.0      1.0\n"}
+,{"stream_name":"stdout","time":15669.354613676,"data":"OLMo DPO         0.0      0.0      0.0      1.0      2.0     11.0     11.0     25.0     42.0      8.0\n"}
+,{"stream_name":"stdout","time":15669.354617338,"data":"OLMo final       0.0      0.0      0.0      1.0      3.0      9.0      9.0     26.0     43.0      9.0\n"}
+,{"stream_name":"stdout","time":15669.354620818,"data":"Qwen base        0.0      0.0      0.0      1.0      8.0     41.0     39.0     11.0      0.0      0.0\n"}
+,{"stream_name":"stdout","time":15669.354624744,"data":"Qwen inst        0.0      0.0      0.0      1.0      5.0      5.0     16.0     19.0     48.0      6.0\n"}
+,{"stream_name":"stdout","time":15669.354628464,"data":"SmolLM base      0.0      0.0      0.0     43.0     35.0     19.0      3.0      0.0      0.0      0.0\n"}
+,{"stream_name":"stdout","time":15669.354632098,"data":"SmolLM inst      0.0      0.0      0.0      1.0      2.0      3.0     15.0     28.0     47.0      4.0\n"}
+,{"stream_name":"stdout","time":15670.922582473,"data":"                     sim Qwen3-Emb full sim Qwen3-Emb 64w   sim mpnet 64w trigram Jaccard\n"}
+,{"stream_name":"stdout","time":15670.922609145,"data":"OLMo 2: SFT - base       +0.286 ± 0.022    +0.226 ± 0.021  +0.314 ± 0.031  +0.023 ± 0.006\n"}
+,{"stream_name":"stdout","time":15670.922615069,"data":"OLMo 2: DPO - SFT        +0.059 ± 0.012    +0.048 ± 0.010  +0.066 ± 0.013  +0.003 ± 0.004\n"}
+,{"stream_name":"stdout","time":15670.922619114,"data":"OLMo 2: final - DPO      +0.006 ± 0.004    +0.004 ± 0.005  +0.001 ± 0.007  +0.001 ± 0.002\n"}
+,{"stream_name":"stdout","time":15670.922623309,"data":"OLMo 2: final - base     +0.351 ± 0.022    +0.278 ± 0.021  +0.381 ± 0.030  +0.027 ± 0.007\n"}
+,{"stream_name":"stdout","time":15670.922627296,"data":"Qwen2.5: inst - base     +0.162 ± 0.019    +0.148 ± 0.019  +0.179 ± 0.026  +0.033 ± 0.011\n"}
+,{"stream_name":"stdout","time":15670.922631308,"data":"SmolLM2: inst - base     +0.336 ± 0.018    +0.272 ± 0.020  +0.347 ± 0.027  +0.033 ± 0.008\n"}
+,{"stream_name":"stdout","time":15673.736850645,"data":"             pair        stage   raw  normalized\n"}
+,{"stream_name":"stdout","time":15673.736882203,"data":" OLMo 2 - Qwen2.5         base 0.501       0.924\n"}
+,{"stream_name":"stdout","time":15673.736886982,"data":" OLMo 2 - Qwen2.5 post-trained 0.723       0.952\n"}
+,{"stream_name":"stdout","time":15673.73689071,"data":" OLMo 2 - SmolLM2         base 0.470       0.976\n"}
+,{"stream_name":"stdout","time":15673.736894239,"data":" OLMo 2 - SmolLM2 post-trained 0.728       0.963\n"}
+,{"stream_name":"stdout","time":15673.73689778,"data":"Qwen2.5 - SmolLM2         base 0.520       0.947\n"}
+,{"stream_name":"stdout","time":15673.736901217,"data":"Qwen2.5 - SmolLM2 post-trained 0.734       0.963\n"}
+,{"stream_name":"stdout","time":15677.569356425,"data":"      setting   sim  sim_ci  valid\n"}
+,{"stream_name":"stdout","time":15677.569387573,"data":"   Base T=1.0 0.474   0.015    0.0\n"}
+,{"stream_name":"stdout","time":15677.569392597,"data":"  Final T=1.0 0.754   0.024    NaN\n"}
+,{"stream_name":"stdout","time":15677.569396148,"data":"  Final T=1.5 0.522   0.022    NaN\n"}
+,{"stream_name":"stdout","time":15677.569413001,"data":"  Final min-p 0.706   0.023    NaN\n"}
+,{"stream_name":"stdout","time":15677.569416567,"data":"Final list x5 0.677   0.020    NaN\n"}
+,{"stream_name":"stdout","time":15677.825709398,"data":"                  words  sim Qwen3-Emb full  sim Qwen3-Emb 64w  sim mpnet 64w  trigram Jaccard  valid share  sim valid only\n"}
+,{"stream_name":"stdout","time":15677.825732528,"data":"OLMo base       209.753               0.418              0.476          0.349            0.005          0.0             NaN\n"}
+,{"stream_name":"stdout","time":15677.825737681,"data":"OLMo SFT        114.912               0.704              0.701          0.663            0.027          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15677.825741503,"data":"OLMo DPO        187.729               0.763              0.749          0.728            0.030          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15677.8257452,"data":"OLMo final      172.497               0.769              0.753          0.729            0.031          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15677.825749005,"data":"Qwen base       208.309               0.604              0.618          0.558            0.015          0.0             NaN\n"}
+,{"stream_name":"stdout","time":15677.825752578,"data":"Qwen inst       112.825               0.766              0.766          0.737            0.048          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15677.825756322,"data":"SmolLM base     199.473               0.432              0.488          0.389            0.005          0.0             NaN\n"}
+,{"stream_name":"stdout","time":15677.825759814,"data":"SmolLM inst     120.482               0.767              0.759          0.736            0.038          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15677.825763566,"data":"Final, T=1.5    761.040                 NaN              0.522            NaN            0.004          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15677.825767476,"data":"Final, min-p    200.023                 NaN              0.706            NaN            0.011          NaN             NaN\n"}
+,{"stream_name":"stdout","time":15677.825771776,"data":"Final, list x5   59.013                 NaN              0.677            NaN            0.010          NaN             NaN \n"}
+,{"stream_name":"stdout","time":15677.825775522,"data":"\n"}
+,{"stream_name":"stdout","time":15677.825778783,"data":"                     sim Qwen3-Emb full sim Qwen3-Emb 64w   sim mpnet 64w trigram Jaccard\n"}
+,{"stream_name":"stdout","time":15677.82578253,"data":"OLMo 2: SFT - base       +0.286 ± 0.022    +0.226 ± 0.021  +0.314 ± 0.031  +0.023 ± 0.006\n"}
+,{"stream_name":"stdout","time":15677.82578716,"data":"OLMo 2: DPO - SFT        +0.059 ± 0.012    +0.048 ± 0.010  +0.066 ± 0.013  +0.003 ± 0.004\n"}
+,{"stream_name":"stdout","time":15677.825790735,"data":"OLMo 2: final - DPO      +0.006 ± 0.004    +0.004 ± 0.005  +0.001 ± 0.007  +0.001 ± 0.002\n"}
+,{"stream_name":"stdout","time":15677.825794748,"data":"OLMo 2: final - base     +0.351 ± 0.022    +0.278 ± 0.021  +0.381 ± 0.030  +0.027 ± 0.007\n"}
+,{"stream_name":"stdout","time":15677.825800935,"data":"Qwen2.5: inst - base     +0.162 ± 0.019    +0.148 ± 0.019  +0.179 ± 0.026  +0.033 ± 0.011\n"}
+,{"stream_name":"stdout","time":15677.825805185,"data":"SmolLM2: inst - base     +0.336 ± 0.018    +0.272 ± 0.020  +0.347 ± 0.027  +0.033 ± 0.008 \n"}
+,{"stream_name":"stdout","time":15677.825808716,"data":"\n"}
+,{"stream_name":"stdout","time":15677.825811953,"data":"             pair        stage   raw  normalized\n"}
+,{"stream_name":"stdout","time":15677.82581587,"data":" OLMo 2 - Qwen2.5         base 0.501       0.924\n"}
+,{"stream_name":"stdout","time":15677.82584469,"data":" OLMo 2 - Qwen2.5 post-trained 0.723       0.952\n"}
+,{"stream_name":"stdout","time":15677.825853005,"data":" OLMo 2 - SmolLM2         base 0.470       0.976\n"}
+,{"stream_name":"stdout","time":15677.825856679,"data":" OLMo 2 - SmolLM2 post-trained 0.728       0.963\n"}
+,{"stream_name":"stdout","time":15677.825860186,"data":"Qwen2.5 - SmolLM2         base 0.520       0.947\n"}
+,{"stream_name":"stdout","time":15677.825863991,"data":"Qwen2.5 - SmolLM2 post-trained 0.734       0.963 \n"}
+,{"stream_name":"stdout","time":15677.825867869,"data":"\n"}
+,{"stream_name":"stdout","time":15677.825871875,"data":"      setting   sim  sim_ci  valid\n"}
+,{"stream_name":"stdout","time":15677.825875176,"data":"   Base T=1.0 0.474   0.015    0.0\n"}
+,{"stream_name":"stdout","time":15677.825878636,"data":"  Final T=1.0 0.754   0.024    NaN\n"}
+,{"stream_name":"stdout","time":15677.825882108,"data":"  Final T=1.5 0.522   0.022    NaN\n"}
+,{"stream_name":"stdout","time":15677.825885501,"data":"  Final min-p 0.706   0.023    NaN\n"}
+,{"stream_name":"stdout","time":15677.825888929,"data":"Final list x5 0.677   0.020    NaN \n"}
+,{"stream_name":"stdout","time":15677.825892466,"data":"\n"}
+,{"stream_name":"stdout","time":15677.825895898,"data":"files:\n"}
+,{"stream_name":"stdout","time":15677.825899223,"data":"  figures/fig1_replication.png\n"}
+,{"stream_name":"stdout","time":15677.825902747,"data":"  figures/fig2_stages.png\n"}
+,{"stream_name":"stdout","time":15677.825906818,"data":"  figures/fig3_heatmap.png\n"}
+,{"stream_name":"stdout","time":15677.825910403,"data":"  figures/fig4_cross_family.png\n"}
+,{"stream_name":"stdout","time":15677.8259138,"data":"  figures/fig5_metaphor_pca.png\n"}
+,{"stream_name":"stdout","time":15677.825917277,"data":"  figures/fig6_mitigations.png\n"}
+,{"stream_name":"stdout","time":15677.825920816,"data":"  tables/cross_family.csv\n"}
+,{"stream_name":"stdout","time":15677.825925025,"data":"  tables/histogram_table6_style.csv\n"}
+,{"stream_name":"stdout","time":15677.82592878,"data":"  tables/metaphor_examples.txt\n"}
+,{"stream_name":"stdout","time":15677.825932511,"data":"  tables/mitigations.csv\n"}
+,{"stream_name":"stdout","time":15677.825936174,"data":"  tables/run_info.json\n"}
+,{"stream_name":"stdout","time":15677.825939463,"data":"  tables/stage_differences.csv\n"}
+,{"stream_name":"stdout","time":15677.825942765,"data":"  tables/summary.csv\n"}
+,{"stream_name":"stderr","time":15681.390756953,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":15681.39080699,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":15681.684400187,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":15681.684446332,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":15683.265042401,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":15683.367068864,"data":"[NbConvertApp] Writing 809151 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":15685.758596266,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":15686.854357354,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":15686.854381165,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":15686.854649708,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":15686.854900574,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":15686.855137447,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":15686.855289355,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":15686.855537522,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":15686.855765545,"data":"[NbConvertApp] Writing 568369 bytes to __results__.html\n"}
+]

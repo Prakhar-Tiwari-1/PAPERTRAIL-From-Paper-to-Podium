@@ -1,0 +1,4 @@
+# Profile for "Artificial Hivemind: The Open-Ended Homogeneity of Language Models (and Beyond)" (Jiang et al.; NeurIPS 2025 Datasets and Benchmarks).
+# Minimal on purpose: everything else is optional and the pipeline works from the paper text alone (see papers/default.yaml).
+paper_citation: "Jiang et al.  ·  NeurIPS 2025 (Datasets and Benchmarks)  ·  arXiv:2510.22954"
+cite_short: "Jiang et al., 2025"
