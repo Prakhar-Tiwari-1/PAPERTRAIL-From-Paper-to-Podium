@@ -1,0 +1,4 @@
+# Keep LF line endings for files read from WSL/bash
+.env* text eol=lf
+*.sh text eol=lf
+*.py text eol=lf

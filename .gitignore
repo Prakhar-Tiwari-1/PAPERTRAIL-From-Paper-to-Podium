@@ -1,0 +1,57 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Node / Slidev
+node_modules/
+deck/dist/
+deck/.slidev/
+deck/slides-export*
+*.log
+
+# Pipeline outputs (local; a chosen release run can be committed explicitly)
+runs/*
+!runs/.gitkeep
+# !runs/release/
+
+# LLM response cache and tool caches
+.cache/
+cache/
+
+# External data (license-dependent; see SPEC §17)
+data/slideaudit/
+data/lost_in_conversation/
+experiments/lost_in_conv/upstream/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# generated from deck/footer.json by tools/footer.py
+deck/theme/footer.json
+deck/public/footer-logo.png
+
+# example slides the owner likes (may be copyrighted): local only
+references/slides/*
+!references/slides/.gitkeep
+
+# papers you present (may be copyrighted): local only
+papers/*.pdf

@@ -1,0 +1,42 @@
+# Static rubric (SPEC §10). 100 points, binary items judged with evidence.
+# `hard_gate: true` -> a failure fails the whole deck until fixed.
+dimensions:
+  faithfulness:
+    points: 25
+    items:
+      - {id: F1, points: 10, hard_gate: true, text: "Every number on the slides matches the paper or an artifact (number + page/table/CSV listed)."}
+      - {id: F2, points: 10, hard_gate: true, text: "No claim is absent from or contradicts the paper."}
+      - {id: F3, points: 5, text: "Figures are reproduced or re-plotted without distortion."}
+  explanation:
+    points: 20
+    items:
+      - {id: E1, points: 8, text: "Every hard concept in the checklist is explained before it is used."}
+      - {id: E2, points: 6, text: "Each explanation device is appropriate and correct (an analogy states its limits; examples come from real data)."}
+      - {id: E3, points: 6, text: "The paper's key metrics and terms can be understood from the slides alone."}
+  coverage:
+    points: 20
+    items:
+      - {id: C1, points: 3, text: "Problem and motivation are covered."}
+      - {id: C2, points: 6, text: "Each stated contribution is covered."}
+      - {id: C3, points: 4, text: "The conditions, variants or ablations the paper tests, and its key design choices, are covered."}
+      - {id: C4, points: 3, text: "The headline result is stated with its number."}
+      - {id: C5, points: 4, text: "Limitations (the authors' own and any known critique) are covered and prior work is positioned."}
+  narrative:
+    points: 15
+    items:
+      - {id: N1, points: 5, text: "The slide titles alone tell the story."}
+      - {id: N2, points: 4, text: "Logical order; no undefined forward references."}
+      - {id: N3, points: 3, auto: true, text: "12-14 main slides, notes 2,400-2,900 words, no slide over 2 minutes."}
+      - {id: N4, points: 3, text: "There is a clear takeaway."}
+  design:
+    points: 10
+    items:
+      - {id: D1, points: 3, auto: true, text: "Density rules met (at most 70 words per slide) and no banned patterns or AI-sounding phrasing."}
+      - {id: D2, points: 2, auto: true, text: "Consistent style; no overflow or misalignment (from qa.json)."}
+      - {id: D3, points: 2, auto: true, text: "Figures are readable at projection size."}
+      - {id: D4, points: 3, vision: true, text: "Looking at the slide images: the deck is visually engaging, not text-heavy; nearly every slide carries a real visual from the paper; colour is used purposefully and consistently."}
+  beyond:
+    points: 10
+    items:
+      - {id: B1, points: 5, text: "An own-analysis slide with a reproducible artifact."}
+      - {id: B2, points: 5, text: "The Tools & Workflow slide is accurate and complete."}

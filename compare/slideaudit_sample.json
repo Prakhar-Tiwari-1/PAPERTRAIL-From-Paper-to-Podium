@@ -1,0 +1,378 @@
+{
+ "source": "github.com/zhuohaouw/SlideAudit (CC BY 4.0)",
+ "slides": [
+  {
+   "id": 48,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Unbalanced Space Distribution",
+    "Occluded Content",
+    "Poor Text Hierarchy",
+    "Poor Image Quality/Editing"
+   ]
+  },
+  {
+   "id": 137,
+   "labels": [
+    "Improper Font Sizing"
+   ]
+  },
+  {
+   "id": 170,
+   "labels": [
+    "Illegible Typeface Selection or Usage",
+    "Poor Text Hierarchy"
+   ]
+  },
+  {
+   "id": 173,
+   "labels": [
+    "Content Alignment Issues"
+   ]
+  },
+  {
+   "id": 202,
+   "labels": [
+    "Cluttered Layout",
+    "Excessive Text Volume"
+   ]
+  },
+  {
+   "id": 205,
+   "labels": []
+  },
+  {
+   "id": 216,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Improper Image Sizing"
+   ]
+  },
+  {
+   "id": 245,
+   "labels": [
+    "Content Alignment Issues",
+    "Occluded Content"
+   ]
+  },
+  {
+   "id": 246,
+   "labels": []
+  },
+  {
+   "id": 286,
+   "labels": [
+    "Cluttered Layout"
+   ]
+  },
+  {
+   "id": 291,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Unbalanced Space Distribution",
+    "Content Alignment Issues",
+    "Improper Font Sizing",
+    "Insufficient Color Contrast for Readability"
+   ]
+  },
+  {
+   "id": 311,
+   "labels": [
+    "Irrelevant Visual Content"
+   ]
+  },
+  {
+   "id": 327,
+   "labels": [
+    "Occluded Content",
+    "Excessive Text Volume"
+   ]
+  },
+  {
+   "id": 357,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Unbalanced Space Distribution",
+    "Content Alignment Issues",
+    "Improper Font Sizing",
+    "Poor Text Hierarchy",
+    "Insufficient Color Contrast for Readability"
+   ]
+  },
+  {
+   "id": 408,
+   "labels": [
+    "Occluded Content",
+    "Improper Image Sizing"
+   ]
+  },
+  {
+   "id": 483,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Cluttered Layout",
+    "Insufficient Color Contrast for Readability",
+    "Inappropriate or Mismatched Color Combinations",
+    "Irrelevant Visual Content"
+   ]
+  },
+  {
+   "id": 496,
+   "labels": [
+    "Cluttered Layout",
+    "Unbalanced Space Distribution",
+    "Content Alignment Issues",
+    "Improper Font Sizing",
+    "Poor Text Hierarchy",
+    "Excessive or Inconsistent Color Usage",
+    "Irrelevant Visual Content"
+   ]
+  },
+  {
+   "id": 510,
+   "labels": []
+  },
+  {
+   "id": 533,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Cluttered Layout",
+    "Content Alignment Issues",
+    "Occluded Content",
+    "Improper Font Sizing"
+   ]
+  },
+  {
+   "id": 652,
+   "labels": [
+    "Cluttered Layout",
+    "Unbalanced Space Distribution",
+    "Content Alignment Issues",
+    "Occluded Content",
+    "Excessive Text Volume"
+   ]
+  },
+  {
+   "id": 741,
+   "labels": []
+  },
+  {
+   "id": 753,
+   "labels": [
+    "Improper Font Sizing",
+    "Improper Text Styling",
+    "Improper Line/Character Spacing",
+    "Poor Text Hierarchy"
+   ]
+  },
+  {
+   "id": 776,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Occluded Content",
+    "Improper Font Sizing",
+    "Excessive Text Volume"
+   ]
+  },
+  {
+   "id": 781,
+   "labels": [
+    "Content Overflow/Cut-off",
+    "Poor Text Hierarchy",
+    "Excessive or Inconsistent Color Usage"
+   ]
+  },
+  {
+   "id": 825,
+   "labels": [
+    "Improper Font Sizing",
+    "Improper Image Sizing"
+   ]
+  },
+  {
+   "id": 1087,
+   "labels": []
+  },
+  {
+   "id": 1194,
+   "labels": [
+    "Poor Text Hierarchy"
+   ]
+  },
+  {
+   "id": 1267,
+   "labels": [
+    "Cluttered Layout"
+   ]
+  },
+  {
+   "id": 1320,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Cluttered Layout",
+    "Occluded Content",
+    "Improper Font Sizing",
+    "Excessive Text Volume",
+    "Improper Image Sizing"
+   ]
+  },
+  {
+   "id": 1352,
+   "labels": []
+  },
+  {
+   "id": 1401,
+   "labels": []
+  },
+  {
+   "id": 1420,
+   "labels": [
+    "Improper Text Styling",
+    "Insufficient Color Contrast for Readability",
+    "Excessive or Inconsistent Color Usage"
+   ]
+  },
+  {
+   "id": 1499,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Poor Image Quality/Editing",
+    "Improper Image Sizing"
+   ]
+  },
+  {
+   "id": 1504,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Cluttered Layout",
+    "Improper Font Sizing",
+    "Excessive Text Volume",
+    "Poor Text Hierarchy"
+   ]
+  },
+  {
+   "id": 1530,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Cluttered Layout",
+    "Unbalanced Space Distribution",
+    "Content Alignment Issues",
+    "Improper Image Sizing"
+   ]
+  },
+  {
+   "id": 1537,
+   "labels": [
+    "Poor Visual Hierarchy",
+    "Cluttered Layout",
+    "Illegible Typeface Selection or Usage",
+    "Improper Image Sizing"
+   ]
+  },
+  {
+   "id": 1558,
+   "labels": [
+    "Cluttered Layout",
+    "Occluded Content",
+    "Improper Font Sizing",
+    "Excessive Text Volume"
+   ]
+  },
+  {
+   "id": 1616,
+   "labels": [
+    "Cluttered Layout",
+    "Unbalanced Space Distribution",
+    "Improper Font Sizing",
+    "Insufficient Color Contrast for Readability"
+   ]
+  },
+  {
+   "id": 1670,
+   "labels": [
+    "Occluded Content"
+   ]
+  },
+  {
+   "id": 1776,
+   "labels": [
+    "Occluded Content"
+   ]
+  },
+  {
+   "id": 1914,
+   "labels": [
+    "Excessive Text Volume",
+    "Improper Text Styling"
+   ]
+  },
+  {
+   "id": 1922,
+   "labels": [
+    "Poor Text Hierarchy"
+   ]
+  },
+  {
+   "id": 1996,
+   "labels": [
+    "Improper Line/Character Spacing",
+    "Inappropriate or Mismatched Color Combinations"
+   ]
+  },
+  {
+   "id": 2035,
+   "labels": [
+    "Excessive Text Volume",
+    "Excessive or Inconsistent Color Usage",
+    "Inappropriate or Mismatched Color Combinations"
+   ]
+  },
+  {
+   "id": 2082,
+   "labels": [
+    "Cluttered Layout",
+    "Content Overflow/Cut-off"
+   ]
+  },
+  {
+   "id": 2091,
+   "labels": [
+    "Content Overflow/Cut-off",
+    "Occluded Content",
+    "Improper Font Sizing"
+   ]
+  },
+  {
+   "id": 2111,
+   "labels": []
+  },
+  {
+   "id": 2139,
+   "labels": [
+    "Cluttered Layout",
+    "Unbalanced Space Distribution",
+    "Illegible Typeface Selection or Usage",
+    "Improper Font Sizing",
+    "Excessive Text Volume",
+    "Improper Text Styling",
+    "Poor Text Hierarchy",
+    "Insufficient Color Contrast for Readability",
+    "Excessive or Inconsistent Color Usage"
+   ]
+  },
+  {
+   "id": 2256,
+   "labels": [
+    "Unbalanced Space Distribution",
+    "Occluded Content"
+   ]
+  },
+  {
+   "id": 2263,
+   "labels": [
+    "Excessive Text Volume",
+    "Excessive or Inconsistent Color Usage"
+   ]
+  }
+ ]
+}

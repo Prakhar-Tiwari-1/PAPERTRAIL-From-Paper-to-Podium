@@ -1,0 +1,39 @@
+# Profile for "LLMs Get Lost In Multi-Turn Conversation" (Laban, Hayashi, Zhou, Neville; ICLR 2026 Outstanding Paper). This was the test paper.
+candidate_concepts:
+  - "sharding an instruction"
+  - "the five simulation conditions (FULL, CONCAT, SHARDED, RECAP, SNOWBALL) and what each one isolates"
+  - "the simulated user and how answers are classified and graded"
+  - "aptitude versus unreliability, and how each is computed"
+  - "why the drop counts as lost and not just worse"
+  - "the failure behaviours the authors identify"
+  - "why lowering the temperature does not fix it"
+
+extra_required_slides:
+  - {name: "metrics", keywords: ["metric", "aptitude", "unreliab"]}
+  - {name: "failure behaviours", keywords: ["failure", "behaviour", "behavior", "lost", "premature"]}
+
+known_critiques:
+  - "The models tested are dated (noted by the ICLR 2026 award committee): newer models may behave differently."
+
+quiz_hints:
+  - "the temperature"
+  - "how many shards are revealed per turn"
+  - "a recap of everything in a final turn (RECAP)"
+  - "a larger or reasoning model"
+
+analysis_hints: "The released dataset has instructions and their shards but no per-run scores, so unreliability cannot be recomputed from it."
+
+paper_citation: "Laban, Hayashi, Zhou and Neville  ·  ICLR 2026 Outstanding Paper  ·  arXiv:2505.06120"
+cite_short: "Laban et al., 2025"
+
+dataset:
+  name: lost_in_conversation
+  url: https://raw.githubusercontent.com/microsoft/lost_in_conversation/main/data/sharded_instructions_600.json
+  path: data/lost_in_conversation/sharded_instructions_600.json
+  description: "each record is a fully specified instruction split into shards that a simulated user reveals one per turn (task_id like sharded-GSM8K/1246)"
+  id_field: task_id
+  task_field: task
+  text_fields: [prompt, question, instruction, query]
+  shards_field: shards
+  shard_text_field: shard
+  example_tasks: [math, code, database]

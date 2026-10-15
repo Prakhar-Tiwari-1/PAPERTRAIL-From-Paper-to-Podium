@@ -1,0 +1,22 @@
+/* Design tokens. Logical canvas 1280x720; 64px margin; 8px spacing unit. Colours follow the navy of the university logo (#063A59)
+   with Okabe-Ito accents; flat colour only (no gradients, shadows, emoji or decorative icons). */
+:root {
+  --bg: #FBFBF9;
+  --fg: #14202B;
+  --primary: #063A59;     /* navy from the university logo */
+  --accent: #0072B2;      /* Okabe-Ito blue */
+  --warm: #E69F00;        /* Okabe-Ito orange: highlights and rules */
+  --tint: #E8F0F6;        /* light navy tint: panels */
+  --tint-warm: #FCF1D6;   /* light orange tint */
+  --muted: #4A5866;
+  --rule: #D3DCE3;
+  --margin: 64px;
+  --gutter: 24px;
+  --u: 8px;
+  --font-text: Inter, "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+  --fs-title: 40px;
+  --fs-subtitle: 28px;
+  --fs-body: 24px;
+  --fs-caption: 16px;
+}

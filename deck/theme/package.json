@@ -1,0 +1,7 @@
+{
+  "name": "slidev-theme-papertrail",
+  "version": "0.1.0",
+  "private": true,
+  "engines": { "slidev": ">=0.50.0" },
+  "slidev": { "colorSchema": "light", "defaults": { "canvasWidth": 1280, "aspectRatio": "16/9", "transition": "none" } }
+}

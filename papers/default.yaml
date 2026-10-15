@@ -1,0 +1,33 @@
+# Default paper profile: empty, so the pipeline works for any paper without configuration.
+# Copy this file to papers/<arxiv-id>.yaml (for example papers/2401.12345.yaml) and fill in only what helps. Every field is optional.
+# See common/profile.py for what each field does.
+
+# Concepts you already know are hard for this audience. The difficulty stage must still confirm each against the paper text.
+candidate_concepts: []
+
+# Slides the plan must contain in addition to the generic ones (motivation, method, results, prior work, limitations, our analysis, takeaway).
+# extra_required_slides:
+#   - {name: "ablation", keywords: ["ablation", "removing"]}
+extra_required_slides: []
+
+# Critiques of the paper (reviewers, an award committee, a follow-up) that belong on the limitations slide.
+known_critiques: []
+
+# Directions for the quiz's what-if questions that suit this paper (for example "the temperature", "the number of layers").
+quiz_hints: []
+
+# One sentence for the analyst about the data it may use besides the paper's tables.
+analysis_hints: ""
+
+# Override the title-page citation and the short citation in figure captions. Empty: built from the arXiv metadata.
+paper_citation: ""
+cite_short: ""
+
+# A released dataset the deck may take worked examples from. Omit it if there is none.
+# dataset:
+#   name: my_dataset
+#   url: https://example.org/data.json
+#   path: data/my_dataset/data.json
+#   description: "each record is one task with its input"
+#   id_field: id
+#   text_fields: [prompt]

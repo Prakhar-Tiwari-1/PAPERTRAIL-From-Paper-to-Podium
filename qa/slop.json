@@ -1,0 +1,27 @@
+{
+  "_note": "Patterns for AI-sounding writing, applied to slide text AND speaker notes (qa/slop_check.py). 'high' = must be fixed (the author is sent back); 'low' = advice. Superset of banned.json phrases (a test keeps them in sync).",
+  "high_phrases": [
+    "delve", "delving", "unlock", "unleash", "revolutionize", "revolutionise", "game-changer", "game changer", "game-changing",
+    "in today's fast-paced", "in today\u2019s fast-paced", "ever-evolving", "ever evolving", "seamless", "seamlessly", "cutting-edge",
+    "paradigm shift", "tapestry", "testament to", "realm of", "it's worth noting", "it\u2019s worth noting", "it is worth noting",
+    "it is important to note", "it's important to note", "it\u2019s important to note", "plays a crucial role", "play a crucial role",
+    "crucial role", "pivotal role", "underscores", "underscoring", "showcasing", "navigating the", "landscape of", "harness the power",
+    "let's dive", "let\u2019s dive", "dive into", "deep dive", "in conclusion", "to summarize", "to sum up", "holistic", "synergy",
+    "a robust", "robust and", "at the end of the day", "needless to say", "rest assured", "stands as a"
+  ],
+  "low_phrases": [
+    "moreover", "furthermore", "additionally", "leverage", "leveraging", "comprehensive", "in summary", "essentially", "basically",
+    "arguably", "notably", "importantly", "interestingly", "remarkably", "significantly impacts", "a myriad of", "plethora"
+  ],
+  "high_regex": [
+    {"name": "not just X but Y", "pattern": "\\bnot (?:just|only|merely|simply) [^.!?\\n]{1,70}?,? but (?:also )?\\b"},
+    {"name": "it's not X, it's Y", "pattern": "\\bit(?:'|\u2019)s not [^.!?\\n]{1,50}[,;] it(?:'|\u2019)s\\b"},
+    {"name": "stock opener", "pattern": "^\\s*(?:in the world of|in an era of|in a world where|when it comes to)\\b"},
+    {"name": "emoji", "pattern": "[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]"}
+  ],
+  "low_regex": [
+    {"name": "em dash", "pattern": "\u2014"},
+    {"name": "exclamation mark", "pattern": "!(?!\\[)"},
+    {"name": "rhetorical question in body", "pattern": "^\\s*[-*]?\\s*(?:what if|why does|have you ever|ever wondered)\\b[^\\n]*\\?"}
+  ]
+}

@@ -1,0 +1,42 @@
+@import "../tokens.css";
+
+.slidev-layout {
+  box-sizing: border-box; width: 100%; height: 100%;
+  padding: var(--margin) var(--margin) 80px var(--margin);   /* extra bottom room: the footer lives there */
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-text); font-size: var(--fs-body); line-height: 1.3; text-align: left;
+  display: flex; flex-direction: column; gap: calc(var(--u) * 2.5);
+}
+.slidev-layout h1 { position: relative; font-size: var(--fs-title); font-weight: 700; line-height: 1.2; margin: 0; padding-bottom: 20px; color: var(--primary); }
+.slidev-layout h1::after { content: ""; position: absolute; left: 0; bottom: 0; width: 96px; height: 6px; background: var(--warm); }
+.slidev-layout h2 { font-size: var(--fs-subtitle); font-weight: 500; margin: 0; color: var(--muted); }
+.slidev-layout p { margin: 0; }
+.slidev-layout ul { margin: 0; padding-left: 28px; display: flex; flex-direction: column; gap: calc(var(--u) * 1.5); list-style: disc; }
+.slidev-layout li { font-size: var(--fs-body); }
+.slidev-layout li::marker { color: var(--warm); }
+.slidev-layout strong { color: var(--primary); }
+.slidev-layout img, .slidev-layout svg.figure { max-width: 100%; max-height: 100%; object-fit: contain; }
+.slidev-layout code, .slidev-layout pre { font-family: var(--font-mono); font-size: 18px; }
+.accent { color: var(--accent); }
+.cols { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items: center; }
+.cols > * { min-width: 0; min-height: 0; }
+.card { background: #FFFFFF; border: 1px solid var(--rule); border-radius: 6px; padding: 12px; }
+.panel { background: var(--tint); border-left: 8px solid var(--accent); border-radius: 4px; padding: 20px 28px; }
+
+/* tables */
+.slidev-layout table { border-collapse: collapse; font-size: 22px; width: 100%; }
+.slidev-layout th { background: var(--primary); color: #FFFFFF; font-weight: 600; text-align: left; padding: 12px 16px; }
+.slidev-layout td { padding: 12px 16px; border-bottom: 1px solid var(--rule); }
+.slidev-layout tr:nth-child(even) td { background: var(--tint); }
+
+/* footer (global-bottom.vue) */
+.pt-footer { position: absolute; z-index: 50; left: var(--margin); right: var(--margin); bottom: 20px; height: 36px; display: flex; align-items: center; gap: 14px;
+  border-top: 1px solid var(--rule); padding-top: 8px; font-family: var(--font-text); font-size: 14px; color: var(--muted); }
+.pt-footer .pt-logo { height: 24px; width: auto; mix-blend-mode: multiply; }
+.pt-footer .pt-course { flex: 1 1 auto; }
+.pt-footer .pt-page { font-weight: 600; color: var(--primary); font-size: 16px; }
+
+/* faint coat-of-arms watermark on content slides (public/watermark.png, prepared by tools/footer.py; switch off in deck/footer.json) */
+.slidev-layout[class*="claim-"], .slidev-layout.workflow {  /* includes claim-quiz and claim-split */
+  background-image: url(/watermark.png); background-repeat: no-repeat; background-position: var(--wm-pos, right 40px bottom 80px); background-size: auto 250px;
+}

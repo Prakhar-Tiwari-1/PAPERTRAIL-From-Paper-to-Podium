@@ -1,0 +1,11 @@
+{
+  "_note": "Mirror of the Banned list in skills/slide-design/SKILL.md; tests/test_skills.py checks they stay in sync.",
+  "phrases": [
+    "delve", "unlock", "revolutionize", "revolutionise", "game-changer", "game changer",
+    "in today's fast-paced", "in today’s fast-paced", "seamless", "seamlessly", "cutting-edge",
+    "robust and", "a robust", "paradigm shift", "let's dive", "dive into"
+  ],
+  "titles": ["introduction", "overview", "key takeaways", "conclusion", "conclusions", "summary", "outline", "agenda"],
+  "emoji_regex": "[\\u{1F300}-\\u{1FAFF}\\u{2600}-\\u{27BF}\\u{1F900}-\\u{1F9FF}]",
+  "decorative_dash_regex": "^\\s*[-—–]{3,}\\s*$"
+}

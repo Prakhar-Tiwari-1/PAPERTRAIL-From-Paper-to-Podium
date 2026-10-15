@@ -1,0 +1,156 @@
+# Role -> model routing (SPEC §5.1). Stage code refers to ROLE NAMES only.
+# Slugs/prices were read from https://openrouter.ai/api/v1/models on 2026-10-12.
+# `dev_model` is used with `--dev`. `fallback` is used after two failures (429/5xx/invalid output).
+# `vision: true` roles receive images and must never be routed to a text-only model (e.g. DeepSeek).
+# `vendor` is used by the harness to enforce cross-vendor rules (SPEC §5.1 Rules).
+
+roles:
+  digest:
+    model: deepseek/deepseek-v4-flash        # no :free DeepSeek exists; ~$0.03/$1.28 per 1M, 1M ctx
+    dev_model: anthropic/claude-haiku-5.5   # the free Nemotron burned the whole token budget on reasoning and fell back anyway
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.2
+    max_tokens: 8000
+    skills: [paper-comprehension]
+  difficulty:
+    model: anthropic/claude-sonnet-5.5
+    dev_model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.3
+    max_tokens: 8000
+    skills: [paper-comprehension, explanation-devices]
+  prior_work:
+    model: deepseek/deepseek-v4-flash
+    dev_model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.1
+    max_tokens: 3000
+    skills: []
+  planner:
+    model: anthropic/claude-sonnet-5.5
+    dev_model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.3
+    max_tokens: 10000
+    skills: [paper-comprehension, slide-design]
+  analyst:
+    model: deepseek/deepseek-v4-flash
+    dev_model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.0
+    max_tokens: 6000
+    skills: [figure-replot]
+  author:
+    model: anthropic/claude-sonnet-5.5
+    dev_model: anthropic/claude-haiku-5.5
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.4
+    max_tokens: 32000
+    skills: [slide-design, slidev-authoring, diagram-style, speaker-notes]
+  vision_critic:
+    model: google/gemini-3-flash-preview     # replaced by the winner of compare/critic_eval.py
+    dev_model: google/gemini-3-flash-preview   # the free Gemma returned 157 rate-limit errors in the first real run
+    fallback: google/gemini-3.1-flash-lite
+    temperature: 0.0
+    max_tokens: 4000
+    vision: true
+    skills: []
+  student_critic:
+    model: deepseek/deepseek-v4-flash
+    dev_model: deepseek/deepseek-v4-flash
+    fallback: nvidia/nemotron-3-super-120b-a12b:free
+    temperature: 0.3
+    max_tokens: 3000
+    skills: []
+  fact_extractor:                             # local stage (Ollama); fallback is hosted
+    model: ollama:qwen3:4b
+    dev_model: ollama:qwen3:4b
+    fallback: deepseek/deepseek-v4-flash
+    temperature: 0.0
+    max_tokens: 4000   # reasoning-capable models (qwen3, deepseek) think before the JSON; a runaway batch is cut off here
+    prompted: true     # small local models: JSON in text, validated by pydantic
+    skills: []
+  checklist:
+    model: deepseek/deepseek-r1-0528
+    dev_model: deepseek/deepseek-v4-flash
+    fallback: google/gemini-3-flash-preview
+    temperature: 0.0
+    max_tokens: 6000
+    prompted: true       # reasoning models: JSON in text, validated by pydantic (tool calling is unreliable on R1)
+    skills: []
+  judge:
+    model: google/gemini-3.1-pro-preview
+    dev_model: google/gemini-3-flash-preview
+    fallback: google/gemini-3-flash-preview
+    temperature: 0.0
+    max_tokens: 4000
+    skills: []
+  judge_second:
+    model: deepseek/deepseek-r1-0528
+    dev_model: deepseek/deepseek-r1-0528
+    fallback: deepseek/deepseek-v4-flash
+    temperature: 0.0
+    max_tokens: 4000
+    prompted: true       # reasoning models: JSON in text, validated by pydantic (tool calling is unreliable on R1)
+    skills: []
+  quiz:
+    model: anthropic/claude-sonnet-5.5
+    dev_model: anthropic/claude-haiku-5.5
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.3
+    max_tokens: 4000
+    skills: []
+  reviser:                                    # per-slide fixes in the render loop: rewrites only the slides that have issues
+    model: anthropic/claude-sonnet-5.5
+    dev_model: anthropic/claude-haiku-5.5
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.3
+    max_tokens: 12000
+    skills: [slide-design, slidev-authoring, diagram-style, speaker-notes]
+  style:                                      # reads the reference slides (images) and writes the style brief
+    model: google/gemini-3-flash-preview
+    dev_model: google/gemini-3-flash-preview
+    fallback: google/gemini-3.1-flash-lite
+    temperature: 0.2
+    max_tokens: 3000
+    vision: true
+    skills: []
+  style_compare:                              # compares our slides with the references on the brief's quality bar (informational)
+    model: google/gemini-3-flash-preview
+    dev_model: google/gemini-3-flash-preview
+    fallback: google/gemini-3.1-flash-lite
+    temperature: 0.0
+    max_tokens: 2500
+    vision: true
+    skills: []
+  category_mapper:                            # maps free-text critic categories to the 19 SlideAudit ones (compare/critic_eval.py)
+    model: deepseek/deepseek-v4-flash
+    dev_model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.0
+    max_tokens: 800
+    skills: []
+  oneshot:
+    model: anthropic/claude-sonnet-5.5
+    dev_model: anthropic/claude-haiku-5.5
+    fallback: anthropic/claude-haiku-5.5
+    temperature: 0.4
+    max_tokens: 32000
+    skills: [slide-design, slidev-authoring, speaker-notes]
+
+# USD per 1M tokens [input, output]. Fallback cost estimate when OpenRouter returns no usage cost.
+prices:
+  anthropic/claude-sonnet-5.5: [2.0, 10.0]
+  anthropic/claude-haiku-5.5: [0.1, 0.5]
+  google/gemini-3.1-pro-preview: [2.0, 12.0]
+  google/gemini-3-flash-preview: [0.5, 3.0]
+  deepseek/deepseek-v4-flash: [0.03, 1.28]
+  deepseek/deepseek-r1-0528: [0.5, 2.15]
+  google/gemini-3.1-flash-lite: [0.25, 1.5]
+  google/gemma-4-31b-it:free: [0, 0]
+  nvidia/nemotron-3-super-120b-a12b:free: [0, 0]
+
+# Vendor prefix check: author != judge, author != student critic.
+vendor_rules:
+  - [author, judge]
+  - [author, student_critic]
