@@ -4,7 +4,7 @@ from qa.source_map import parse_slides
 
 VISUAL = "```mermaid\nflowchart LR\n  A-->B\n```"
 QUIZ_BODY = ('<div class="qa-board">\n<div class="qa-block qa-questions">\n'
-             + "\n".join(f'<div class="qa-q"><span class="qa-n">{n}</span><span>Question {n}?</span></div>' for n in range(1, 8))
+             + "\n".join(f'<div class="qa-q"><span class="qa-n">{n}</span><span>Question {n}?</span></div>' for n in range(1, 7))
              + "\n</div>\n</div>")
 
 
@@ -119,14 +119,14 @@ def test_exactly_three_backup_slides(tmp_path):
     assert any("need exactly 3" in e for e in errs)
 
 
-def test_exactly_one_quiz_slide_with_seven_or_eight_questions(tmp_path):
+def test_exactly_one_quiz_slide_with_six_questions(tmp_path):
     errs = validate_deck(make_deck(quiz=False), tmp_path, check_mermaid=False)
     assert any("exactly one quiz slide" in e for e in errs)
     two = make_deck().replace("layout: claim-diagram\n---\n\n# Claim number 3 holds\n\n" + VISUAL,
                               "layout: claim-quiz\n---\n\n# Another quiz\n\n" + QUIZ_BODY)
     assert any("exactly one quiz slide" in e for e in validate_deck(two, tmp_path, check_mermaid=False))
-    few = make_deck().replace('<div class="qa-q"><span class="qa-n">7</span><span>Question 7?</span></div>\n', "")
-    assert any("questions; need 7 or 8" in e for e in validate_deck(few, tmp_path, check_mermaid=False))
+    few = make_deck().replace('<div class="qa-q"><span class="qa-n">6</span><span>Question 6?</span></div>\n', "")
+    assert any("questions; need 6" in e for e in validate_deck(few, tmp_path, check_mermaid=False))
 
 
 def test_quiz_and_workflow_slides_have_their_own_word_limits(tmp_path):
@@ -158,3 +158,14 @@ def test_judge_faithfulness_quote_normalisation():
     paper = "The drop is 39 percent across six tasks."
     assert sc._norm("The drop is 39 percent") in sc._norm(paper)
     assert sc._norm("a made up sentence") not in sc._norm(paper)
+
+
+def test_table_pipes_are_not_counted_as_visible_words():
+    from common.deckcheck import visible_words
+    from qa.source_map import parse_slides
+
+    md = "---\nlayout: claim-table\n---\n\n# Title\n\n| a | b |\n|---|---|\n| c | d |\n\n<!--\nnotes\n-->\n"
+    s = parse_slides(md)[0]
+    table = "| a | b |\n|---|---|\n| c | d |"
+    plain = md.replace(table, "a b\nc d")      # the same words without any table syntax
+    assert visible_words(s) == visible_words(parse_slides(plain)[0])

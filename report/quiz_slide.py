@@ -6,12 +6,13 @@ from __future__ import annotations
 
 import html
 import json
+import re
 from pathlib import Path
 
 from common.schemas import QUIZ_LAYOUT, Quiz
 from qa.source_map import parse_slides
 
-DEFAULT_TITLE = "Check your understanding: eight questions about the talk"
+DEFAULT_TITLE = "Check your understanding"
 
 
 def body(quiz: Quiz) -> str:
@@ -21,6 +22,11 @@ def body(quiz: Quiz) -> str:
                     for n, i in enumerate(quiz.items, start=1))
     # no blank lines inside the HTML block: a blank line would end it and the markdown parser would wrap the rest in paragraphs
     return f'<div class="qa-board">\n<div class="qa-block qa-questions">\n{qs}\n</div>\n<div v-click class="qa-block qa-answers">\n{ans}\n</div>\n</div>'
+
+
+def has_data_number(text: str) -> bool:
+    """True if the text has a number that is a claim about the paper's data (bare 0, 1 and 2 are counting words)."""
+    return any(n not in ("0", "1", "2") for n in re.findall(r"\d[\d,]*(?:\.\d+)?%?", text))
 
 
 def apply(md: str, quiz: Quiz) -> tuple[str, int | None]:
@@ -55,5 +61,7 @@ def patch(run_dir: Path) -> bool:
     deck = json.loads(dj.read_text(encoding="utf-8")) if dj.exists() else {"claims": []}
     deck["claims"] = [c for c in deck["claims"] if c["slide"] != no]
     deck["claims"] += [{"slide": no, "text": i.answer, "kind": "claim", "source": i.anchor} for i in quiz.items]
+    # a number written in a question is a claim too: without one the fact-check has nothing to match it against
+    deck["claims"] += [{"slide": no, "text": i.question, "kind": "claim", "source": i.anchor} for i in quiz.items if has_data_number(i.question)]
     dj.write_text(json.dumps(deck, indent=2), encoding="utf-8")
     return True

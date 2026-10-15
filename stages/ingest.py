@@ -6,6 +6,7 @@ available, supplies figures (PDF -> SVG), tables and the bibliography; otherwise
 from __future__ import annotations
 
 import re
+from collections import Counter
 import shutil
 import tarfile
 from pathlib import Path
@@ -60,7 +61,7 @@ def safe_extract(tgz: Path, dest: Path) -> None:
 # ------------------------------------------------------------------ paper.md from the PDF
 def pdf_to_markdown(pdf: Path) -> tuple[str, int, str]:
     doc = fitz.open(pdf)
-    sizes: list[float] = []
+    sizes: Counter[float] = Counter()
     pages_lines: list[list[tuple[str, float, bool]]] = []
     for page in doc:
         lines = []
@@ -73,18 +74,27 @@ def pdf_to_markdown(pdf: Path) -> tuple[str, int, str]:
                 size = max(s["size"] for s in spans)
                 bold = any("bold" in s["font"].lower() for s in spans)
                 lines.append((text, size, bold))
-                sizes.append(size)
+                sizes[round(size * 2) / 2] += len(text)
         pages_lines.append(lines)
-    body = sorted(sizes)[len(sizes) // 2] if sizes else 10.0
+    # body size = the most common size by character count among text of 8.5pt or more: footnotes, figure labels and
+    # appendix tables are set smaller and must not drag it down (a median over lines put it under 7pt on a long paper)
+    text_sizes = Counter({k: v for k, v in sizes.items() if k >= 8.5}) or sizes
+    body = max(text_sizes, key=text_sizes.get) if text_sizes else 10.0
     out = []
-    title = ""
+    title_parts: list[str] = []
+    title_done = False
     for n, lines in enumerate(pages_lines, start=1):
         out.append(f"\n[p.{n}]\n")
         for text, size, bold in lines:
             is_heading = len(text) < 90 and (size > body * 1.15 or (bold and re.match(r"^(\d+(\.\d+)*\.?|[A-Z]\.?)\s+\S", text)))
-            if n == 1 and not title and size > body * 1.4 and not text.lower().startswith("arxiv"):
-                title = text
+            if n == 1 and not title_done:
+                # the title may wrap over several lines of the same large size
+                if size > body * 1.4 and not text.lower().startswith("arxiv"):
+                    title_parts.append(text)
+                elif title_parts:
+                    title_done = True
             out.append(("## " + text) if is_heading else text)
+    title = " ".join(title_parts)
     return "\n".join(out), len(doc), title
 
 
@@ -102,8 +112,8 @@ def read_tex(src: Path) -> str:
     # inline \input / \include (one level of nesting is enough for most papers)
     def inline(m):
         name = m.group(1)
-        for cand in (src / name, src / (name + ".tex")):
-            if cand.exists():
+        for cand in (src / (name + ".tex"), src / name):  # LaTeX tries name.tex first; a folder may share the name
+            if cand.is_file():
                 return cand.read_text(encoding="utf-8", errors="ignore")
         return ""
 
@@ -303,7 +313,7 @@ def run(ctx: RunCtx) -> None:
             tables = relabel_tables(latex_tables(tex), md)
             refs = latex_refs(src)
             t = re.search(r"\\title\{((?:[^{}]|\{[^{}]*\})*)\}", tex)
-            if t and strip_tex(t.group(1)):
+            if t and strip_tex(t.group(1)) and not title:  # the printed title wins: the LaTeX one can be an older variant
                 title = strip_tex(t.group(1))
     if not figures:
         figures = pdf_figures(pdf, fig_dir)

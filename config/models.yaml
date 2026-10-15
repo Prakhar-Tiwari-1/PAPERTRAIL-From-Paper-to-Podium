@@ -60,7 +60,7 @@ roles:
     dev_model: deepseek/deepseek-v4-flash
     fallback: nvidia/nemotron-3-super-120b-a12b:free
     temperature: 0.3
-    max_tokens: 3000
+    max_tokens: 8000   # deepseek reasons before answering and the reasoning counts against the cap: 3000 failed on a 16-slide deck review
     skills: []
   fact_extractor:                             # local stage (Ollama); fallback is hosted
     model: ollama:qwen3:4b

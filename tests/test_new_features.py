@@ -13,8 +13,8 @@ def item(kind="concept", ans="Because the first answer sticks, so later details 
 
 
 def good_quiz():
-    items = [item(q=f"Concept question number {i}?") for i in range(4)]
-    items += [item(kind="what_if", q=f"What if we change setting {i}?") for i in range(3)]
+    items = [item(q=f"Concept question number {i}?") for i in range(3)]
+    items += [item(kind="what_if", q=f"What if we change setting {i}?") for i in range(2)]
     items += [item(kind="what_if", q="What if the model is larger?", ev="reasoned", ans="Not tested: a larger model has the same unreliability gap in the paper.")]
     return Quiz(items=items)
 
@@ -23,10 +23,10 @@ def test_good_quiz_passes():
     assert validate_quiz(good_quiz(), n_pages=36) == []
 
 
-def test_quiz_needs_seven_or_eight_and_three_what_ifs():
+def test_quiz_needs_exactly_six_and_three_what_ifs():
     q = good_quiz()
-    q.items = q.items[:6]
-    assert any("need 7 or 8" in e for e in validate_quiz(q))
+    q.items = q.items[:5]
+    assert any("need 6" in e for e in validate_quiz(q))
     q2 = good_quiz()
     for i in q2.items:
         i.kind = "concept"
@@ -56,7 +56,7 @@ def test_quiz_slide_is_generated_from_quiz_json_with_questions_above_answers(tmp
     assert no == 2
     s = parse_slides(new)[1]
     assert s.layout == "claim-quiz" and "old body" not in s.text and "run the quiz" in s.text and "# Check it" in s.text
-    assert s.text.count('class="qa-q"') == 8 and s.text.count('class="qa-a"') == 8
+    assert s.text.count('class="qa-q"') == 6 and s.text.count('class="qa-a"') == 6
     assert s.text.index("qa-questions") < s.text.index("qa-answers") and "v-click" in s.text
     assert len(parse_slides(new)) == 3                       # the HTML did not split the slide
     again, _ = quiz_slide.apply(new, good_quiz())
@@ -72,7 +72,7 @@ def test_quiz_slide_patch_registers_answers_as_claims(tmp_path):
     (tmp_path / "deck.json").write_text(json.dumps({"claims": [{"slide": 1, "text": "stale", "kind": "claim", "source": "p.1"}]}), encoding="utf-8")
     assert quiz_slide.patch(tmp_path)
     claims = json.loads((tmp_path / "deck.json").read_text())["claims"]
-    assert len(claims) == 8 and all(c["slide"] == 1 and c["source"].startswith("p.") for c in claims)
+    assert len(claims) == 6 and all(c["slide"] == 1 and c["source"].startswith("p.") for c in claims)
 
 
 # ------------------------------------------------------------------ plan rules for the quiz slide
@@ -248,3 +248,44 @@ def test_reviser_prompt_fills_every_placeholder(tmp_path):
     iss = [QAIssue(round=1, source="automatic", slide=2, category="sparse_slide", severity="high", detail="empty")]
     p = revise.build_prompt(ctx, slides, iss, [2], [])
     assert "### Slide 2 (claim-bullets)" in p and "empty" in p and "(no reference slides given)" in p and "{" + "style" + "}" not in p
+
+
+def test_unsourced_numbers_flags_digits_missing_from_the_cited_source():
+    from stages.quiz import unsourced_numbers
+
+    src = "randomly paired responses fall within the 0.1-0.2 range; 31,250 human annotations"
+    assert unsourced_numbers("What does the 0.1 to 0.2 range mean?", src) == []
+    assert unsourced_numbers("How is 31,250 computed, and why 2.0?", src) == ["2.0"]
+    assert unsourced_numbers("Why do 2 shards help?", src) == []   # small counting words are not claims about the data
+
+
+def test_quiz_questions_with_data_numbers_are_registered_as_claims(tmp_path):
+    from report import quiz_slide
+
+    q = good_quiz()
+    q.items[0].question = "What does the 0.1 to 0.2 range mean?"
+    q.items[0].anchor = "p.4"
+    (tmp_path / "deck").mkdir()
+    (tmp_path / "deck" / "slides.md").write_text("---\nlayout: claim-quiz\n---\n\n# Q\n\n<!--\nn\n-->\n", encoding="utf-8")
+    (tmp_path / "quiz.json").write_text(q.model_dump_json(), encoding="utf-8")
+    assert quiz_slide.patch(tmp_path)
+    claims = json.loads((tmp_path / "deck.json").read_text())["claims"]
+    numbered = [c for c in claims if c["text"] == "What does the 0.1 to 0.2 range mean?"]
+    assert len(numbered) == 1 and numbered[0]["source"] == "p.4"
+    assert len(claims) == 7                                   # six answers + the one question with a data number ("setting 0" is a counting word)
+
+
+def test_title_background_is_cut_to_16_9_around_the_focus(tmp_path):
+    from tools.footer import prepare_title_bg
+
+    tall = Image.new("RGB", (320, 960), (255, 0, 0))                       # red top, blue bottom
+    ImageDraw.Draw(tall).rectangle((0, 480, 320, 960), fill=(0, 0, 255))
+    src = tmp_path / "tall.png"
+    tall.save(src)
+    for focus, expect_blue in ((0.0, False), (1.0, True)):
+        out = tmp_path / f"bg{focus}.jpg"
+        prepare_title_bg(src, out, width=640, focus_y=focus)
+        im = Image.open(out)
+        assert im.size == (640, 360)                                       # 16:9
+        r, g, b = im.getpixel((320, 180))
+        assert (b > 200) == expect_blue and (r > 200) == (not expect_blue)

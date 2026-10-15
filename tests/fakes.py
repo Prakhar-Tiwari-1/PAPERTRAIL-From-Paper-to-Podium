@@ -25,11 +25,9 @@ FRONT = ("---\ntheme: ./theme\nrouterMode: hash\ncanvasWidth: 1280\naspectRatio:
 QUIZ = [("concept", "Why does a model that answers early get stuck on its first guess?", "Its first attempt stays in the conversation and later details are fitted around it.", "paper"),
         ("concept", "What does unreliability measure that average performance hides?", "The gap between best and worst runs of the same instruction, so how much luck decides.", "paper"),
         ("concept", "Why call the loss getting lost and not just worse?", "The same model solves the task when told everything at once, so the ability is there but not used.", "paper"),
-        ("concept", "What does the concatenated condition isolate?", "It keeps all details but removes the turn structure, so it separates rephrasing from the real cause.", "paper"),
         ("what_if", "What if the temperature is set to zero?", "Unreliability drops but a large share stays, so randomness is not the main cause.", "paper"),
         ("what_if", "What if the user repeats everything in a final turn?", "Performance improves but stays below the single-turn level, so a recap helps only part of the way.", "paper"),
-        ("what_if", "What if only one shard is revealed per turn instead of several?", "Not tested: with fewer pieces there is less to anchor on early, so we would expect a smaller drop.", "reasoned"),
-        ("what_if", "What if a much larger or reasoning model is used?", "The tested reasoning models also drop, so size alone does not remove the problem.", "paper")]
+        ("what_if", "What if only one shard is revealed per turn instead of several?", "Not tested: with fewer pieces there is less to anchor on early, so we would expect a smaller drop.", "reasoned")]
 
 
 class FakeScript:
@@ -86,7 +84,7 @@ class FakeScript:
             titles = ["Title", "Motivation: models get lost when details arrive late", "The setup shards one instruction into turns",
                       "Conditions isolate what makes multi-turn hard", "Metrics: aptitude and unreliability explained",
                       "Headline result: a large average drop", "Failure behaviours: models answer too early", "Prior work positions this study",
-                      "Our analysis re-plots the main figure", "Limitations include dated models", "Check your understanding: eight questions",
+                      "Our analysis re-plots the main figure", "Limitations include dated models", "Check your understanding",
                       "Takeaway: tell the model everything at once", "Tools & Workflow of this talk"]
             slides = []
             for i, t in enumerate(titles):
@@ -170,7 +168,7 @@ class FakeScript:
             if self.author_calls == 1 and i == 3:   # round-1 defect: far too many words on one slide
                 body += " ".join(["extra"] * 80) + "\n"
             parts.append(f"---\nlayout: {layout}\n---\n\n{body}\n<!--\n{notes(190, 'Next slide.')}\n-->\n")
-        parts.append(f"---\nlayout: claim-quiz\n---\n\n# Check your understanding: eight questions\n\n<!--\n{notes(190, 'Now the takeaway.')}\n-->\n")
+        parts.append(f"---\nlayout: claim-quiz\n---\n\n# Check your understanding\n\n<!--\n{notes(190, 'Now the takeaway.')}\n-->\n")
         n_take = len(parts) + 1
         parts.append("---\nlayout: claim-number\n---\n\n# Takeaway: say everything at once\n\n<BigNumber>39%</BigNumber>\n\nAverage drop when details arrive in pieces\n\n"
                      f"<!--\n{notes(190, 'Last, the tools.')}\n-->\n")

@@ -27,7 +27,7 @@ Speaker notes, in an HTML comment at the end of the slide.
 - `claim-two-figures`: two figures side by side (`::left::`, `::right::`).
 - `claim-table`: title + markdown table excerpt (3 to 6 rows, at most 6 columns) + caption `Smith et al., 2024, Table N` (use the paper's own citation, given to you) + one sentence on what to read off it.
 - `claim-diagram`: title + one Mermaid diagram (see skill diagram-style).
-- `claim-example`: a worked example as a chat: `<Turn who="user">...</Turn>` / `<Turn who="assistant">...</Turn>`, from the example named in the difficulty map (a real record or one printed in the paper).
+- `claim-example`: a worked example as a chat: `<Turn who="user">...</Turn>` / `<Turn who="assistant">...</Turn>`, from the example named in the difficulty map (a real record or one printed in the paper). Use it only for a real exchange. Never turn counts, a study design or a list of facts into an invented question-and-answer chat: use `claim-table` (rows and columns) for that.
 - `claim-number`: `<BigNumber>39%</BigNumber>` plus one or two context lines.
 - `claim-bullets`: at most 4 short bullets; at most two such slides in the main deck.
 - `claim-quiz`: the quiz slide. Write only its `# title` and its notes; the pipeline inserts the questions and answers.

@@ -5,14 +5,14 @@ import re
 from pathlib import Path
 
 from common.anchors import valid_anchor
-from common.schemas import MAIN_MAX, MAIN_MIN, QUIZ_LAYOUT, DeckClaim
+from common.schemas import MAIN_MAX, MAIN_MIN, QUIZ_LAYOUT, QUIZ_QUESTIONS, DeckClaim
 from qa.slop_check import deck_hits, describe
 from qa.source_map import Slide, parse_slides
 
 ALLOWED_LAYOUTS = {"title", "claim-figure", "claim-two-figures", "claim-split", "claim-diagram", "claim-example", "claim-table",
                    "claim-bullets", "claim-number", QUIZ_LAYOUT, "section", "workflow"}
 MAX_WORDS = 70          # visible words per slide (target 50-70)
-MAX_WORDS_QUIZ = 300    # the quiz slide carries 7-8 questions and their answers
+MAX_WORDS_QUIZ = 300    # the quiz slide carries its questions and their answers
 MAX_WORDS_WORKFLOW = 90 # generated from the run: diagram labels, numbers, repo
 MAX_BULLET_ONLY = 2     # main slides with no visual at all
 NO_VISUAL_NEEDED = ("title", "section", "workflow", QUIZ_LAYOUT)
@@ -36,9 +36,9 @@ def words(s: str) -> int:
 
 
 def visible_words(slide: Slide) -> int:
-    """Words a viewer reads: no notes, no HTML tags, no code fences, no table separator rows."""
+    """Words a viewer reads: no notes, no HTML tags, no code fences, no table separator rows, no table pipes."""
     vis = re.sub(r"<[^>]+>", " ", re.sub(r"```.*?```", " ", body_of(slide), flags=re.S))
-    return words(re.sub(r"\|[-: ]+\|[-| :]*", " ", vis))
+    return words(re.sub(r"\|", " ", re.sub(r"\|[-: ]+\|[-| :]*", " ", vis)))
 
 
 def word_limit(layout: str) -> int:
@@ -78,8 +78,8 @@ def validate_deck(md: str, run_dir: Path, *, check_notes_total: bool = True, che
     if require_quiz:
         if len(quiz) != 1:
             errs.append(f"need exactly one quiz slide (layout `{QUIZ_LAYOUT}`) in the main deck; found {len(quiz)}")
-        elif not 7 <= len(QUIZ_Q_RE.findall(quiz[0].text)) <= 8:
-            errs.append(f"quiz slide {quiz[0].no} has {len(QUIZ_Q_RE.findall(quiz[0].text))} questions; need 7 or 8 (the pipeline fills them in from quiz.json)")
+        elif len(QUIZ_Q_RE.findall(quiz[0].text)) != QUIZ_QUESTIONS:
+            errs.append(f"quiz slide {quiz[0].no} has {len(QUIZ_Q_RE.findall(quiz[0].text))} questions; need {QUIZ_QUESTIONS} (the pipeline fills them in from quiz.json)")
     no_visual = [s.no for s in main if s.layout not in NO_VISUAL_NEEDED and not VISUAL_RE.search(body_of(s))]
     if len(no_visual) > MAX_BULLET_ONLY:
         errs.append(f"slides {no_visual} have no visual (figure, table, diagram, worked example or big number); at most {MAX_BULLET_ONLY} main slides may be bullets only. "

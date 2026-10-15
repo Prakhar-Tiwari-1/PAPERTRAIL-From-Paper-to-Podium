@@ -14,7 +14,7 @@ Shape
   Add a slide when a hard concept needs a second step to be understood; do not pad. Give each slide `minutes` between 0.5 and 2 (the total is
   rescaled in code, so ignore the sum).
 - The FIRST slide is the title slide (layout `title`). The FINAL main slide is "Tools & Workflow" (layout `workflow`).
-- EXACTLY ONE quiz slide (layout `claim-quiz`, title like "Check your understanding"): 7 to 8 questions on what the talk taught, with the answers
+- EXACTLY ONE quiz slide (layout `claim-quiz`, title like "Check your understanding"): six questions on what the talk taught, with the answers
   shown below them. Put it after the results and limitations, before the takeaway. Its content is written by a later step; here give only the title,
   purpose and anchors.
 - Required slides: motivation (ideally open with a concrete example of the problem); the method or setup; the key ideas or metrics a newcomer needs; the headline

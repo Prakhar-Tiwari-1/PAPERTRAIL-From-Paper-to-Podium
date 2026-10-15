@@ -184,7 +184,8 @@ REQUIRED_SLIDE_KEYWORDS = [
     ("takeaway", ["takeaway", "implication", "lesson", "so what", "bottom line"]),
 ]
 
-QUIZ_LAYOUT = "claim-quiz"   # the one "check your understanding" slide: 7-8 questions, then their answers
+QUIZ_LAYOUT = "claim-quiz"   # the one "check your understanding" slide: the questions, then their answers
+QUIZ_QUESTIONS = 6            # 3 concept + 3 what-if: six fit above the footer at a readable size (eight did not)
 QUIZ_MINUTES = 3.0
 MAIN_MIN, MAIN_MAX = 13, 16
 
@@ -226,7 +227,7 @@ def validate_plan(plan: Plan, concept_names: list[str], extra_required: list[dic
         errs.append(f"{n} main slides; need {MAIN_MIN}-{MAIN_MAX}")
     quiz = [i for i, s in enumerate(plan.slides) if s.layout == QUIZ_LAYOUT]
     if len(quiz) != 1:
-        errs.append(f"need exactly one quiz slide (layout `{QUIZ_LAYOUT}`: 7-8 questions about the talk, answers below); found {len(quiz)}")
+        errs.append(f"need exactly one quiz slide (layout `{QUIZ_LAYOUT}`: {QUIZ_QUESTIONS} questions about the talk, answers below); found {len(quiz)}")
     elif quiz[0] in (0, n - 1):
         errs.append("the quiz slide goes after the results and limitations, before the takeaway and the final Tools & Workflow slide")
     for s in plan.slides:
@@ -400,8 +401,8 @@ def validate_quiz(q: Quiz, n_pages: int | None = None) -> list[str]:
 
     errs: list[str] = []
     n = len(q.items)
-    if not 7 <= n <= 8:
-        errs.append(f"{n} questions; need 7 or 8")
+    if n != QUIZ_QUESTIONS:
+        errs.append(f"{n} questions; need {QUIZ_QUESTIONS}")
     what_if = sum(1 for i in q.items if i.kind == "what_if")
     if what_if < 3:
         errs.append(f"{what_if} what-if questions; need at least 3 (change one thing, ask what happens and why)")

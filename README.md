@@ -19,7 +19,7 @@ paper (arXiv ID or PDF)
   → prior work    3–5 related works via Semantic Scholar
   → plan          13–16 main slides (about 15+ minutes of speech), each title a full-sentence claim
   → analyze       re-plots and explanatory graphs from the paper's data (sandboxed Python)
-  → quiz          7–8 questions with answers (concepts and what-if), one quiz slide
+  → quiz          6 questions with answers (3 concept, 3 what-if), one quiz slide
   → style         optional: design moves from your reference slides (never copied)
   → author        Slidev markdown, Mermaid diagrams, speaker notes, claim→source map
   → render loop   render → automatic checks (word count, empty space, overlap) → vision critic
@@ -115,7 +115,7 @@ Put slides you like in `references/slides/` (png, jpg, pdf). The pipeline studie
 
 ## The quiz slide
 
-One slide near the end asks 7 to 8 questions about the talk (conceptual depth and what-if questions such as "what if the temperature is zero?"), with the answers in a block below, revealed on click in the live talk and all visible in the PDF. The questions come from `stage quiz` and are checked against the paper like every other number.
+One slide near the end asks six questions about the talk, three on concepts (left) and three what-ifs (right, such as "what if the temperature is zero?"), with the answers in a block below, revealed on click in the live talk and all visible in the PDF. The questions come from `stage quiz` and are checked against the paper like every other number.
 
 ## Footer, title page and watermark
 
@@ -127,7 +127,7 @@ Only the analyst runs code (`tools/python_exec.py`). With a WSL distro (`PAPERTR
 
 ## Cost control
 
-Budget caps are enforced in code (`config/budget.yaml`): $5 per run, $8 in total, where the total counts everything ever spent (ledger `runs/_spend.jsonl`, currently $6.25 from the test-paper run). Each call is checked before it is sent (worst case) and after (actual cost), and every response is cached on disk, so re-runs are free. `runs/<timestamp>/cost.json` accounts for every call. A full run with per-slide revision is estimated at about $2.5 to 3. The caps are the owner's decision: raise `total_usd` in `config/budget.yaml` before a run that needs more.
+Budget caps are enforced in code (`config/budget.yaml`): $10 per run, $16.25 in total (the owner's EUR 10 for the final-paper run plus the $6.25 already spent), where the total counts everything ever spent (ledger `runs/_spend.jsonl`, currently $6.25 from the test-paper run). Each call is checked before it is sent (worst case) and after (actual cost), and every response is cached on disk, so re-runs are free. `runs/<timestamp>/cost.json` accounts for every call. A full run with per-slide revision is estimated at about $2.5 to 3. The caps are the owner's decision: raise `total_usd` in `config/budget.yaml` before a run that needs more.
 
 ## Results *(planned: to be filled from the final-paper run)*
 

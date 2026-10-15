@@ -82,3 +82,22 @@ def test_heatmap_cells_wraptable_and_pdf_numbering():
     assert t and t[0]["rows"][1] == ["x", "30.9"]
     md = "[p.20]\nTable 6: Answer earliness breakdown.\n"
     assert ingest.relabel_tables(t, md)[0]["id"] == "Table 6"
+
+
+def test_input_prefers_tex_file_over_same_named_folder(tmp_path):
+    (tmp_path / "sections" / "appendix").mkdir(parents=True)
+    (tmp_path / "sections" / "appendix.tex").write_text("APPENDIX TEXT", encoding="utf-8")
+    (tmp_path / "main.tex").write_text(r"\begin{document}\input{sections/appendix}\end{document}", encoding="utf-8")
+    assert "APPENDIX TEXT" in ingest.read_tex(tmp_path)
+
+
+def test_two_line_title_is_joined(tmp_path):
+    doc = fitz.open()
+    page = doc.new_page()
+    page.insert_text((72, 90), "A Long Title That Wraps", fontsize=24)
+    page.insert_text((72, 124), "Onto A Second Line", fontsize=24)
+    for i in range(12):
+        page.insert_text((72, 180 + 14 * i), "Body text of the paper line.", fontsize=10)
+    pdf = tmp_path / "t.pdf"
+    doc.save(pdf)
+    assert ingest.pdf_to_markdown(pdf)[2] == "A Long Title That Wraps Onto A Second Line"

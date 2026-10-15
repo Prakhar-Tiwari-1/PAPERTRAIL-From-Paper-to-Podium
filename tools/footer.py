@@ -14,7 +14,7 @@ import json
 import shutil
 from pathlib import Path
 
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "deck" / "footer.json"
@@ -44,12 +44,29 @@ def prepare_logo(src: Path, dest: Path, pad: int = 6, max_h: int = 120) -> None:
     im.save(dest)
 
 
-def prepare_title_bg(src: Path, dest: Path, width: int = 1920) -> None:
+def prepare_title_bg(src: Path, dest: Path, width: int = 2560, focus_y: float = 0.5) -> None:
+    """Cut a 16:9 band out of the photo (the slide shows it "cover" style) and save it at `width` px. focus_y is where the band is centred in a
+    photo that is taller than 16:9 (0 = top, 1 = bottom); a photo that is wider than 16:9 is cut at the sides, centred."""
     im = Image.open(src).convert("RGB")
+    band_h = round(im.width * 9 / 16)
+    if band_h < im.height:
+        top = min(max(round(focus_y * im.height - band_h / 2), 0), im.height - band_h)
+        im = im.crop((0, top, im.width, top + band_h))
+    elif round(im.height * 16 / 9) < im.width:
+        band_w = round(im.height * 16 / 9)
+        left = (im.width - band_w) // 2
+        im = im.crop((left, 0, left + band_w, im.height))
     if im.width > width:
         im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+    elif im.width < width:
+        # A small photo would be stretched by the browser (soft and blocky). Upscale it here with a better filter, sharpen the edges a little and add
+        # fine grain so the remaining softness reads as photo texture. It cannot add detail: a larger photo (1920 px wide or more) is still better.
+        im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+        im = im.filter(ImageFilter.UnsharpMask(radius=2.0, percent=80, threshold=2))
+        grain = Image.effect_noise(im.size, 14).convert("RGB")
+        im = ImageChops.add(im, grain, scale=1, offset=-128)
     dest.parent.mkdir(parents=True, exist_ok=True)
-    im.save(dest, quality=82, optimize=True)
+    im.save(dest, quality=90, optimize=True)
 
 
 def prepare_watermark(src: Path, dest: Path, strength: float = 0.11, height: int = 700) -> None:
@@ -82,7 +99,10 @@ def sync(deck_dir: Path, config: Path = SRC, run_dir: Path | None = None) -> dic
             src = _resolve(cfg[key])
             if not src.exists():
                 raise FileNotFoundError(f"{key} file not found: {src} (edit deck/footer.json)")
-            fn(src, pub / name)
+            if key == "title_background":
+                fn(src, pub / name, focus_y=float(cfg.get("title_background_focus", 0.5)))
+            else:
+                fn(src, pub / name)
         elif name == "watermark.png":  # switched off: a transparent pixel, so the stylesheet url() always resolves
             pub.mkdir(parents=True, exist_ok=True)
             Image.new("RGBA", (1, 1), (0, 0, 0, 0)).save(pub / name)

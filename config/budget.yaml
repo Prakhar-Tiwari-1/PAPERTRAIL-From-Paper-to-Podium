@@ -1,5 +1,5 @@
 # Hard caps in USD, enforced in common/budget.py (SPEC §4.1).
-per_run_usd: 5.00   # raised from 2.00 (owner, 2026-10-12): a full Sonnet + Gemini Pro run with the 3-round loop costs about $3-5
-total_usd: 8.00     # owner's limit: under 8 euros in total, including everything already spent (ledger runs/_spend.jsonl)
+per_run_usd: 10.00  # owner, 2026-10-15: EUR 10 for the final-paper run; kept at $10 (about EUR 9) to stay safely under it. Was $5.
+total_usd: 16.25   # = $6.25 already in the ledger (runs/_spend.jsonl, test paper) + the $10 for this run. Was $8 (owner, under 8 euros).
 # Safety multiplier applied to the worst-case pre-call estimate.
 estimate_margin: 1.0
