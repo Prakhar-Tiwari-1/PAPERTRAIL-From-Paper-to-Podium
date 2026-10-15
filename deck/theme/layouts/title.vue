@@ -34,12 +34,11 @@ const shade = { background: `rgba(0, 0, 0, ${footer.title_shade ?? 0.6})` }
 .slidev-layout.title .title-top { display: flex; align-items: center; gap: 18px; }
 .slidev-layout.title .title-chip { background: #FFFFFF; border-radius: 6px; padding: 6px 12px; display: inline-flex; }
 .slidev-layout.title .title-chip img { height: 40px; width: auto; }
-.slidev-layout.title .title-tag { font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #F3C65A; font-weight: 600; }
+.slidev-layout.title .title-tag { font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2B8A5; font-weight: 600; }
 .slidev-layout.title .title-body { margin-top: auto; }
-.slidev-layout.title h1 { font-size: 56px; line-height: 1.12; color: #FFFFFF; padding-bottom: 24px; }
-.slidev-layout.title h1::after { background: var(--warm); height: 8px; width: 120px; }
+.slidev-layout.title h1 { font-size: 56px; line-height: 1.12; color: #FFFFFF; }
 .slidev-layout.title .title-body p { font-size: 30px; color: #E4EDF3; margin-top: 4px; max-width: 980px; }
-.slidev-layout.title .title-cite { font-size: 22px; color: #F3C65A; }
+.slidev-layout.title .title-cite { font-size: 22px; color: #F2B8A5; }
 .slidev-layout.title .title-meta { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
 .slidev-layout.title .title-names { font-size: 30px; font-weight: 700; color: #FFFFFF; }
 .slidev-layout.title .title-course { font-size: 22px; color: #D6E4EE; }

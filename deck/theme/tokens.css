@@ -1,13 +1,13 @@
 /* Design tokens. Logical canvas 1280x720; 64px margin; 8px spacing unit. Colours follow the navy of the university logo (#063A59)
-   with Okabe-Ito accents; flat colour only (no gradients, shadows, emoji or decorative icons). */
+   with a blue accent and one brick-red highlight; flat colour only (no gradients, shadows, emoji or decorative icons). */
 :root {
   --bg: #FBFBF9;
   --fg: #14202B;
   --primary: #063A59;     /* navy from the university logo */
   --accent: #0072B2;      /* Okabe-Ito blue */
-  --warm: #E69F00;        /* Okabe-Ito orange: highlights and rules */
+  --warm: #B04A33;        /* brick red: highlights, bullet markers, answer panel (replaced the Okabe-Ito orange on 2026-10-15) */
   --tint: #E8F0F6;        /* light navy tint: panels */
-  --tint-warm: #FCF1D6;   /* light orange tint */
+  --tint-warm: #F6E6E0;   /* light brick tint */
   --muted: #4A5866;
   --rule: #D3DCE3;
   --margin: 64px;

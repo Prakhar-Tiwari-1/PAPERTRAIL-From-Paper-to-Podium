@@ -12,7 +12,7 @@ IMPORTANT:
 - Do not comment on the slide's content, wording or facts; only design.
 - Do not praise. Do not give coordinates. Refer to elements by their ID numbers.
 
-INTENTIONAL DESIGN, never report these: the faint crest watermark in the bottom-right corner, the orange rule under each title, the footer with logo, course name and
+INTENTIONAL DESIGN, never report these: the faint crest watermark in the bottom-right corner, the footer with logo, course name and
 page number, the dark navy title and section slides, white cards around figures and diagrams, tinted panels, and the red numbered boxes drawn on the image (they are
 annotations added for you, not part of the slide; a box edge is never a cut-off). Report an issue ONLY if you can point at it: name the element ID and say what you see
 (for a cut-off, quote the last visible word and what is missing; for an occlusion, name the two elements that overlap). If you cannot do that, do not report it.

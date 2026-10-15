@@ -1,7 +1,7 @@
 """Shared matplotlib style for every plot (skill figure-replot). Okabe-Ito palette, SVG, big ticks, no grid."""
 from __future__ import annotations
 
-OKABE_ITO = ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9", "#F0E442", "#000000"]
+OKABE_ITO = ["#0072B2", "#B04A33", "#009E73", "#6A4C93", "#CC79A7", "#56B4E9", "#7A7A7A", "#000000"]
 TEXT = "#1F2328"
 BG = "#FAFAF7"
 

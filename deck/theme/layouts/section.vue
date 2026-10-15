@@ -5,5 +5,4 @@
 </template>
 <style>
 .slidev-layout.section h1 { font-size: 52px; color: #FFFFFF; }
-.slidev-layout.section h1::after { background: var(--warm); }
 </style>

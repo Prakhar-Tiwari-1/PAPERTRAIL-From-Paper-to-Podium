@@ -10,7 +10,7 @@ stages: [plan, author, reviser, render_loop]
 - Real figures with source captions ("Smith et al., 2024, Fig. N" using the paper's citation, or "Our analysis, artifacts/X.csv"). A table excerpt shows 3 to 6 rows and at most 6 columns: the rows that carry the point.
 - **Balanced space.** The visual is large and the slide is used: a slide whose lower third is empty, or whose figure floats in a corner, is a defect. Fix it with a visual
   (diagram, chart, example, or a table plus a one-line reading of it), never with more text. Split a slide rather than shrink text. Body text never below 16 px.
-- The theme provides colour (navy titles, orange rule, tinted panels). Do not add colours, styles or decoration.
+- The theme provides colour (navy titles, brick-red highlights, tinted panels). Do not add colours, styles or decoration.
 
 ## Plain writing
 Write the way a careful student speaks: short, concrete, specific, with the paper's own terms and numbers. A check scans slides AND speaker notes and sends the deck back for
