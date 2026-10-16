@@ -8,7 +8,8 @@ Guidance for Claude Code sessions in this repo.
 
 - **`SPEC.md` is the source of truth.** Read §0 first. Decisions listed there are settled; don't reopen them without the user.
 - **`Tasks.md` tracks progress.** Tick items as they're finished and add any newly discovered tasks under the right phase.
-- `2508.03630v1.pdf` is the SlideAudit paper (reference for the vision critic, SPEC §4/§7.7). It is not the paper being presented.
+- `docs/reference/2508.03630v1.pdf` is the SlideAudit paper (reference for the vision critic, SPEC §4/§7.7). It is not the paper being presented.
+- `results/` holds archived outputs and the cost report (first surviving run, the final-paper run as the model made it and as presented); `extra_study/` is the owner's extra experiment and the script that turns it into slide data; `docs/RUNLOG.md` is the dated record of real runs.
 
 ## Architecture in one paragraph
 

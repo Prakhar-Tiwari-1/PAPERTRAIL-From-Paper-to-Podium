@@ -3,7 +3,7 @@
 No number is typed here. Everything is parsed from the notebook's printed tables (the .log), the notebook's config cell, and the
 paper's own Table 6 (runs/<ts>/tables.json). The slides cite the CSVs ("Our analysis, artifacts/extra_*.csv").
 
-    python Extra_work/make_slide_data.py --run runs/20261015-155838
+    python extra_study/make_slide_data.py --run runs/20261015-155838
 """
 from __future__ import annotations
 
