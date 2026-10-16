@@ -2,6 +2,28 @@
 
 Dated record of real runs: what was run, what happened, what was changed because of it. Newest first. Spend is from `runs/_spend.jsonl` (OpenRouter's returned cost).
 
+## 2026-10-15 to 16: final-paper run (arXiv 2510.22954), hand edits, extra study, reorganisation
+
+Paper: *Artificial Hivemind* (Jiang et al., NeurIPS 2025 D&B). Run dir `runs/20261015-155838`; kept in [results/final-paper-2510.22954/](../results/final-paper-2510.22954/). Spend of this run: **$3.69** (ledger total after it: $9.93, see [results/COSTS.md](../results/COSTS.md)). Budget for the run raised to $10 per run and $16.25 in total at the owner's request (EUR 10).
+
+**Before the run (free):** the paper PDF went into `papers/` with a minimal profile. Ingest bugs found and fixed: a folder `sections/appendix/` next to `appendix.tex` crashed the arXiv path; the title was cut to its first line and most lines became headings because the body font size was a median over lines (small figure and table text pulled it under 7 pt); the LaTeX `\title` was an older variant, so the printed PDF title now wins.
+
+**The run:**
+- Stages ingest to style cost under $0.6; the author (Claude) took 6 minutes and $1.14.
+- The render loop failed at the student critic: DeepSeek's reasoning counted against `max_tokens: 3000`. Raised to 8000, resumed with `--from-stage 9`; earlier calls came from the cache. Render loop 12 minutes, fact-check 112 numbers all matched, judge 18 minutes.
+- Judge (Gemini 3.1 Pro, 2 repeats): **64/100, hard fail**: faithfulness items F1 and F2 had no verbatim quote; no own-analysis slide (the replot could not be built); design 7/10.
+- Export was blocked by four numbers on the quiz slide. They were real, but a number written only in a quiz question had no claim to be checked against. Fixed at the source: questions with data numbers are registered as claims, and the quiz stage rejects a question whose numbers are not on its cited page. The export then passed with no waivers.
+
+**Hand edits after the run** (separate `manual:` commit; the list is in [results/final-paper-2510.22954/EDITS.md](../results/final-paper-2510.22954/EDITS.md)): heading rule removed, gold replaced by a brick red, crest credit line removed, new title photo, quiz cut from eight questions to six (now the pipeline default), a fake chat slide replaced by a table, a diagram that overflowed its card redrawn, and four slides added from the extra study. Pipeline fixes that came out of it: the quiz is six questions from one constant; the word counter ignores table pipes; diagrams scale to fit their card; the title photo is cut to 16:9 around a focus point.
+
+**Extra study** ([extra_study/](../extra_study/)): the owner ran a Kaggle notebook (2 x T4) on 8 small open models (OLMo 2 1B at every stage, Qwen2.5 1.5B and SmolLM2 1.7B base vs instruct) and three decoding fixes. Results: similarity rises from about 0.42 (OLMo base) to about 0.77, mostly at the first fine-tuning step; the same jump in the other two families; temperature 1.5 lowers similarity but its answers average 761 words and 45% hit the token cap. Two problems: the LLM judge failed in that run (so off-task text in base models could not be filtered), and the notebook saved no figures, so the slide charts were redrawn from the log by `extra_study/make_slide_data.py`.
+
+**Open:** the presented deck has 20 main slides and about 21 minutes of notes (limits: 16 and 20); the judge has not seen the presented deck; the licence of the title photo is not recorded yet; the oneshot comparison was not run for this paper.
+
+**Earlier attempts:** the first run (`20261012-112632`, cheapest models, $1.51) was deleted at the owner's request on 2026-10-12; the earliest surviving output is the test-paper run `20261012-181956` ($4.73, judge 95/100), kept in [results/test-paper-2505.06120/](../results/test-paper-2505.06120/).
+
+**Reorganisation (2026-10-16):** `results/` added (outputs and costs), `Extra_work/` renamed `extra_study/`, the SlideAudit PDF moved to `docs/reference/`, loose logs moved to `runs/logs/`, `tools/cost_report.py` added, README and Tasks.md brought up to date.
+
 ## 2026-10-15: improvements round (offline only, no paid run)
 
 Requested: speaking time of at least 15 minutes, reference slides, fuller slides, tighter prompts, a quiz slide. Built and tested with scripted fake models only; the real spend is unchanged at $6.25. The owner asked NOT to run the full pipeline: the next presentation uses a different paper.

@@ -6,7 +6,7 @@ An agent harness that reads a research paper, works out what is hard to understa
 
 Built for a three-person course presentation (CSC_53432_EP, Large Language Models: 20 min talk + 5 min Q&A). The pipeline is **paper-independent**: give it any arXiv ID or PDF. `2505.06120` was only the test paper.
 
-> **Status:** the pipeline is built and passes 107 offline tests and a full fake-model end-to-end run (real Slidev rendering, QA and export) for a paper with a profile and for an unknown paper without one. It has had one real run, on the test paper; the next real run will be on the final paper. The full design is in [SPEC.md](SPEC.md); progress is in [Tasks.md](Tasks.md). Sections marked *(planned)* describe results that do not exist yet.
+> **Status:** the pipeline is built and passes 114 offline tests and a full fake-model end-to-end run (real Slidev rendering, QA and export) for a paper with a profile and for an unknown paper without one. It has had real runs on the test paper and one on the final paper (arXiv:2510.22954); the decks, the judge reports and the cost are in [results/](results/README.md). The full design is in [SPEC.md](SPEC.md); progress is in [Tasks.md](Tasks.md); the dated record of real runs is [docs/RUNLOG.md](docs/RUNLOG.md). Sections marked *(planned)* describe results that do not exist yet.
 
 ## How it works
 
@@ -127,18 +127,36 @@ Only the analyst runs code (`tools/python_exec.py`). With a WSL distro (`PAPERTR
 
 ## Cost control
 
-Budget caps are enforced in code (`config/budget.yaml`): $10 per run, $16.25 in total (the owner's EUR 10 for the final-paper run plus the $6.25 already spent), where the total counts everything ever spent (ledger `runs/_spend.jsonl`, currently $6.25 from the test-paper run). Each call is checked before it is sent (worst case) and after (actual cost), and every response is cached on disk, so re-runs are free. `runs/<timestamp>/cost.json` accounts for every call. A full run with per-slide revision is estimated at about $2.5 to 3. The caps are the owner's decision: raise `total_usd` in `config/budget.yaml` before a run that needs more.
+Budget caps are enforced in code (`config/budget.yaml`): $10 per run, $16.25 in total (the owner's EUR 10 for the final-paper run plus the $6.25 already spent), where the total counts everything ever spent (ledger `runs/_spend.jsonl`; $9.93 so far, broken down in [results/COSTS.md](results/COSTS.md)). Each call is checked before it is sent (worst case) and after (actual cost), and every response is cached on disk, so re-runs are free. `runs/<timestamp>/cost.json` accounts for every call. A full run with per-slide revision is estimated at about $2.5 to 3. The caps are the owner's decision: raise `total_usd` in `config/budget.yaml` before a run that needs more.
 
-## Results *(planned: to be filled from the final-paper run)*
+## Results
 
-- Oneshot vs. full pipeline: rubric scores, cost and time
-- Vision-critic validation on SlideAudit: macro P/R/F1, with and without the taxonomy
-- Critic issues per revision round
-- Fact-check extractor precision/recall
+Full detail, files and costs: [results/README.md](results/README.md).
+
+- **Test paper** (run `20261012-181956`, $4.73): judge score 95/100, no hard fail; all 68 numbers fact-checked.
+- **Final paper** (run `20261015-155838`, $3.69): judge score 64/100 with a hard fail (faithfulness items F1 and F2 had no verbatim quote; no own-analysis slide with an artifact); all 112 numbers fact-checked. The presented deck was then edited by hand and extended with four slides from an extra study (listed in [results/final-paper-2510.22954/EDITS.md](results/final-paper-2510.22954/EDITS.md)), so that score does not describe it.
+- **Extra study** ([extra_study/](extra_study/)): on small open models the response similarity rises from about 0.42 for a base model to about 0.77 after post-training, mostly at the first fine-tuning step; the LLM judge of that study failed, so base-model diversity may be inflated by off-task text.
+- *(planned, not run)* Oneshot vs. full pipeline comparison; vision-critic validation on SlideAudit (macro P/R/F1); fact-check extractor precision/recall.
 
 ## Repository layout
 
-See [SPEC.md §13](SPEC.md). Key folders: `stages/` (one module per stage), `common/` (LLM layer, budget, schemas, trace), `tools/`, `skills/`, `prompts/`, `qa/`, `deck/` (Slidev project and theme), `compare/`, `runs/`.
+See [SPEC.md §13](SPEC.md) for the design. In short:
+
+```
+pipeline.py          the state machine (stages in stages/, one module each)
+stages/ common/      stage code; LLM layer, budget guard, schemas, trace
+tools/ qa/ report/   helpers (render, plots, footer, cost report); slide checks; trace page, quiz and workflow slides
+compare/ judges/     oneshot comparison and critic evaluation; rubric judge
+skills/ prompts/     markdown instructions injected into stage prompts
+config/              models, budget, rubric
+deck/ media/         Slidev project and theme; images and their credits
+papers/ references/  per-paper profiles (the paper PDFs are local); example slides (local)
+extra_study/         the owner's extra experiment (Kaggle notebook, log) and the script that makes slide data from it
+results/             archived outputs and costs of real runs (tracked)
+docs/                run log, the SlideAudit paper, plans
+tests/               offline tests and the fake-model end-to-end run
+runs/                every run's working files (gitignored)
+```
 
 ## References
 

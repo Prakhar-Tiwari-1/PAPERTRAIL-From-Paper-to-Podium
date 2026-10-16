@@ -9,10 +9,10 @@ Progress tracker for **papertrail — From Paper to Podium**. Spec references ar
 
 - [ ] Sign up for the presentation slot (deadline today, Oct 12)
 - [x] Create GitHub repo + `git init` (README committed)
-- [ ] Commit spec, CLAUDE.md, Tasks.md, .gitignore, .env.example (push only with the user's permission)
-- [ ] OpenRouter account: add credit, set a per-key credit limit (~$10), put the key in `.env`
+- [x] Commit spec, CLAUDE.md, Tasks.md, .gitignore, .env.example (pushed with the owner's permission)
+- [x] OpenRouter account: add credit, set a per-key credit limit (~$10), put the key in `.env`
 - [x] Verify slugs and prices on openrouter.ai (§17): Sonnet 5.5, Haiku 5.5, Gemini 3 Flash, Gemini 3.1 Pro, DeepSeek chat + reasoning (`:free`?, context length, tool calling), a free vision model → `config/models.yaml`
-- [ ] Check whether OpenRouter returns usage cost per response; check free-model daily limits
+- [x] Check whether OpenRouter returns usage cost per response (it does: the ledger uses it); free-model daily limits are still unchecked
 - [ ] Install Ollama; `ollama pull` a 3–4B Q4 model (Qwen/Gemma class); test JSON-schema output
 - [ ] Check that WSL2 is available and `unshare -rn` works
 - [x] Python venv + `pyproject.toml` (pydantic-ai, pydantic, pymupdf, httpx, pyyaml, matplotlib, pandas, pytest)
@@ -72,9 +72,9 @@ Progress tracker for **papertrail — From Paper to Podium**. Spec references ar
 - [ ] SlideAudit: check license and format (§17); build a 50-slide stratified sample
 - [x] `prompts/vision_critic_zeroshot.md`; `compare/critic_eval.py` 2×2 grid → macro P/R/F1 → choose the vision critic
 - [x] 7.9 `judges/checklist_gen.py` + `judges/score.py` (per dimension, 2 repeats, quotes required)
-- [ ] First full Sonnet run
+- [x] First full Sonnet run (test paper, then the final paper)
 - [x] `report/trace_page.py` → `trace.html` + `pipeline.mmd`
-- [ ] Tools & Workflow slide generated from the run
+- [x] Tools & Workflow slide generated from the run
 - [x] README: reproduction steps, results, cost
 
 ## Phase 6 — Stretch and comparison (Wed–Thu, Oct 14–15)
@@ -89,7 +89,12 @@ Progress tracker for **papertrail — From Paper to Podium**. Spec references ar
 ## Phase 7 — Finish and rehearse (Fri–Sun, Oct 16–18)
 
 - [ ] Check acceptance criteria §15 (1–8)
-- [ ] Freeze the deck; final export
+- [ ] Freeze the deck; final export (the presented deck is in `results/final-paper-2510.22954/final/`; it still has 20 main slides and about 21 minutes of notes, above the 16 slides and 20 minutes the pipeline allows)
+- [ ] Trim to 20 minutes, for example by moving one of the four extra slides to the backup section
+- [ ] Record the licence of the title photo in `media/ATTRIBUTION.md` (the owner has it)
+- [ ] Split `speaker_script.md` per presenter (proposed: Prakhar slides 1-7, Karl 8-13, Adrian 14-20) with a hand-over sentence each
+- [ ] (Optional, about $0.30) Re-run the judge on the presented deck
+- [ ] (Optional) Oneshot vs. full comparison: not run for the final paper
 - [ ] Rehearsal 1 (timed, 20 min)
 - [ ] Rehearsal 2 with Q&A, using the student critic's questions
 - [ ] Clean-clone reproduction test following the README
@@ -98,7 +103,11 @@ Progress tracker for **papertrail — From Paper to Podium**. Spec references ar
 
 | Date | What | $ | Running total |
 |---|---|---|---|
-| | | | |
+| 2026-10-12 | First attempt on the test paper, cheapest `--dev` models (run dir deleted later) | 1.51 | 1.51 |
+| 2026-10-12 | Test paper, final models, after the quality pass (`20261012-181956`) | 4.73 | 6.25 |
+| 2026-10-15 | Final paper 2510.22954 (`20261015-155838`), including the resume after the student-critic token fix and four exports | 3.69 | 9.93 |
+
+The ledger total is $9.93, broken down by run, model and role in [results/COSTS.md](results/COSTS.md) (regenerate with `python -m tools.cost_report`). (Offline fake-model tests add $0.0006.)
 
 ## Notes / decisions during build
 
