@@ -1,8 +1,8 @@
 import fitz
 
-from common.ctx import RunCtx
-from common.llm import Harness
-from stages import ingest
+from papertrail.common.ctx import RunCtx
+from papertrail.common.llm import Harness
+from papertrail.stages import ingest
 
 
 def make_pdf(path):

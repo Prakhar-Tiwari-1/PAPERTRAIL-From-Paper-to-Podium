@@ -1,6 +1,6 @@
 import os
 
-from tools.python_exec import python_exec
+from papertrail.tools.python_exec import python_exec
 
 
 def test_runs_and_writes_in_artifacts(tmp_path):
@@ -31,7 +31,7 @@ def test_timeout(tmp_path):
 
 
 def test_plot_style_importable_in_sandbox(tmp_path):
-    code = ("from tools.plot_style import apply_style\napply_style()\nimport matplotlib.pyplot as plt\n"
+    code = ("from papertrail.tools.plot_style import apply_style\napply_style()\nimport matplotlib.pyplot as plt\n"
             "plt.plot([1,2,3]); plt.savefig('p.svg')\nprint('saved')")
     r = python_exec(code, tmp_path)
     assert r["returncode"] == 0, r["stderr"]

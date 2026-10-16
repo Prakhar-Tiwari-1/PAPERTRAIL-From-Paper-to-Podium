@@ -24,7 +24,7 @@ deck/.slidev/
 deck/slides-export*
 *.log
 # the extra study's run log is its data source, so keep it
-!extra_study/*.log
+!experiments/extra_study/*.log
 
 # Pipeline outputs (local; a chosen release run can be committed explicitly)
 runs/*

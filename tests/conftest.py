@@ -1,6 +1,6 @@
 import pytest
 
-from common import profile as profile_mod
+from papertrail.common import profile as profile_mod
 
 
 @pytest.fixture(autouse=True)

@@ -1,5 +1,5 @@
-from common.llm import load_models
-from common.skills import all_skills, load_skill, skills_prompt
+from papertrail.common.llm import load_models
+from papertrail.common.skills import all_skills, load_skill, skills_prompt
 
 SPEC_SKILLS = {"paper-comprehension", "explanation-devices", "slide-design", "slidev-authoring", "diagram-style", "figure-replot", "speaker-notes"}
 

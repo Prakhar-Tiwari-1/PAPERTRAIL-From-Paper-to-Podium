@@ -6,8 +6,8 @@ from pydantic_ai.messages import ModelResponse, TextPart
 from pydantic_ai.models.function import AgentInfo, FunctionModel
 from pydantic_ai.models.test import TestModel
 
-from common.budget import Budget, BudgetExceeded
-from common.llm import Harness, MissingAPIKey, check_vendor_rules, load_models
+from papertrail.common.budget import Budget, BudgetExceeded
+from papertrail.common.llm import Harness, MissingAPIKey, check_vendor_rules, load_models
 
 
 class Out(BaseModel):
@@ -108,7 +108,7 @@ def test_images_never_routed_to_deepseek(tmp_path):
 def test_vendor_rules_in_shipped_config():
     roles, _ = load_models()
     import yaml
-    from common.llm import ROOT
+    from papertrail.common.llm import ROOT
 
     rules = yaml.safe_load((ROOT / "config" / "models.yaml").read_text())["vendor_rules"]
     assert check_vendor_rules(roles, rules) == []

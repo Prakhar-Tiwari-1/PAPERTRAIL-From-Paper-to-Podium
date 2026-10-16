@@ -1,4 +1,4 @@
-from tools.cost_report import report
+from papertrail.tools.cost_report import report
 
 
 def test_report_totals_by_run_model_and_role():

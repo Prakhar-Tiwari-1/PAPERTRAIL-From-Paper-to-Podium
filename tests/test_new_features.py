@@ -3,8 +3,8 @@ import json
 
 from PIL import Image, ImageDraw
 
-from common.schemas import Plan, PlanSlide, QAIssue, Quiz, QuizItem, validate_plan, validate_quiz
-from qa.source_map import parse_slides
+from papertrail.common.schemas import Plan, PlanSlide, QAIssue, Quiz, QuizItem, validate_plan, validate_quiz
+from papertrail.qa.source_map import parse_slides
 
 
 # ------------------------------------------------------------------ quiz
@@ -48,7 +48,7 @@ def test_reasoned_answers_must_say_not_tested_and_limits_hold():
 
 
 def test_quiz_slide_is_generated_from_quiz_json_with_questions_above_answers(tmp_path):
-    from report import quiz_slide
+    from papertrail.report import quiz_slide
 
     md = ("---\ntheme: ./theme\nlayout: title\n---\n\n# T\n\n<!--\nn\n-->\n\n---\nlayout: claim-quiz\n---\n\n# Check it\n\nold body\n\n"
           "<!--\nrun the quiz\n-->\n\n---\nlayout: workflow\n---\n\n# Tools\n\n<!--\nw\n-->\n")
@@ -64,7 +64,7 @@ def test_quiz_slide_is_generated_from_quiz_json_with_questions_above_answers(tmp
 
 
 def test_quiz_slide_patch_registers_answers_as_claims(tmp_path):
-    from report import quiz_slide
+    from papertrail.report import quiz_slide
 
     (tmp_path / "deck").mkdir()
     (tmp_path / "deck" / "slides.md").write_text("---\nlayout: claim-quiz\n---\n\n# Q\n\n<!--\nn\n-->\n", encoding="utf-8")
@@ -101,7 +101,7 @@ DECK = ("---\ntheme: ./theme\nlayout: title\n---\n\n# T\n\n<!--\nn1\n-->\n\n---\
 
 
 def test_splice_replaces_only_the_named_slides():
-    from stages.revise import splice
+    from papertrail.stages.revise import splice
 
     new = splice(DECK, {2: "---\nlayout: claim-table\n---\n\n# Two, fixed\n\n| a | b |\n|---|---|\n| 1 | 2 |\n\n<!--\nn2 new\n-->"})
     s = parse_slides(new)
@@ -111,7 +111,7 @@ def test_splice_replaces_only_the_named_slides():
 
 
 def test_splice_two_slides_keeps_order():
-    from stages.revise import splice
+    from papertrail.stages.revise import splice
 
     new = splice(DECK, {2: "---\nlayout: claim-bullets\n---\n\n# Two b\n\n<!--\nx\n-->", 3: "---\nlayout: claim-figure\n---\n\n# Three b\n\n<!--\ny\n-->"})
     t = [l for s in parse_slides(new) for l in s.lines if l.startswith("# ")]
@@ -119,7 +119,7 @@ def test_splice_two_slides_keeps_order():
 
 
 def test_only_content_slides_with_high_issues_are_targeted():
-    from stages.revise import targets_for
+    from papertrail.stages.revise import targets_for
 
     slides = parse_slides(DECK)
     mk = lambda slide, sev="high": QAIssue(round=1, source="automatic", slide=slide, category="c", severity=sev, detail="d")
@@ -132,7 +132,7 @@ def vi(cat, slide=1, sev="high", src="vision_slide"):
 
 
 def test_unconfirmed_layout_claims_are_demoted_confirmed_ones_stay():
-    from qa.triage import triage
+    from papertrail.qa.triage import triage
 
     out = triage([vi("Content Overflow/Cut-off"), vi("Insufficient Color Contrast for Readability", slide=2)], {1: set(), 2: {"contrast"}}, {1: [], 2: []}, set())
     assert out[0].severity == "low" and "not confirmed by measurement" in out[0].detail
@@ -140,7 +140,7 @@ def test_unconfirmed_layout_claims_are_demoted_confirmed_ones_stay():
 
 
 def test_occlusion_needs_a_real_overlap():
-    from qa.triage import overlapping, triage
+    from papertrail.qa.triage import overlapping, triage
 
     apart = [{"bbox": [0.1, 0.1, 0.3, 0.1]}, {"bbox": [0.1, 0.5, 0.3, 0.1]}]
     panel = [{"bbox": [0.1, 0.1, 0.8, 0.5]}, {"bbox": [0.2, 0.2, 0.3, 0.1]}]       # text inside a panel is design
@@ -151,7 +151,7 @@ def test_occlusion_needs_a_real_overlap():
 
 
 def test_an_issue_still_reported_after_a_fix_attempt_is_contested():
-    from qa.triage import triage
+    from papertrail.qa.triage import triage
 
     out = triage([vi("Cluttered Layout")], {1: set()}, {1: []}, {(1, "Cluttered Layout")})
     assert out[0].severity == "low" and "contested" in out[0].detail
@@ -160,7 +160,7 @@ def test_an_issue_still_reported_after_a_fix_attempt_is_contested():
 
 # ------------------------------------------------------------------ empty space
 def test_sparse_slides_are_flagged_with_an_instruction_to_add_a_visual(tmp_path):
-    from stages.render_loop import automatic_issues
+    from papertrail.stages.render_loop import automatic_issues
 
     slides = parse_slides(DECK)
     for s, met in zip(slides, [{"coverage": 0.2, "empty_band_px": 300}, {"coverage": 0.3, "empty_band_px": 208},
@@ -191,7 +191,7 @@ def slide_png(seed, size=(640, 360)):
 def test_collect_reads_images_and_pdf_and_reports_unreadable_files(tmp_path):
     import pymupdf
 
-    from tools.references import collect
+    from papertrail.tools.references import collect
 
     (tmp_path / "a.png").write_bytes(slide_png(0))
     (tmp_path / "broken.png").write_bytes(b"not an image")
@@ -208,7 +208,7 @@ def test_collect_reads_images_and_pdf_and_reports_unreadable_files(tmp_path):
 
 
 def test_near_copy_guard_flags_a_copied_layout_not_a_different_one():
-    from tools.references import near_copies
+    from papertrail.tools.references import near_copies
 
     refs = [("ref0", slide_png(0)), ("ref1", slide_png(1))]
     assert near_copies([(1, slide_png(0))], refs) == [{"slide": 1, "reference": "ref0", "distance": 0}]
@@ -216,9 +216,9 @@ def test_near_copy_guard_flags_a_copied_layout_not_a_different_one():
 
 
 def test_style_stage_without_references_writes_an_empty_brief(tmp_path):
-    from common.ctx import RunCtx
-    from common.llm import Harness
-    from stages import style
+    from papertrail.common.ctx import RunCtx
+    from papertrail.common.llm import Harness
+    from papertrail.stages import style
 
     run = tmp_path / "run"
     ctx = RunCtx(run_dir=run, paper="", config="full", h=Harness(run, model_factory=lambda s: None))
@@ -226,16 +226,16 @@ def test_style_stage_without_references_writes_an_empty_brief(tmp_path):
     style.run(ctx)
     b = json.loads((run / "style_brief.json").read_text())
     assert b == {"examples": [], "principles": [], "quality_bar": []}
-    from stages import author
+    from papertrail.stages import author
 
     assert author.style_block(ctx) == "(no reference slides given)"
 
 
 def test_reviser_prompt_fills_every_placeholder(tmp_path):
     """Regression: the reviser prompt once failed with a missing {style} field at run time."""
-    from common.ctx import RunCtx
-    from common.llm import Harness
-    from stages import revise
+    from papertrail.common.ctx import RunCtx
+    from papertrail.common.llm import Harness
+    from papertrail.stages import revise
 
     run = tmp_path / "run"
     run.mkdir()
@@ -251,7 +251,7 @@ def test_reviser_prompt_fills_every_placeholder(tmp_path):
 
 
 def test_unsourced_numbers_flags_digits_missing_from_the_cited_source():
-    from stages.quiz import unsourced_numbers
+    from papertrail.stages.quiz import unsourced_numbers
 
     src = "randomly paired responses fall within the 0.1-0.2 range; 31,250 human annotations"
     assert unsourced_numbers("What does the 0.1 to 0.2 range mean?", src) == []
@@ -260,7 +260,7 @@ def test_unsourced_numbers_flags_digits_missing_from_the_cited_source():
 
 
 def test_quiz_questions_with_data_numbers_are_registered_as_claims(tmp_path):
-    from report import quiz_slide
+    from papertrail.report import quiz_slide
 
     q = good_quiz()
     q.items[0].question = "What does the 0.1 to 0.2 range mean?"
@@ -276,7 +276,7 @@ def test_quiz_questions_with_data_numbers_are_registered_as_claims(tmp_path):
 
 
 def test_title_background_is_cut_to_16_9_around_the_focus(tmp_path):
-    from tools.footer import prepare_title_bg
+    from papertrail.tools.footer import prepare_title_bg
 
     tall = Image.new("RGB", (320, 960), (255, 0, 0))                       # red top, blue bottom
     ImageDraw.Draw(tall).rectangle((0, 480, 320, 960), fill=(0, 0, 255))

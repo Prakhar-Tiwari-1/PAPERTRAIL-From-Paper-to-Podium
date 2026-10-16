@@ -4,9 +4,20 @@
 
 An agent harness that reads a research paper, works out what is hard to understand in it and how best to explain each part, and produces a conference-style Slidev deck. The rendered slides are critiqued by a vision model and a "confused student" model, the numbers are fact-checked by a local model, and the deck is scored by a judge from a different vendor.
 
-Built for a three-person course presentation (CSC_53432_EP, Large Language Models: 20 min talk + 5 min Q&A). The pipeline is **paper-independent**: give it any arXiv ID or PDF. `2505.06120` was only the test paper.
+## About this project
 
-> **Status:** the pipeline is built and passes 114 offline tests and a full fake-model end-to-end run (real Slidev rendering, QA and export) for a paper with a profile and for an unknown paper without one. It has had real runs on the test paper and one on the final paper (arXiv:2510.22954); the decks, the judge reports and the cost are in [results/](results/README.md). The full design is in [SPEC.md](SPEC.md); progress is in [Tasks.md](Tasks.md); the dated record of real runs is [docs/RUNLOG.md](docs/RUNLOG.md). Sections marked *(planned)* describe results that do not exist yet.
+papertrail is a project we developed for the course **Large Language Models (CSC_53432_EP) at École Polytechnique**, where we were required to **submit AI-generated slides** for a presentation of a research paper (a 20 minute talk and 5 minutes of questions, three presenters). Instead of prompting a chatbot once, we built the whole workflow as a reusable pipeline: understand the paper, plan the talk, write the deck, critique it, fact-check it and score it.
+
+**Which papers we used**
+
+1. ***LLMs Get Lost In Multi-Turn Conversation*** (Laban et al., arXiv:2505.06120) was the **test paper**. We built and tuned the pipeline on it over several runs.
+2. ***Artificial Hivemind: The Open-Ended Homogeneity of Language Models (and Beyond)*** (Jiang et al., NeurIPS 2025, arXiv:2510.22954) is the **real paper**. One pipeline run produced the deck, followed by a few manual changes: the look of the theme, a quiz cut from eight to six questions, one slide redrawn, and four slides from an extra study of our own. What changed is listed in [`results/final-paper-2510.22954/EDITS.md`](results/final-paper-2510.22954/EDITS.md); the deck exactly as the model made it is kept next to the presented one.
+
+**What we deliver** is the pipeline as a template, not a single deck. It is **paper-independent**: give it any arXiv ID or PDF, and put anything specific to one paper in an optional profile (`papers/<id>.yaml`).
+
+**What we found: examples help a lot.** Showing the model example slides we like (`references/slides/`, turned into a short style brief for the author) improved its generation a great deal compared with instructions alone. This is our observation from building the pipeline, not a controlled experiment: we did not run a with-versus-without comparison.
+
+> **Status:** the pipeline is built and passes 114 offline tests and a full fake-model end-to-end run (real Slidev rendering, QA and export) for a paper with a profile and for an unknown paper without one. It has had real runs on the test paper and one on the final paper (arXiv:2510.22954); the decks, the judge reports and the cost are in [results/](results/README.md). The full design is in [SPEC.md](docs/SPEC.md); progress is in [Tasks](docs/TASKS.md); the dated record of real runs is [docs/RUNLOG.md](docs/RUNLOG.md). Sections marked *(planned)* describe results that do not exist yet.
 
 ## How it works
 
@@ -31,7 +42,7 @@ paper (arXiv ID or PDF)
   → export        slides.pdf, editable pptx, speaker script, trace page
 ```
 
-**Harness.** Our own Python state machine (`pipeline.py`) owns the stages, the critic loop, skills, tools, budget and tracing. PydanticAI is used only for typed LLM calls. Every stage writes inspectable files to `runs/<timestamp>/`, and each run produces `trace.html` showing what every stage did, which model ran it, and what it cost.
+**Harness.** Our own Python state machine (`src/papertrail/pipeline.py`) owns the stages, the critic loop, skills, tools, budget and tracing. PydanticAI is used only for typed LLM calls. Every stage writes inspectable files to `runs/<timestamp>/`, and each run produces `trace.html` showing what every stage did, which model ran it, and what it cost.
 
 **Prior work we build on.** The revision loop follows DeepPresenter's render → critique → revise pattern. The vision critic uses the design-flaw taxonomy and evaluation method from SlideAudit (Zhang et al., UIST 2025).
 
@@ -58,6 +69,7 @@ cd deck; npm install; npx playwright install chromium; cd ..
 ollama pull qwen3:4b                                       # local fact extractor (slug in config/models.yaml)
 copy .env.example .env                                     # then add OPENROUTER_API_KEY
 pytest                                                     # offline tests, no key needed
+papertrail --help                                          # the pipeline command (same as: python -m papertrail --help)
 ```
 
 ### API keys
@@ -74,20 +86,20 @@ No other keys are used. Slidev, Playwright, the Semantic Scholar API (keyless) a
 
 ```powershell
 # Full pipeline
-python pipeline.py --config full --paper <arxiv-id, or the path to a PDF>
+papertrail --config full --paper <arxiv-id, or the path to a PDF>
 
 # One-shot baseline for comparison, then the comparison table
-python pipeline.py --config oneshot --paper <arxiv-id>
-python -m compare.run_compare --full runs/<full run dir>
+papertrail --config oneshot --paper <arxiv-id>
+python -m papertrail.compare.run_compare --full runs/<full run dir>
 
 # Cheap development run, a single stage, or resume from a stage
-python pipeline.py --config full --paper <arxiv-id> --dev
-python pipeline.py --config full --paper <arxiv-id> --only plan
-python pipeline.py --config full --paper <arxiv-id> --run-dir runs/<ts> --from-stage 6
+papertrail --config full --paper <arxiv-id> --dev
+papertrail --config full --paper <arxiv-id> --only plan
+papertrail --config full --paper <arxiv-id> --run-dir runs/<ts> --from-stage 6
 
 # Choose the vision critic by F1 on SlideAudit (50 slides, <= $1)
-python -m compare.critic_eval --prepare
-python -m compare.critic_eval --run
+python -m papertrail.compare.critic_eval --prepare
+python -m papertrail.compare.critic_eval --run
 
 # Offline end-to-end run with scripted fake models (no key, no cost)
 python tests/e2e_fake.py
@@ -102,7 +114,7 @@ If numbers on the slides cannot be traced to their cited source, export stops. F
 The pipeline is paper-independent. Run it on any arXiv ID or PDF:
 
 ```powershell
-python pipeline.py --config full --paper <arxiv-id, or the path to a PDF>
+papertrail --config full --paper <arxiv-id, or the path to a PDF>
 ```
 
 **Where does the paper go?** Easiest: pass the **arXiv ID**. The pipeline downloads the PDF and the LaTeX source (clean figures and tables) and the metadata (authors, year, venue) itself, so nothing needs to be placed in the folder. For a paper that is not on arXiv, put the PDF anywhere, for example `papers/my-paper.pdf` (PDFs in `papers/` are git-ignored), and pass its path: `--paper papers/my-paper.pdf`. The file name (without `.pdf`) becomes the paper id, so an optional profile for it is `papers/my-paper.yaml`. A PDF has no LaTeX source or metadata, so figures are cropped from the pages and the title-page citation needs `paper_citation` in a profile or in `deck/footer.json`.
@@ -119,11 +131,11 @@ One slide near the end asks six questions about the talk, three on concepts (lef
 
 ## Footer, title page and watermark
 
-Edit `deck/footer.json`: logo, course code and name, page number on or off, the layouts that hide the footer, presenter names, paper citation, date, the title-page photo and its shading (`title_shade`, 0 to 1), the watermark image and position (`right` or `center`), and the image credit line. Set an image field to `null` to switch it off. Images live in `media/` (credits in `media/ATTRIBUTION.md`). The pipeline applies the file to every run; for the dev deck run `python -m tools.footer`.
+Edit `deck/footer.json`: logo, course code and name, page number on or off, the layouts that hide the footer, presenter names, paper citation, date, the title-page photo and its shading (`title_shade`, 0 to 1), the watermark image and position (`right` or `center`), and the image credit line. Set an image field to `null` to switch it off. Images live in `media/` (credits in `media/ATTRIBUTION.md`). The pipeline applies the file to every run; for the dev deck run `python -m papertrail.tools.footer`.
 
 ## Sandbox
 
-Only the analyst runs code (`tools/python_exec.py`). With a WSL distro (`PAPERTRAIL_WSL_DISTRO`) it runs under `unshare -rn` (no network). Without one, it falls back to a Windows subprocess with a stripped environment (no API keys), cwd = `artifacts/`, a 60 s timeout, sockets disabled and writes restricted to `artifacts/` by a Python-level guard. **This fallback is weaker isolation than `unshare`**: it blocks the accidental and the obvious, not a determined attacker.
+Only the analyst runs code (`src/papertrail/tools/python_exec.py`). With a WSL distro (`PAPERTRAIL_WSL_DISTRO`) it runs under `unshare -rn` (no network). Without one, it falls back to a Windows subprocess with a stripped environment (no API keys), cwd = `artifacts/`, a 60 s timeout, sockets disabled and writes restricted to `artifacts/` by a Python-level guard. **This fallback is weaker isolation than `unshare`**: it blocks the accidental and the obvious, not a determined attacker.
 
 ## Cost control
 
@@ -135,26 +147,31 @@ Full detail, files and costs: [results/README.md](results/README.md).
 
 - **Test paper** (run `20261012-181956`, $4.73): judge score 95/100, no hard fail; all 68 numbers fact-checked.
 - **Final paper** (run `20261015-155838`, $3.69): judge score 64/100 with a hard fail (faithfulness items F1 and F2 had no verbatim quote; no own-analysis slide with an artifact); all 112 numbers fact-checked. The presented deck was then edited by hand and extended with four slides from an extra study (listed in [results/final-paper-2510.22954/EDITS.md](results/final-paper-2510.22954/EDITS.md)), so that score does not describe it.
-- **Extra study** ([extra_study/](extra_study/)): on small open models the response similarity rises from about 0.42 for a base model to about 0.77 after post-training, mostly at the first fine-tuning step; the LLM judge of that study failed, so base-model diversity may be inflated by off-task text.
+- **Extra study** ([experiments/extra_study/](experiments/extra_study/)): on small open models the response similarity rises from about 0.42 for a base model to about 0.77 after post-training, mostly at the first fine-tuning step; the LLM judge of that study failed, so base-model diversity may be inflated by off-task text.
 - *(planned, not run)* Oneshot vs. full pipeline comparison; vision-critic validation on SlideAudit (macro P/R/F1); fact-check extractor precision/recall.
 
 ## Repository layout
 
-See [SPEC.md §13](SPEC.md) for the design. In short:
+See [SPEC.md §13](docs/SPEC.md) for the design. The code is the installable package in `src/papertrail/` (the conventional `src` layout); everything it reads or writes sits at the repository root.
 
 ```
-pipeline.py          the state machine (stages in stages/, one module each)
-stages/ common/      stage code; LLM layer, budget guard, schemas, trace
-tools/ qa/ report/   helpers (render, plots, footer, cost report); slide checks; trace page, quiz and workflow slides
-compare/ judges/     oneshot comparison and critic evaluation; rubric judge
-skills/ prompts/     markdown instructions injected into stage prompts
+src/papertrail/      all the code (pip install -e .)
+  pipeline.py        the state machine: `papertrail` command and `python -m papertrail`
+  paths.py           the one place that knows where everything lives
+  stages/            one module per pipeline stage
+  common/            LLM layer, budget guard, schemas, trace, deck checks
+  tools/ qa/         helpers (render, plots, footer, cost report); slide QA scripts
+  report/            trace page, quiz and workflow slides, speaker script
+  compare/ judges/   oneshot comparison and critic evaluation; rubric judge
+  local/             local model client (Ollama)
 config/              models, budget, rubric
+prompts/ skills/     markdown instructions injected into stage prompts
 deck/ media/         Slidev project and theme; images and their credits
-papers/ references/  per-paper profiles (the paper PDFs are local); example slides (local)
-extra_study/         the owner's extra experiment (Kaggle notebook, log) and the script that makes slide data from it
-results/             archived outputs and costs of real runs (tracked)
-docs/                run log, the SlideAudit paper, plans
+papers/ references/  per-paper profiles (the PDFs are local); example slides (local)
 tests/               offline tests and the fake-model end-to-end run
+docs/                design (SPEC.md), tasks, run log, the SlideAudit paper, plans
+experiments/         the extra study (Kaggle notebook, log, script that makes slide data)
+results/             archived outputs and costs of real runs (tracked)
 runs/                every run's working files (gitignored)
 ```
 

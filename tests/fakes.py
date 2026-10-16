@@ -57,7 +57,7 @@ class FakeScript:
 
     # ---- canned payloads per output schema
     def payload(self, props: set[str], prompt: str):
-        from tools import dataset as dataset_tool
+        from papertrail.tools import dataset as dataset_tool
 
         if {"problem", "claims", "terms"} <= props:
             return {"problem": "LLMs lose track in multi-turn chats.", "contributions": ["A simulation of sharded conversations"],
@@ -203,7 +203,7 @@ def make_factory(run_dir: Path):
             if info.function_tools and any(t.name == "run_python" for t in info.function_tools):
                 last = messages[-1]
                 if not any(isinstance(p, ToolReturnPart) for p in getattr(last, "parts", [])):
-                    code = ("import csv\nfrom tools.plot_style import apply_style\napply_style()\nimport matplotlib.pyplot as plt\n"
+                    code = ("import csv\nfrom papertrail.tools.plot_style import apply_style\napply_style()\nimport matplotlib.pyplot as plt\n"
                             "rows=[('a',1),('b',2)]\nw=csv.writer(open('replot_fig.csv','w',newline=''))\nw.writerow(['x','y'])\n"
                             "[w.writerow(r) for r in rows]\nplt.plot([r[1] for r in rows]);plt.savefig('replot_fig.svg')\n")
                     return ModelResponse(parts=[ToolCallPart("run_python", {"code": code})])

@@ -24,6 +24,8 @@ Paper: *Artificial Hivemind* (Jiang et al., NeurIPS 2025 D&B). Run dir `runs/202
 
 **Reorganisation (2026-10-16):** `results/` added (outputs and costs), `Extra_work/` renamed `extra_study/`, the SlideAudit PDF moved to `docs/reference/`, loose logs moved to `runs/logs/`, `tools/cost_report.py` added, README and Tasks.md brought up to date.
 
+**Conventional layout (2026-10-16):** all code moved into the installable package `src/papertrail/` (`pipeline.py` became `papertrail.pipeline`, the `papertrail` command and `python -m papertrail`; one `paths.py` replaced about 25 per-file root calculations); `SPEC.md` and `Tasks.md` moved to `docs/` (`TASKS.md`); `extra_study/` moved to `experiments/extra_study/`; the comparison outputs and the SlideAudit sample no longer live in the code folder (`results/compare/`, `config/slideaudit_sample.json`). Commands in this log and in older entries use the old names (`python pipeline.py`, `python -m tools.x`): read them as `papertrail` and `python -m papertrail.tools.x`.
+
 ## 2026-10-15: improvements round (offline only, no paid run)
 
 Requested: speaking time of at least 15 minutes, reference slides, fuller slides, tighter prompts, a quiz slide. Built and tested with scripted fake models only; the real spend is unchanged at $6.25. The owner asked NOT to run the full pipeline: the next presentation uses a different paper.

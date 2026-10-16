@@ -5,13 +5,14 @@ from pathlib import Path
 
 import pytest
 
-from common import profile as profile_mod
-from common.profile import DatasetSpec, Profile, cite_short, citation_line, load_profile
-from common.schemas import Plan, PlanSlide, validate_plan
+from papertrail.common import profile as profile_mod
+from papertrail.common.profile import DatasetSpec, Profile, cite_short, citation_line, load_profile
+from papertrail.common.schemas import Plan, PlanSlide, validate_plan
 
 ROOT = Path(__file__).resolve().parent.parent
-GENERIC_SOURCES = ["stages/difficulty.py", "stages/plan.py", "stages/quiz.py", "stages/digest.py", "stages/analyze.py", "stages/author.py",
-                   "stages/revise.py", "common/schemas.py", "judges/checklist_gen.py", "config/rubric.yaml", "tools/dataset.py"]
+PKG = "src/papertrail/"
+GENERIC_SOURCES = [PKG + f for f in ("stages/difficulty.py", "stages/plan.py", "stages/quiz.py", "stages/digest.py", "stages/analyze.py", "stages/author.py",
+                                    "stages/revise.py", "common/schemas.py", "judges/checklist_gen.py", "tools/dataset.py")] + ["config/rubric.yaml"]
 PAPER_WORDS = re.compile(r"sharded|shard\b|aptitude|unreliab|lost_in_conv|RECAP|SNOWBALL|2505\.06120|Laban|ICLR|GSM8K", re.I)
 
 
@@ -75,7 +76,7 @@ RECORDS = [{"id": "a1", "kind": "math", "question": "What is 2+2?", "parts": [{"
 
 
 def synthetic():
-    from tools.dataset import Dataset
+    from papertrail.tools.dataset import Dataset
 
     spec = DatasetSpec(name="toy", id_field="id", task_field="kind", text_fields=["question"], shards_field="parts", shard_text_field="s", example_tasks=["math"])
     return Dataset(spec, records=RECORDS)
@@ -90,9 +91,9 @@ def test_dataset_class_is_generic():
 
 
 def test_no_dataset_means_no_tool_and_worked_examples_must_cite_the_paper():
-    from stages import difficulty
-    from common.schemas import AudienceModel, DifficultyMap, HardConcept
-    from tools import dataset as dataset_tool
+    from papertrail.stages import difficulty
+    from papertrail.common.schemas import AudienceModel, DifficultyMap, HardConcept
+    from papertrail.tools import dataset as dataset_tool
 
     assert dataset_tool.active() is None and dataset_tool.tool() is None
     mk = lambda mat: DifficultyMap(concepts=[HardConcept(concept=f"c{i}", why_hard="jargon", misconception_to_avoid="x", device="worked_example",
@@ -105,8 +106,8 @@ def test_no_dataset_means_no_tool_and_worked_examples_must_cite_the_paper():
 
 
 def test_dataset_citation_without_a_dataset_is_an_error(tmp_path):
-    from common.deckcheck import validate_deck
-    from common.schemas import DeckClaim
+    from papertrail.common.deckcheck import validate_deck
+    from papertrail.common.schemas import DeckClaim
 
     md = "---\ntheme: ./theme\nlayout: title\n---\n\n# T\n\n<!--\nn\n-->\n"
     errs = validate_deck(md, tmp_path, check_mermaid=False, check_notes_total=False, require_quiz=False,
@@ -122,7 +123,7 @@ ATOM = """<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:a
 
 
 def test_arxiv_metadata_is_parsed():
-    from tools import arxiv_meta
+    from papertrail.tools import arxiv_meta
 
     m = arxiv_meta.parse(ATOM)
     assert m["authors"][0] == "Ada Lovelace" and m["year"] == 2024 and m["venue"] == "ICML 2024" and m["title"] == "A Great Paper"
@@ -157,7 +158,7 @@ def test_a_pdf_without_metadata_still_gets_safe_defaults(tmp_path):
 
 
 def test_footer_sync_resolves_auto_citation(tmp_path):
-    from tools import footer
+    from papertrail.tools import footer
 
     (tmp_path / "run").mkdir()
     run = run_with_meta(tmp_path / "run")

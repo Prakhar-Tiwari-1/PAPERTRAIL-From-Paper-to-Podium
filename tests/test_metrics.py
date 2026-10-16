@@ -1,5 +1,5 @@
-from compare.metrics import macro_prf, prf
-from compare import slideaudit_data as sa
+from papertrail.compare.metrics import macro_prf, prf
+from papertrail.compare import slideaudit_data as sa
 
 
 def test_prf_basic_and_zero_division():

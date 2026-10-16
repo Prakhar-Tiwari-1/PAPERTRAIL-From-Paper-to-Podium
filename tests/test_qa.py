@@ -3,9 +3,9 @@ from pathlib import Path
 
 from PIL import Image
 
-from qa.contact_sheet import annotate, contact_sheets
-from qa.source_map import parse_slides, resolve_source_lines
-from tools.mermaid_check import extract_mermaid
+from papertrail.qa.contact_sheet import annotate, contact_sheets
+from papertrail.qa.source_map import parse_slides, resolve_source_lines
+from papertrail.tools.mermaid_check import extract_mermaid
 
 DECK = """---
 theme: ./theme
@@ -80,7 +80,7 @@ def test_annotate_and_contact_sheet(tmp_path):
 
 def test_banned_list_matches_slide_design_skill():
     root = Path(__file__).resolve().parent.parent
-    banned = json.loads((root / "qa" / "banned.json").read_text(encoding="utf-8"))
+    banned = json.loads((root / "src" / "papertrail" / "qa" / "banned.json").read_text(encoding="utf-8"))
     skill = (root / "skills" / "slide-design" / "SKILL.md").read_text(encoding="utf-8").lower()
     for phrase in ("delve", "unlock", "revolutionize", "game-changer", "seamless"):
         assert phrase in skill and any(phrase in p for p in banned["phrases"])

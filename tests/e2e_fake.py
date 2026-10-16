@@ -15,14 +15,14 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "tests"))
 
 import pytest  # noqa: E402
 
-import pipeline  # noqa: E402
-from common.budget import Budget  # noqa: E402
-from common.llm import Harness  # noqa: E402
+from papertrail import pipeline  # noqa: E402
+from papertrail.common.budget import Budget  # noqa: E402
+from papertrail.common.llm import Harness  # noqa: E402
 from fakes import make_factory  # noqa: E402
 
 
@@ -32,7 +32,7 @@ def prepare_run(src: Path, run: Path) -> None:
     for name in ("paper.md", "tables.json", "refs.json", "ingested.json", "source.pdf"):
         shutil.copy(src / name, run / name)
     shutil.copytree(src / "figures", run / "figures")
-    from common.papertext import make_llm_text
+    from papertrail.common.papertext import make_llm_text
 
     (run / "paper_llm.md").write_text(make_llm_text((run / "paper.md").read_text(encoding="utf-8")), encoding="utf-8")
 

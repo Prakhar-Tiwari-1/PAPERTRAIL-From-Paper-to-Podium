@@ -1,4 +1,4 @@
-from tools.prompt_audit import LIMITS, audit
+from papertrail.tools.prompt_audit import LIMITS, audit
 
 
 def test_every_prompt_and_skill_is_long_enough_and_not_too_long():
@@ -9,4 +9,4 @@ def test_every_prompt_and_skill_is_long_enough_and_not_too_long():
 def test_author_context_is_compact():
     """The author's own instructions (skills + template) stay under 2,300 words; the data blocks are compacted separately."""
     rows = {(r["kind"], r["name"]): r["words"] for r in audit()}
-    assert rows[("role_skills", "author")] + rows[("stage_prompt", "stages.author.PROMPT")] < 2300
+    assert rows[("role_skills", "author")] + rows[("stage_prompt", "papertrail.stages.author.PROMPT")] < 2300

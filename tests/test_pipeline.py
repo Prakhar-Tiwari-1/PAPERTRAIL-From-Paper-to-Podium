@@ -1,6 +1,6 @@
 import pytest
 
-import pipeline
+from papertrail import pipeline
 
 
 def test_full_stage_order_matches_spec():

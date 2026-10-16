@@ -1,5 +1,5 @@
 {
-  "_help": "Editable footer, title-page and watermark details. Change a value, then re-render (python -m tools.footer syncs the images; the pipeline does it for every run). Set an image field to null to switch it off. title_background_focus (0 to 1) picks which part of a tall photo the 16:9 title slide shows: 0 = top, 1 = bottom. paper_citation: \"auto\" builds the line from the arXiv metadata (authors, venue, id); the paper profile (papers/<id>.yaml) can override it.",
+  "_help": "Editable footer, title-page and watermark details. Change a value, then re-render (python -m papertrail.tools.footer syncs the images; the pipeline does it for every run). Set an image field to null to switch it off. title_background_focus (0 to 1) picks which part of a tall photo the 16:9 title slide shows: 0 = top, 1 = bottom. paper_citation: \"auto\" builds the line from the arXiv metadata (authors, venue, id); the paper profile (papers/<id>.yaml) can override it.",
   "enabled": true,
   "logo": "media/Ecole-polytechnique-logo.jpg",
   "course_code": "CSC_53432_EP",

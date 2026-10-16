@@ -16,4 +16,4 @@ flags any of our slides that looks like one of them.
 3. `style_compare` scores the references and our final deck from 1 to 5 on each quality-bar feature and writes `style_comparison.md`
    (also in `final/`), plus a list of our slides that fall below the references. Informational: it never edits the deck.
 
-Use another folder with `python pipeline.py ... --refs path/to/folder`. The folder is ignored by git, so your examples stay on your machine.
+Use another folder with `papertrail ... --refs path/to/folder`. The folder is ignored by git, so your examples stay on your machine.

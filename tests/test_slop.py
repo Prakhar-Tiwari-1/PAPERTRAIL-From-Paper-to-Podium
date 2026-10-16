@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from qa.slop_check import deck_hits, describe, scan_line
+from papertrail.qa.slop_check import deck_hits, describe, scan_line
 
 DECK = """---
 theme: ./theme
@@ -58,7 +58,7 @@ def test_word_boundaries():
 
 
 def test_banned_json_phrases_are_a_subset_of_slop_json():
-    root = Path(__file__).resolve().parent.parent / "qa"
+    root = Path(__file__).resolve().parent.parent / "src" / "papertrail" / "qa"
     banned = json.loads((root / "banned.json").read_text(encoding="utf-8"))["phrases"]
     slop = json.loads((root / "slop.json").read_text(encoding="utf-8"))
     allp = {p.lower() for p in slop["high_phrases"] + slop["low_phrases"]}
@@ -67,7 +67,7 @@ def test_banned_json_phrases_are_a_subset_of_slop_json():
 
 
 def test_author_validation_sends_slop_back(tmp_path):
-    from common.deckcheck import validate_deck
+    from papertrail.common.deckcheck import validate_deck
 
     errs = validate_deck(DECK, tmp_path, check_mermaid=False, check_notes_total=False)
     assert any("AI-sounding writing" in e and "delve" in e for e in errs)

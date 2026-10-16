@@ -1,6 +1,6 @@
-from common.deckcheck import notes_of, split_main_backup, validate_deck, word_limit, words
-from common.repair import fill
-from qa.source_map import parse_slides
+from papertrail.common.deckcheck import notes_of, split_main_backup, validate_deck, word_limit, words
+from papertrail.common.repair import fill
+from papertrail.qa.source_map import parse_slides
 
 VISUAL = "```mermaid\nflowchart LR\n  A-->B\n```"
 QUIZ_BODY = ('<div class="qa-board">\n<div class="qa-block qa-questions">\n'
@@ -69,7 +69,7 @@ def test_helpers():
 
 
 def test_normalize_minutes_hits_target_and_respects_cap():
-    from common.schemas import Plan, PlanSlide, normalize_minutes
+    from papertrail.common.schemas import Plan, PlanSlide, normalize_minutes
 
     def slides(ms):
         return Plan(story_arc="x", backup_slides=[], slides=[PlanSlide(id=str(i), title="t", purpose="p", key_points=[], minutes=m) for i, m in enumerate(ms)])
@@ -81,7 +81,7 @@ def test_normalize_minutes_hits_target_and_respects_cap():
 
 
 def test_normalize_minutes_pins_the_quiz_slide():
-    from common.schemas import Plan, PlanSlide, normalize_minutes
+    from papertrail.common.schemas import Plan, PlanSlide, normalize_minutes
 
     sl = [PlanSlide(id=str(i), title="t", purpose="p", key_points=[], minutes=1.4, layout="claim-quiz" if i == 8 else "claim-figure") for i in range(14)]
     p = Plan(story_arc="x", backup_slides=[], slides=sl)
@@ -137,9 +137,9 @@ def test_quiz_and_workflow_slides_have_their_own_word_limits(tmp_path):
 def test_latest_sheets_ignores_annotated_screenshots(tmp_path):
     from PIL import Image
 
-    from common.ctx import RunCtx
-    from common.llm import Harness
-    from judges.score import latest_sheets
+    from papertrail.common.ctx import RunCtx
+    from papertrail.common.llm import Harness
+    from papertrail.judges.score import latest_sheets
 
     run = tmp_path / "run"
     rd = run / "render" / "round_2"
@@ -153,7 +153,7 @@ def test_latest_sheets_ignores_annotated_screenshots(tmp_path):
 
 
 def test_judge_faithfulness_quote_normalisation():
-    from judges import score as sc
+    from papertrail.judges import score as sc
 
     paper = "The drop is 39 percent across six tasks."
     assert sc._norm("The drop is 39 percent") in sc._norm(paper)
@@ -161,8 +161,8 @@ def test_judge_faithfulness_quote_normalisation():
 
 
 def test_table_pipes_are_not_counted_as_visible_words():
-    from common.deckcheck import visible_words
-    from qa.source_map import parse_slides
+    from papertrail.common.deckcheck import visible_words
+    from papertrail.qa.source_map import parse_slides
 
     md = "---\nlayout: claim-table\n---\n\n# Title\n\n| a | b |\n|---|---|\n| c | d |\n\n<!--\nnotes\n-->\n"
     s = parse_slides(md)[0]

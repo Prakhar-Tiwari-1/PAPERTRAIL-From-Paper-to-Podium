@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from common.schemas import DeckClaim, NumberPair
-from qa.source_map import parse_slides
-from stages import factcheck as fc
+from papertrail.common.schemas import DeckClaim, NumberPair
+from papertrail.qa.source_map import parse_slides
+from papertrail.stages import factcheck as fc
 
 
 def test_value_matching_exact_rounded_and_fraction():
@@ -58,9 +58,9 @@ def test_number_words_match_digits():
 def test_extractor_failure_degrades_instead_of_failing(tmp_path):
     import json
     from pydantic_ai.models.function import FunctionModel
-    from common.budget import Budget
-    from common.ctx import RunCtx
-    from common.llm import Harness
+    from papertrail.common.budget import Budget
+    from papertrail.common.ctx import RunCtx
+    from papertrail.common.llm import Harness
 
     run = tmp_path / "run"
     (run / "deck").mkdir(parents=True)
@@ -82,7 +82,7 @@ def test_extractor_failure_degrades_instead_of_failing(tmp_path):
 
 
 def test_dataset_source_verifies_numbers_against_the_real_instance(tmp_path):
-    from common import profile as profile_mod
+    from papertrail.common import profile as profile_mod
 
     profile_mod.set_current(profile_mod.load_profile("2505.06120"))   # this paper's profile names the released dataset (cached locally)
     ctx = Ctx(tmp_path)
