@@ -1,0 +1,7 @@
+pair,stage,raw,normalized
+OLMo 2 - Qwen2.5,base,0.501,0.924
+OLMo 2 - Qwen2.5,post-trained,0.723,0.952
+OLMo 2 - SmolLM2,base,0.47,0.976
+OLMo 2 - SmolLM2,post-trained,0.728,0.963
+Qwen2.5 - SmolLM2,base,0.52,0.947
+Qwen2.5 - SmolLM2,post-trained,0.734,0.963

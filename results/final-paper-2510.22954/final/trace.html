@@ -1,0 +1,318 @@
+<!doctype html><meta charset="utf-8"><title>papertrail trace: 20261015-155838</title>
+<style>body{font:15px/1.4 system-ui,sans-serif;max-width:980px;margin:32px auto;padding:0 16px;color:#1F2328;background:#FAFAF7}
+.card{border:1px solid #D9D9D2;padding:12px 16px;margin:12px 0;background:#fff}h1{font-size:26px}h2{margin:0 0 4px;font-size:18px}
+.meta{color:#5B6470;margin:0 0 8px}pre{white-space:pre-wrap;background:#f3f3ee;padding:8px;overflow:auto}table{border-collapse:collapse}
+td,th{border:1px solid #D9D9D2;padding:2px 8px;text-align:left}</style>
+<h1>papertrail run 20261015-155838</h1><p class="meta">calls: 90 · cost usd: 3.6864 · seconds: 4510 · issues round 1: 36 · issues final: 1 · high final: 1 · rounds: 5 · judge total: 64.0</p>
+<h2>Pipeline</h2><pre class="mermaid">flowchart LR
+  classDef base fill:#FAFAF7,stroke:#1F2328,color:#1F2328
+  classDef accent fill:#0B6E99,stroke:#0B6E99,color:#FFFFFF
+  n0[&quot;Ingest&lt;br/&gt;no model&quot;]
+  class n0 base
+  n1[&quot;Understand&lt;br/&gt;claude-sonnet-5.5, deepseek-v4-flash&lt;br/&gt;5 calls, $0.45&quot;]
+  class n1 base
+  n0 --&gt; n1
+  n2[&quot;Analyze&lt;br/&gt;claude-haiku-5.5&lt;br/&gt;4 calls, $0.02&quot;]
+  class n2 base
+  n1 --&gt; n2
+  n3[&quot;Author&lt;br/&gt;claude-sonnet-5.5&lt;br/&gt;2 calls, $1.14&quot;]
+  class n3 base
+  n2 --&gt; n3
+  n4[&quot;Critic loop&lt;br/&gt;gemini-3-flash, claude-sonnet-5.5&lt;br/&gt;44 calls, $1.26&quot;]
+  class n4 accent
+  n3 --&gt; n4
+  n5[&quot;Fact-check&lt;br/&gt;deepseek-v4-flash, claude-sonnet-5.5&lt;br/&gt;19 calls, $0.43&quot;]
+  class n5 base
+  n4 --&gt; n5
+  n6[&quot;Judge&lt;br/&gt;gemini-3-flash, gemini-3.1-pro&lt;br/&gt;13 calls, $0.31&quot;]
+  class n6 base
+  n5 --&gt; n6
+  n7[&quot;Export&lt;br/&gt;no model&quot;]
+  class n7 base
+  n6 --&gt; n7
+</pre>
+<section class="card"><h2>ingest</h2>
+<p class="meta">no model (code only) · 0 calls (0 cached) · 0 in / 0 out tokens · $0.0000 · 22s
+</p>
+<details><summary>output preview</summary><pre>
+[p.1]
+
+## Artificial Hivemind: The Open-Ended Homogeneity
+## of Language Models (and Beyond)
+Liwei Jiang♠
+Yuanjun Chai♠
+Margaret Li♠
+Mickel Liu♠
+Raymond Fok♠
+Nouha Dziri⋆
+Yulia Tsvetkov♠
+Maarten Sap♢
+Alon Albalak♣
+Yejin Choi♡
+♠University of Washington
+♢Carnegie Mellon University
+⋆Allen Institute for Artificial Intelligence
+♣Lila Sciences
+♡Stanford University
+lwjiang@cs.washington.edu
+Code: https://github.com/liweijiang/artificial-hivemind
+INFINITY-CHAT Collection: liweijiang/artificial-hivemind
+## Abstract
+Large language models (LMs) often struggle to generate diverse, human-like
+creative content, raising concerns about the long-term homogenization of human
+thought through repeated exposure to similar outputs. Yet scalable methods for
+evaluating LM output diversity remain limited, especially beyond narrow tasks
+such as random number or name generation, or beyond repeated sampling from
+a single model. To address this gap, we introduce INFINITY-CHAT, a large-
+scale dataset of 26K diverse, real-world, open-ended user queries that admit a
+wide range of plausible answers with no single ground truth. We introduce the
+first comprehensive taxonomy for characterizing the full spectrum of open-ended
+prompts posed to LMs, comprising 6 top-level categories (e.g., creative content
+generation, brainstorm &amp; ideation) that further breaks down to 17 subcategories.
+Using INFINITY-CHAT, we prese
+...</pre></details></section><section class="card"><h2>digest</h2>
+<p class="meta">deepseek-v4-flash ×1 · 1 calls (0 cached) · 20,953 in / 5,279 out tokens · $0.0044 · 79s
+</p>
+<details><summary>output preview</summary><pre>{
+  &quot;problem&quot;: &quot;Large language models (LMs) often fail to generate diverse, human-like creative content in open-ended tasks that have no single ground-truth answer, raising concerns about long-term homogenization of human thought. Scalable methods for evaluating LM output diversity remain limited, especially beyond narrow tasks like random number or name generation or repeated sampling from a single model, and existing benchmarks do not capture the open-endedness of real-world user interactions.&quot;,
+  &quot;contributions&quot;: [
+    &quot;Introduces INFINITY-CHAT, a large-scale dataset of 26K real-world open-ended user queries that admit a wide range of plausible answers with no single ground truth.&quot;,
+    &quot;Introduces the first comprehensive taxonomy for characterizing the full spectrum of open-ended prompts posed to LMs, comprising 6 top-level categories and 17 subcategories.&quot;,
+    &quot;Presents a large-scale study of mode collapse in LMs across 70+ open and closed source LMs, revealing the Artificial Hivemind effect (intra-model repetition and inter-model homogeneity).&quot;,
+    &quot;Provides 31,250 human annotations (absolute ratings and pairwise preferences) with 25 independent annotators per example, enabling study of collective and individual-specific human preferences.&quot;,
+    &quot;Shows that state-of-the-art LMs, reward models, and LM judges are less well calibrated to human ratings on model generations 
+...</pre></details></section><section class="card"><h2>difficulty</h2>
+<p class="meta">claude-sonnet-5.5 ×1 · 1 calls (0 cached) · 20,155 in / 7,719 out tokens · $0.1175 · 55s
+</p>
+<details><summary>output preview</summary><pre>{
+  &quot;concepts&quot;: [
+    {
+      &quot;concept&quot;: &quot;Artificial Hivemind effect (intra-model repetition + inter-model homogeneity)&quot;,
+      &quot;why_hard&quot;: &quot;jargon&quot;,
+      &quot;prerequisites&quot;: [
+        &quot;Sampling from an LM with temperature and top-p&quot;,
+        &quot;What &#x27;open-ended&#x27; means: many valid answers, no ground truth&quot;
+      ],
+      &quot;misconception_to_avoid&quot;: &quot;That the effect is only one model repeating itself. The paper stresses that different models independently converge on the same ideas, so ensembles of models may not give true diversity. Also avoid implying the paper has found the cause: it explicitly leaves causes open.&quot;,
+      &quot;device&quot;: &quot;worked_example&quot;,
+      &quot;device_material&quot;: &quot;Use Fig. 1 on p.2: the query &#x27;Write a metaphor about time&#x27;, with 50 responses from each of 25 models sampled at top-p=0.9, temperature=1.0 and projected to 2D with PCA. Walk through the printed responses turn by turn. gpt-4o-2024-11-20, Qwen2.5-72B-Instruct, phi-4 and gpt-4o-mini-2024-07-18 all say &#x27;Time is a river...&#x27;. Meta-Llama-3.1-405B-Instruct-Turbo and phi-4 say &#x27;Time is a master/silent weaver... tapestry&#x27;. Point at the two visible clusters: a dominant &#x27;time is a river&#x27; one on the left and a smaller &#x27;time is a weaver&#x27; one on the right. Models from different families land in the same cluster.&quot;,
+      &quot;anchor&quot;: &quot;Fig. 1&quot;
+    },
+    {
+      &quot;concept&quot;: &quot;Average pairwise sentence-embedding similarity as the rep
+...</pre></details></section><section class="card"><h2>prior_work</h2>
+<p class="meta">claude-haiku-5.5 ×1 · 1 calls (0 cached) · 12,796 in / 1,406 out tokens · $0.0020 · 50s
+ · 3 errors, 1 fallbacks</p>
+<details><summary>output preview</summary><pre>{
+  &quot;works&quot;: [
+    {
+      &quot;title&quot;: &quot;Generative AI enhances individual creativity but reduces the collective diversity of novel content&quot;,
+      &quot;year&quot;: 2024,
+      &quot;relation&quot;: &quot;builds-on&quot;,
+      &quot;point&quot;: &quot;Found that generative AI raised individual creativity but made the collective pool of novel content less diverse, the human-side version of the homogenization concern this paper studies in LMs.&quot;,
+      &quot;used_for&quot;: &quot;motivation&quot;,
+      &quot;semantic_scholar_id&quot;: null,
+      &quot;in_paper_refs&quot;: true
+    },
+    {
+      &quot;title&quot;: &quot;Does writing with language models reduce content diversity?&quot;,
+      &quot;year&quot;: 2024,
+      &quot;relation&quot;: &quot;contrasts&quot;,
+      &quot;point&quot;: &quot;Measured how writing with LMs narrows the diversity of human-written content; this paper instead measures diversity across LM outputs themselves, without human writers in the loop.&quot;,
+      &quot;used_for&quot;: &quot;contrast slide&quot;,
+      &quot;semantic_scholar_id&quot;: null,
+      &quot;in_paper_refs&quot;: true
+    },
+    {
+      &quot;title&quot;: &quot;One fish, two fish, but not the whole sea: Alignment reduces language models&#x27; conceptual diversity&quot;,
+      &quot;year&quot;: 2024,
+      &quot;relation&quot;: &quot;builds-on&quot;,
+      &quot;point&quot;: &quot;Showed that alignment tuning reduces the conceptual diversity of language model outputs, supporting the view that post-training contributes to homogenization.&quot;,
+      &quot;used_for&quot;: &quot;motivation&quot;,
+      &quot;semantic_scholar_id&quot;: null,
+      &quot;in_paper_refs&quot;: true
+    },
+    
+...</pre></details></section><section class="card"><h2>plan</h2>
+<p class="meta">claude-sonnet-5.5 ×2 · 2 calls (0 cached) · 44,128 in / 23,763 out tokens · $0.3259 · 143s
+</p>
+<details><summary>output preview</summary><pre>{
+  &quot;story_arc&quot;: &quot;Ask many LMs the same open-ended question and they keep giving the same answer. The motivation is the metaphor-about-time example and the worry that human thought homogenizes. We place the work against prior studies and build INFINITY-CHAT from real user queries. We define the similarity metric and show repetition inside one model, with min-p decoding as a failed fix. We then show repetition across 70+ models and the top-N count of unique source models, with our own replot. Next comes the 25-annotator design, where entropy marks real disagreement. Reward models and LM judges fit human ratings worse on similar-quality and high-disagreement items. We close with the authors&#x27; stated limits, a quiz, the takeaway and the tool workflow.&quot;,
+  &quot;slides&quot;: [
+    {
+      &quot;id&quot;: &quot;s01&quot;,
+      &quot;title&quot;: &quot;Artificial Hivemind: open-ended LM outputs collapse into the same ideas&quot;,
+      &quot;purpose&quot;: &quot;Title slide naming the paper, authors and the one-line question.&quot;,
+      &quot;key_points&quot;: [
+        &quot;Open-ended queries have no single right answer&quot;,
+        &quot;Do LMs still give varied answers?&quot;,
+        &quot;INFINITY-CHAT: 26K real queries, 70+ LMs, 31,250 human labels&quot;
+      ],
+      &quot;device&quot;: &quot;none&quot;,
+      &quot;concept&quot;: null,
+      &quot;figure_ref&quot;: null,
+      &quot;table_ref&quot;: null,
+      &quot;plot_request&quot;: null,
+      &quot;diagram_request&quot;: null,
+      &quot;layout&quot;: &quot;title&quot;,
+      &quot;anchors&quot;: [
+        &quot;p.1&quot;
+     
+...</pre></details></section><section class="card"><h2>analyze</h2>
+<p class="meta">claude-haiku-5.5 ×4 · 4 calls (0 cached) · 159,086 in / 10,748 out tokens · $0.0213 · 1189s
+ · 12 errors, 4 fallbacks</p>
+<details><summary>output preview</summary><pre># Analysis notes
+
+## similarity_scale (explanatory_graph): FAILED
+- request: Number line of the similarity scale with the paper&#x27;s reference points: random pairs 0.1 to 0.2, thresholds 0.7 and 0.8, cross-model range 71% to 82%, DeepSeek-V3 and qwen-max-2025-01-25 at 0.82. Shows what 0.8 means and that the random-pair figure is only a scale reference.
+- notes: Not produced. The requested reference points (random pairs 0.1 to 0.2, thresholds 0.7 and 0.8, cross-model range 71% to 82%, DeepSeek-V3 and qwen-max-2025-01-25 at 0.82) come from the paper&#x27;s p.4-p.5 text, and the plan names that text as the data source. tables.json holds only the appendix tables (Tables 6-11, 23, 25, 26 and others), and none of them carries these text values. Plotting them would mean typing numbers by hand, which the rules forbid, so I did not write similarity_scale.csv or the SVG. To proceed, supply the page 4-5 text values in a file (for example a JSON of reference points with their source sentences) and the figure can be built from that.
+
+## intra_model_replot (replot): FAILED
+- request: Bar chart of intra-model repetition per model from the full results, sorted, with the 0.8 line marked.
+- notes: Table 6 (Full results of the intra-model repetition analysis, Figure 4) has 79 models with 10 numeric values each, summing to about 100 per row, plus an Average row. The columns are unlabelled and the table gi
+...</pre></details></section><section class="card"><h2>author</h2>
+<p class="meta">claude-sonnet-5.5 ×2 · 2 calls (0 cached) · 264,294 in / 61,551 out tokens · $1.1441 · 377s
+</p>
+<details><summary>output preview</summary><pre>---
+theme: ./theme
+routerMode: hash
+canvasWidth: 1280
+aspectRatio: 16/9
+fonts:
+  provider: none
+  sans: Inter
+  mono: JetBrains Mono
+layout: title
+---
+# Artificial Hivemind: The Open-Ended Homogeneity of Language Models (and Beyond)
+
+Real open-ended queries show many LMs giving near-identical answers.
+
+&lt;!--
+Welcome. This talk is about a paper called Artificial Hivemind, by Jiang and colleagues. The question is simple. If you ask many language models an open-ended question, one with no single right answer, do you get many different answers? The paper says mostly no. We will look at how the data was built, how repetition is measured, and where the authors see their own limits. First, a concrete example that shows the problem in one picture.
+--&gt;
+
+---
+layout: claim-figure
+---
+# Asked for a metaphor about time, many LMs land in the same few clusters
+
+&lt;img src=&quot;/figures/fig1.svg&quot; /&gt;
+&lt;SourceCaption&gt;Jiang et al., 2025, Fig. 1&lt;/SourceCaption&gt;
+
+Query: Write a metaphor about time. 50 responses from each of 25 models, projected with PCA. A big &#x27;time is a river&#x27; cluster and a smaller &#x27;weaver&#x27; cluster. Cause is left open by the authors.
+
+&lt;!--
+Here is the example that opens the paper. The query is: Write a metaphor about time. The authors collected 50 responses from each of 25 models and projected the sentence embeddings down to two dimensions with PCA. Look at the plot. A big cluster on the 
+...</pre></details></section><section class="card"><h2>render_loop</h2>
+<p class="meta">gemini-3-flash-preview ×105, deepseek-v4-flash ×4, claude-sonnet-5.5 ×7 · 116 calls (72 cached) · 574,453 in / 59,121 out tokens · $1.2590 · 716s
+ · 5 errors, 0 fallbacks</p><table><tr><th>round</th><th>issues</th><th>high</th><th>by source</th></tr><tr><td>1</td><td>36</td><td>7</td><td>{&quot;automatic&quot;: 3, &quot;vision_slide&quot;: 29, &quot;vision_deck&quot;: 2, &quot;student&quot;: 2}</td></tr><tr><td>2</td><td>39</td><td>3</td><td>{&quot;automatic&quot;: 2, &quot;vision_slide&quot;: 30, &quot;vision_deck&quot;: 2, &quot;student&quot;: 5}</td></tr><tr><td>3</td><td>33</td><td>1</td><td>{&quot;vision_slide&quot;: 28, &quot;vision_deck&quot;: 2, &quot;student&quot;: 3}</td></tr><tr><td>4</td><td>32</td><td>0</td><td>{&quot;vision_slide&quot;: 27, &quot;vision_deck&quot;: 2, &quot;student&quot;: 3}</td></tr><tr><td>5</td><td>1</td><td>1</td><td>{&quot;automatic&quot;: 1}</td></tr></table>
+<details><summary>output preview</summary><pre>{
+  &quot;mode&quot;: &quot;full&quot;,
+  &quot;rounds_run&quot;: 5,
+  &quot;final_high&quot;: 1,
+  &quot;final_by_category&quot;: {
+    &quot;sparse_slide&quot;: 1
+  },
+  &quot;finished&quot;: true,
+  &quot;rounds&quot;: [
+    {
+      &quot;round&quot;: 1,
+      &quot;n_issues&quot;: 36,
+      &quot;n_high&quot;: 7,
+      &quot;by_source&quot;: {
+        &quot;automatic&quot;: 3,
+        &quot;vision_slide&quot;: 29,
+        &quot;vision_deck&quot;: 2,
+        &quot;student&quot;: 2
+      },
+      &quot;by_category&quot;: {
+        &quot;outside_safe_area&quot;: 1,
+        &quot;sparse_slide&quot;: 1,
+        &quot;slop: phrase: notably&quot;: 1,
+        &quot;Insufficient Color Contrast for Readability&quot;: 1,
+        &quot;Content Overflow/Cut-off&quot;: 17,
+        &quot;Occluded Content&quot;: 7,
+        &quot;Illegible Typeface Selection or Usage&quot;: 1,
+        &quot;Object Alignment Issues&quot;: 3,
+        &quot;Inconsistent Layout Across Slides&quot;: 1,
+        &quot;Content Logical Flow Issues&quot;: 1,
+        &quot;undefined_term&quot;: 2
+      },
+      &quot;issues&quot;: [
+        {
+          &quot;round&quot;: 1,
+          &quot;source&quot;: &quot;automatic&quot;,
+          &quot;slide&quot;: 12,
+          &quot;category&quot;: &quot;outside_safe_area&quot;,
+          &quot;severity&quot;: &quot;high&quot;,
+          &quot;detail&quot;: &quot;&lt;p&gt; \&quot;Quality is similar on these su\&quot; spans 652,586-1216,710&quot;,
+          &quot;source_lines&quot;: &quot;263-284&quot;,
+          &quot;fixed&quot;: null
+        },
+        {
+          &quot;round&quot;: 1,
+          &quot;source&quot;: &quot;automatic&quot;,
+          &quot;slide&quot;: 19,
+          &quot;category&quot;: &quot;sparse_slide&quot;,
+          &quot;severity&quot;: &quot;high&quot;,
+          &quot;detail&quot;: &quot;75% of the content area is used and the largest empty band is 144px tall. Do not add 
+...</pre></details></section><section class="card"><h2>factcheck</h2>
+<p class="meta">deepseek-v4-flash ×31, claude-sonnet-5.5 ×2 · 33 calls (14 cached) · 165,098 in / 59,790 out tokens · $0.4313 · 388s
+ · 9 errors, 0 fallbacks</p>
+<details><summary>output preview</summary><pre>{
+  &quot;n_extracted&quot;: 112,
+  &quot;n_matched&quot;: 112,
+  &quot;unmatched&quot;: [],
+  &quot;waived&quot;: []
+}</pre></details></section><section class="card"><h2>judge</h2>
+<p class="meta">deepseek-r1-0528 ×1, gemini-3-flash-preview ×6, gemini-3.1-pro-preview ×6 · 13 calls (0 cached) · 227,202 in / 20,675 out tokens · $0.3086 · 1095s
+ · 18 errors, 6 fallbacks</p>
+<details><summary>output preview</summary><pre>{
+  &quot;judge_role&quot;: &quot;judge&quot;,
+  &quot;judge_model&quot;: &quot;google/gemini-3.1-pro-preview&quot;,
+  &quot;repeats&quot;: 2,
+  &quot;scores&quot;: {
+    &quot;faithfulness&quot;: 5.0,
+    &quot;explanation&quot;: 20.0,
+    &quot;coverage&quot;: 20.0,
+    &quot;narrative&quot;: 12.0,
+    &quot;design&quot;: 7.0,
+    &quot;beyond&quot;: 0.0
+  },
+  &quot;total&quot;: 64.0,
+  &quot;hard_fail&quot;: true,
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;B1&quot;,
+      &quot;dimension&quot;: &quot;beyond&quot;,
+      &quot;points&quot;: 5,
+      &quot;hard_gate&quot;: false,
+      &quot;passes&quot;: [
+        false,
+        false
+      ],
+      &quot;auto&quot;: false,
+      &quot;issue&quot;: &quot;The deck does not contain an own-analysis slide with a reproducible artifact. Slide 8 explicitly states that a replot could not be built and falls back to a diagram.&quot;,
+      &quot;suggested_fix&quot;: &quot;Include an own-analysis slide with a reproducible artifact, such as a replot of data from the paper&#x27;s tables or a custom analysis.&quot;,
+      &quot;evidence_slide&quot;: 8,
+      &quot;evidence_paper_quote&quot;: null,
+      &quot;pass&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;B2&quot;,
+      &quot;dimension&quot;: &quot;beyond&quot;,
+      &quot;points&quot;: 5,
+      &quot;hard_gate&quot;: false,
+      &quot;passes&quot;: [
+        false,
+        false
+      ],
+      &quot;auto&quot;: false,
+      &quot;issue&quot;: &quot;The Tools &amp; Workflow slide inaccurately states &#x27;Judge no model&#x27;, whereas the pipeline facts indicate the judge used &#x27;deepseek-r1-0528&#x27;. It also fails to list all the models used in the render loop and fact-check stages.&quot;,
+      &quot;suggested_fix&quot;: &quot;Update the Tools &amp; Workflow slide to accurately reflect the pi
+...</pre></details></section><section class="card"><h2>export</h2>
+<p class="meta">no model (code only) · 0 calls (0 cached) · 0 in / 0 out tokens · $0.0000 · 337s
+</p>
+<details><summary>output preview</summary><pre></pre></details></section>
+<script type="module">import m from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';m.initialize({startOnLoad:true,theme:'neutral'});</script>

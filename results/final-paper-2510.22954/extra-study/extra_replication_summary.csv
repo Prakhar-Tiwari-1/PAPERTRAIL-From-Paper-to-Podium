@@ -1,0 +1,3 @@
+metric,paper,ours
+mean_similarity,0.72,0.77
+share_of_prompts_at_0.7_to_0.9_pct,59.0,67.0

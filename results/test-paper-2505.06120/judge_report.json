@@ -1,0 +1,362 @@
+{
+  "judge_role": "judge",
+  "judge_model": "google/gemini-3.1-pro-preview",
+  "repeats": 2,
+  "scores": {
+    "faithfulness": 25.0,
+    "explanation": 20.0,
+    "coverage": 20.0,
+    "narrative": 15.0,
+    "design": 10.0,
+    "beyond": 5.0
+  },
+  "total": 95.0,
+  "hard_fail": false,
+  "items": [
+    {
+      "id": "B1",
+      "dimension": "beyond",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 7,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "B2",
+      "dimension": "beyond",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        false,
+        true
+      ],
+      "auto": false,
+      "issue": "The Tools & Workflow slide diagram omits several models used in the pipeline (e.g., deepseek-v4-flash in Analyze, deepseek-v4-flash and claude-sonnet-5.5 in Critic loop, claude-sonnet-5.5 in Fact-check, deepseek-r1-0528 and gemini-3.1-pro-preview in Judge). Additionally, the notes incorrectly mention a Qwen model run through Ollama.",
+      "suggested_fix": "Update the diagram to include all models used per stage according to the pipeline facts, and remove the mention of the Qwen model from the notes.",
+      "evidence_slide": 14,
+      "evidence_paper_quote": null,
+      "pass": false
+    },
+    {
+      "id": "C1",
+      "dimension": "coverage",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 1,
+      "evidence_paper_quote": "LLM evaluation has predominantly focused on the single-turn, fully-specified instruction setting. In this work, we perform large-scale simulation experiments to compare LLM performance in single- and multi-turn settings.",
+      "pass": true
+    },
+    {
+      "id": "C2",
+      "dimension": "coverage",
+      "points": 6,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 1,
+      "evidence_paper_quote": "In this work, we perform large-scale simulation experiments to compare LLM performance in single- and multi-turn settings. Our experiments confirm that all the top open- and closed-weight LLMs we test exhibit significantly lower performance in multi-turn conversations than single-turn, with an average drop of 39% across six generation tasks. Analysis of 200,000+ simulated conversations decomposes the performance degradation into two components: a minor loss in aptitude and a significant increase in unreliability. We find that LLMs often make assumptions in early turns and prematurely attempt to generate final solutions, on which they overly rely. In simpler terms, we discover that when LLMs take a wrong turn in a conversation, they get lost and do not recover.",
+      "pass": true
+    },
+    {
+      "id": "C3",
+      "dimension": "coverage",
+      "points": 4,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 4,
+      "evidence_paper_quote": "We leverage sharded instructions to simulate five types of single- or multi-turn conversations... FULL... SHARDED... CONCAT... RECAP... SNOWBALL",
+      "pass": true
+    },
+    {
+      "id": "C4",
+      "dimension": "coverage",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 7,
+      "evidence_paper_quote": "Our experiments confirm that all the top open- and closed-weight LLMs we test exhibit significantly lower performance in multi-turn conversations than single-turn, with an average drop of 39% across six generation tasks.",
+      "pass": true
+    },
+    {
+      "id": "C5",
+      "dimension": "coverage",
+      "points": 4,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 11,
+      "evidence_paper_quote": "Nevertheless, a fully automated simulation limits the scope of our findings: the conversations we simulate are not representative of human-AI conversations. ... We suggest these choices imply that degradations observed in this work are most likely underestimates of what occurs in real-world, underspecified multi-turn Human-AI conversations.",
+      "pass": true
+    },
+    {
+      "id": "D1",
+      "dimension": "design",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": true,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "D2",
+      "dimension": "design",
+      "points": 2,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": true,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "D3",
+      "dimension": "design",
+      "points": 2,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": true,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "D4",
+      "dimension": "design",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 7,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "E1",
+      "dimension": "explanation",
+      "points": 8,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": "all the top open- and closed-weight LLMs we test exhibit significantly lower performance in multi-turn conversations than single-turn, with an average drop of 39% across six generation tasks.",
+      "pass": true
+    },
+    {
+      "id": "E2",
+      "dimension": "explanation",
+      "points": 6,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 3,
+      "evidence_paper_quote": "Ara has been on the school basketball team for four years now ... Ara plays 40 games per year on average ... she scores 21 points in each game",
+      "pass": true
+    },
+    {
+      "id": "E3",
+      "dimension": "explanation",
+      "points": 6,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 6,
+      "evidence_paper_quote": "Aptitude A90 is an estimate of a model’s 90th percentile score on a given instruction... Unreliability (U) ... an interpercentile range estimate between the 90th and 10th percentile scores",
+      "pass": true
+    },
+    {
+      "id": "F1",
+      "dimension": "faithfulness",
+      "points": 10,
+      "hard_gate": true,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 1,
+      "evidence_paper_quote": "with an average drop of 39% across six generation tasks",
+      "quote_verified": true,
+      "verified_quote": "with an average drop of 39% across six generation tasks",
+      "pass": true
+    },
+    {
+      "id": "F2",
+      "dimension": "faithfulness",
+      "points": 10,
+      "hard_gate": true,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 7,
+      "evidence_paper_quote": "Every model sees its performance degrade on every task when comparing FULL and SHARDED performance, with an average degradation of -39%",
+      "quote_verified": true,
+      "verified_quote": "Every model sees its performance degrade on every task when comparing FULL and SHARDED performance, with an average degradation of -39%",
+      "pass": true
+    },
+    {
+      "id": "F3",
+      "dimension": "faithfulness",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 8,
+      "evidence_paper_quote": "Figure 1: In this work, we simulate single- and multi-turn conversations for six generation tasks.",
+      "quote_verified": true,
+      "verified_quote": "Figure 1: In this work, we simulate single- and multi-turn conversations for six generation tasks.",
+      "pass": true
+    },
+    {
+      "id": "N1",
+      "dimension": "narrative",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 1,
+      "evidence_paper_quote": "Our experiments confirm that all the top open- and closed-weight LLMs we test exhibit significantly lower performance in multi-turn conversations than single-turn, with an average drop of 39% across six generation tasks.",
+      "pass": true
+    },
+    {
+      "id": "N2",
+      "dimension": "narrative",
+      "points": 4,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 2,
+      "evidence_paper_quote": "In this work, we perform large-scale simulation experiments to compare LLM performance in single- and multi-turn settings.",
+      "pass": true
+    },
+    {
+      "id": "N3",
+      "dimension": "narrative",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": true,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "N4",
+      "dimension": "narrative",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 13,
+      "evidence_paper_quote": "We provide actionable recommendations based on small-scale experiments and make a concrete call-to-action to LLM builders, urging them to prioritize multi-turn reliability in conjunction with aptitude in future model iterations.",
+      "pass": true
+    }
+  ],
+  "disagreements": [
+    "B2"
+  ]
+}

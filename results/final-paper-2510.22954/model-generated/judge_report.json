@@ -1,0 +1,356 @@
+{
+  "judge_role": "judge",
+  "judge_model": "google/gemini-3.1-pro-preview",
+  "repeats": 2,
+  "scores": {
+    "faithfulness": 5.0,
+    "explanation": 20.0,
+    "coverage": 20.0,
+    "narrative": 12.0,
+    "design": 7.0,
+    "beyond": 0.0
+  },
+  "total": 64.0,
+  "hard_fail": true,
+  "items": [
+    {
+      "id": "B1",
+      "dimension": "beyond",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        false,
+        false
+      ],
+      "auto": false,
+      "issue": "The deck does not contain an own-analysis slide with a reproducible artifact. Slide 8 explicitly states that a replot could not be built and falls back to a diagram.",
+      "suggested_fix": "Include an own-analysis slide with a reproducible artifact, such as a replot of data from the paper's tables or a custom analysis.",
+      "evidence_slide": 8,
+      "evidence_paper_quote": null,
+      "pass": false
+    },
+    {
+      "id": "B2",
+      "dimension": "beyond",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        false,
+        false
+      ],
+      "auto": false,
+      "issue": "The Tools & Workflow slide inaccurately states 'Judge no model', whereas the pipeline facts indicate the judge used 'deepseek-r1-0528'. It also fails to list all the models used in the render loop and fact-check stages.",
+      "suggested_fix": "Update the Tools & Workflow slide to accurately reflect the pipeline facts, specifically listing 'deepseek-r1-0528' for the Judge stage and including all models used in the critic and fact-check stages.",
+      "evidence_slide": 16,
+      "evidence_paper_quote": null,
+      "pass": false
+    },
+    {
+      "id": "C1",
+      "dimension": "coverage",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 1,
+      "evidence_paper_quote": "Large language models (LMs) often struggle to generate diverse, human-like creative content, raising concerns about the long-term homogenization of human thought through repeated exposure to similar outputs.",
+      "pass": true
+    },
+    {
+      "id": "C2",
+      "dimension": "coverage",
+      "points": 6,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "C3",
+      "dimension": "coverage",
+      "points": 4,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "C4",
+      "dimension": "coverage",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "C5",
+      "dimension": "coverage",
+      "points": 4,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "D1",
+      "dimension": "design",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": true,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "D2",
+      "dimension": "design",
+      "points": 2,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": true,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "D3",
+      "dimension": "design",
+      "points": 2,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": true,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "D4",
+      "dimension": "design",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        false,
+        false
+      ],
+      "auto": false,
+      "issue": "Many slides (e.g., 3, 4, 8, 9, 11, 13, 20) use generic box-and-arrow diagrams instead of real visuals from the paper. Slide 14 is also very text-heavy.",
+      "suggested_fix": "Replace generic diagrams with actual figures or data visualizations from the paper. Reduce the amount of text on slide 14.",
+      "evidence_slide": 3,
+      "evidence_paper_quote": null,
+      "pass": false
+    },
+    {
+      "id": "E1",
+      "dimension": "explanation",
+      "points": 8,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 1,
+      "evidence_paper_quote": "Overall, INFINITY-CHAT presents the first large-scale resource for systematically studying real-world open-ended queries to LMs, revealing critical insights to guide future research for mitigating long-term AI safety risks posed by the Artificial Hivemind.",
+      "pass": true
+    },
+    {
+      "id": "E2",
+      "dimension": "explanation",
+      "points": 6,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 2,
+      "evidence_paper_quote": "Figure 1: Responses to the query “Write a metaphor about time” clustered by applying PCA to reduce sentence embeddings to two dimensions. ... a dominant cluster on the left centered on the metaphor “time is a river,” and a smaller cluster on the right revolving around variations of “time is a weaver.”",
+      "pass": true
+    },
+    {
+      "id": "E3",
+      "dimension": "explanation",
+      "points": 6,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 2,
+      "evidence_paper_quote": "Using INFINITY-CHAT, we present a large-scale study of mode collapse in LMs, revealing a pronounced Artificial Hivemind effect in open-ended generation of LMs, characterized by (1) intra-model repetition ... and more so (2) inter-model homogeneity",
+      "pass": true
+    },
+    {
+      "id": "F1",
+      "dimension": "faithfulness",
+      "points": 10,
+      "hard_gate": true,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "faithfulness pass without a verbatim paper quote (no quote found in the paper)",
+      "suggested_fix": "",
+      "evidence_slide": 1,
+      "evidence_paper_quote": "in 79% of cases, the average similarity exceeds 0.8. ... DeepSeek-V3 and qwen-max-2025-01-25 share a similarity of 0.82 ... 31,250 human annotations ... 25 independent human annotations per example.",
+      "pass": false
+    },
+    {
+      "id": "F2",
+      "dimension": "faithfulness",
+      "points": 10,
+      "hard_gate": true,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "faithfulness pass without a verbatim paper quote (no quote found in the paper)",
+      "suggested_fix": "",
+      "evidence_slide": 2,
+      "evidence_paper_quote": "We uncover a pronounced Artificial Hivemind effect: (1) intra-model repetition ... and, more critically, (2) inter-model homogeneity ... correlations between human ratings and those of LMs, reward models, and LM judges drop significantly on similar-quality subsets and high-disagreement subsets",
+      "pass": false
+    },
+    {
+      "id": "F3",
+      "dimension": "faithfulness",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 2,
+      "evidence_paper_quote": "Figure 1: Responses to the query “Write a metaphor about time” clustered by applying PCA to reduce sentence embeddings to two dimensions.",
+      "quote_verified": true,
+      "verified_quote": "Figure 1: Responses to the query “Write a metaphor about time” clustered by applying PCA to reduce sentence embeddings to two dimensions.",
+      "pass": true
+    },
+    {
+      "id": "N1",
+      "dimension": "narrative",
+      "points": 5,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "N2",
+      "dimension": "narrative",
+      "points": 4,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": true
+    },
+    {
+      "id": "N3",
+      "dimension": "narrative",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        false,
+        false
+      ],
+      "auto": true,
+      "issue": "16 main slides, 2431 words of notes, planned minutes 19.5",
+      "suggested_fix": "",
+      "evidence_slide": null,
+      "evidence_paper_quote": null,
+      "pass": false
+    },
+    {
+      "id": "N4",
+      "dimension": "narrative",
+      "points": 3,
+      "hard_gate": false,
+      "passes": [
+        true,
+        true
+      ],
+      "auto": false,
+      "issue": "",
+      "suggested_fix": "",
+      "evidence_slide": 15,
+      "evidence_paper_quote": null,
+      "pass": true
+    }
+  ],
+  "disagreements": []
+}

@@ -1,0 +1,310 @@
+<!doctype html><meta charset="utf-8"><title>papertrail trace: 20261012-181956</title>
+<style>body{font:15px/1.4 system-ui,sans-serif;max-width:980px;margin:32px auto;padding:0 16px;color:#1F2328;background:#FAFAF7}
+.card{border:1px solid #D9D9D2;padding:12px 16px;margin:12px 0;background:#fff}h1{font-size:26px}h2{margin:0 0 4px;font-size:18px}
+.meta{color:#5B6470;margin:0 0 8px}pre{white-space:pre-wrap;background:#f3f3ee;padding:8px;overflow:auto}table{border-collapse:collapse}
+td,th{border:1px solid #D9D9D2;padding:2px 8px;text-align:left}</style>
+<h1>papertrail run 20261012-181956</h1><p class="meta">calls: 123 · cost usd: 4.7316 · seconds: 5356 · issues round 1: 43 · issues final: 1 · high final: 0 · rounds: 6 · judge total: 95.0</p>
+<h2>Pipeline</h2><pre class="mermaid">flowchart LR
+  classDef base fill:#FAFAF7,stroke:#1F2328,color:#1F2328
+  classDef accent fill:#0B6E99,stroke:#0B6E99,color:#FFFFFF
+  n0[&quot;Ingest&lt;br/&gt;no model&quot;]
+  class n0 base
+  n1[&quot;Understand&lt;br/&gt;claude-sonnet-5.5, deepseek-v4-flash&lt;br/&gt;5 calls, $0.47&quot;]
+  class n1 base
+  n0 --&gt; n1
+  n2[&quot;Analyze&lt;br/&gt;claude-haiku-5.5, deepseek-v4-flash&lt;br/&gt;4 calls, $0.02&quot;]
+  class n2 base
+  n1 --&gt; n2
+  n3[&quot;Author&lt;br/&gt;claude-sonnet-5.5&lt;br/&gt;2 calls, $0.87&quot;]
+  class n3 base
+  n2 --&gt; n3
+  n4[&quot;Critic loop&lt;br/&gt;gemini-3-flash, deepseek-v4-flash&lt;br/&gt;70 calls, $1.31&quot;]
+  class n4 accent
+  n3 --&gt; n4
+  n5[&quot;Fact-check&lt;br/&gt;deepseek-v4-flash, claude-sonnet-5.5&lt;br/&gt;17 calls, $1.44&quot;]
+  class n5 base
+  n4 --&gt; n5
+  n6[&quot;Judge&lt;br/&gt;gemini-3-flash, gemini-3.1-pro&lt;br/&gt;25 calls, $0.63&quot;]
+  class n6 base
+  n5 --&gt; n6
+  n7[&quot;Export&lt;br/&gt;no model&quot;]
+  class n7 base
+  n6 --&gt; n7
+</pre>
+<section class="card"><h2>ingest</h2>
+<p class="meta">no model (code only) · 0 calls (0 cached) · 0 in / 0 out tokens · $0.0000 · 6s
+</p>
+<details><summary>output preview</summary><pre>
+[p.1]
+
+## arXiv:2505.06120v1  [cs.CL]  9 May 2025
+## LLMS GET LOST IN MULTI-TURN CONVERSATION
+Philippe Laban∗♢
+Hiroaki Hayashi∗♣
+Yingbo Zhou♣
+Jennifer Neville♢
+♢Microsoft Research
+♣Salesforce Research
+{plaban,jenneville}@microsoft.com
+{hiroakihayashi,yingbo.zhou}@salesforce.com
+## ABSTRACT
+Large Language Models (LLMs) are conversational interfaces. As such, LLMs have the potential to
+assist their users not only when they can fully specify the task at hand, but also to help them define,
+explore, and refine what they need through multi-turn conversational exchange. Although analysis of
+LLM conversation logs has confirmed that underspecification occurs frequently in user instructions,
+LLM evaluation has predominantly focused on the single-turn, fully-specified instruction setting. In
+this work, we perform large-scale simulation experiments to compare LLM performance in single-
+and multi-turn settings. Our experiments confirm that all the top open- and closed-weight LLMs
+we test exhibit significantly lower performance in multi-turn conversations than single-turn, with
+an average drop of 39% across six generation tasks. Analysis of 200,000+ simulated conversations
+decomposes the performance degradation into two components: a minor loss in aptitude and a
+significant increase in unreliability. We find that LLMs often make assumptions in early turns and
+prematurely attempt to generate
+...</pre></details></section><section class="card"><h2>digest</h2>
+<p class="meta">deepseek-v4-flash ×1 · 1 calls (0 cached) · 21,516 in / 2,483 out tokens · $0.0059 · 37s
+</p>
+<details><summary>output preview</summary><pre>{
+  &quot;problem&quot;: &quot;Large Language Models (LLMs) are typically evaluated in single-turn, fully-specified settings, but real-world usage involves multi-turn conversations where users gradually reveal requirements (underspecification). This work investigates whether LLMs suffer performance degradation when moving from single-turn to multi-turn underspecified conversations, and decomposes the degradation into loss of aptitude versus increase in unreliability.&quot;,
+  &quot;contributions&quot;: [
+    &quot;A large-scale simulation environment (sharded simulation) that transforms single-turn fully-specified instructions into multi-turn underspecified conversations, enabling controlled comparison of LLM performance across settings.&quot;,
+    &quot;Demonstration that all 15 tested LLMs exhibit significant performance degradation in multi-turn underspecified conversations (average drop of 39% across six generation tasks), termed the &#x27;Lost in Conversation&#x27; phenomenon.&quot;,
+    &quot;Decomposition of performance degradation into two components: a minor loss in aptitude (average drop of 16%) and a large increase in unreliability (average increase of 112%), showing that unreliability is the dominant factor.&quot;,
+    &quot;Identification of four root causes: premature answer attempts, over-reliance on previous incorrect answers, loss-of-middle-turns phenomenon, and overly verbose responses.&quot;,
+    &quot;Evidence that common remediations (agent
+...</pre></details></section><section class="card"><h2>difficulty</h2>
+<p class="meta">claude-sonnet-5.5 ×1 · 1 calls (0 cached) · 32,743 in / 7,084 out tokens · $0.1363 · 53s
+</p>
+<details><summary>output preview</summary><pre>{
+  &quot;concepts&quot;: [
+    {
+      &quot;concept&quot;: &quot;Sharding an instruction (turning one fully-specified instruction into shards revealed one per turn)&quot;,
+      &quot;why_hard&quot;: &quot;multi-step&quot;,
+      &quot;prerequisites&quot;: [
+        &quot;Single-turn benchmark instructions such as GSM8K, HumanEval and Spider&quot;,
+        &quot;Idea of underspecification: the user does not state everything up front&quot;
+      ],
+      &quot;misconception_to_avoid&quot;: &quot;Shards are not a random split or a paraphrase that drops information. Together they carry the same information as the original. Shard 1 always states the high-level intent, and later shards add clarifications. The user simulator reveals at most one shard per turn.&quot;,
+      &quot;device&quot;: &quot;worked_example&quot;,
+      &quot;device_material&quot;: &quot;Use task_id sharded-GSM8K/1246 (math, 4 shards). Original: &#x27;Ara joined the school basketball team four years ago. She has been playing 40 games every year. If her score for every game is 21 points, calculate the total number of points she has scored in the four years.&#x27; Show it turn by turn. Turn 1 (shard 1, the intent): \&quot;what&#x27;s Ara&#x27;s total basketball score over four years?\&quot; Turn 2 (shard 2): \&quot;Ara has been on the school basketball team for four years now\&quot;. Turn 3 (shard 3): \&quot;Ara plays 40 games per year on average\&quot;. Turn 4 (shard 4): \&quot;she scores 21 points in each game\&quot;. Point out that after turns 1-3 the problem cannot be solved, and the answer only be
+...</pre></details></section><section class="card"><h2>prior_work</h2>
+<p class="meta">claude-haiku-5.5 ×1 · 1 calls (0 cached) · 17,749 in / 1,505 out tokens · $0.0025 · 85s
+ · 2 errors, 1 fallbacks</p>
+<details><summary>output preview</summary><pre>{
+  &quot;works&quot;: [
+    {
+      &quot;title&quot;: &quot;Lost in the middle: How language models use long contexts&quot;,
+      &quot;year&quot;: 2024,
+      &quot;relation&quot;: &quot;builds-on&quot;,
+      &quot;point&quot;: &quot;Positional degradation in long contexts is the precedent for this paper&#x27;s &#x27;loss-of-middle-turns&#x27; root cause, where information revealed mid-conversation is underused.&quot;,
+      &quot;used_for&quot;: &quot;motivation&quot;,
+      &quot;semantic_scholar_id&quot;: null,
+      &quot;in_paper_refs&quot;: true
+    },
+    {
+      &quot;title&quot;: &quot;Are you sure? Challenging LLMs leads to performance drops in the FlipFlop experiment&quot;,
+      &quot;year&quot;: 2023,
+      &quot;relation&quot;: &quot;builds-on&quot;,
+      &quot;point&quot;: &quot;Earlier work by the same group shows LLMs abandon correct answers under multi-turn pushback, which the paper extends to underspecified information gathering and to the over-reliance on prior incorrect answers.&quot;,
+      &quot;used_for&quot;: &quot;motivation&quot;,
+      &quot;semantic_scholar_id&quot;: null,
+      &quot;in_paper_refs&quot;: true
+    },
+    {
+      &quot;title&quot;: &quot;MultiChallenge: A realistic multi-turn conversation evaluation benchmark challenging to frontier LLMs&quot;,
+      &quot;year&quot;: 2025,
+      &quot;relation&quot;: &quot;contrasts&quot;,
+      &quot;point&quot;: &quot;Also evaluates multi-turn instruction retention, but uses human-written realistic conversations and does not isolate underspecification via fully-specified versus sharded instructions on the same tasks.&quot;,
+      &quot;used_for&quot;: &quot;contrast slide&quot;,
+      &quot;semantic_scholar_id&quot;: null,
+      
+...</pre></details></section><section class="card"><h2>plan</h2>
+<p class="meta">claude-sonnet-5.5 ×2 · 2 calls (0 cached) · 60,544 in / 20,446 out tokens · $0.3255 · 130s
+</p>
+<details><summary>output preview</summary><pre>{
+  &quot;story_arc&quot;: &quot;Users reveal what they want over several turns, but LLMs are tested on one complete prompt. We turn complete instructions into shards revealed one per turn and run over 200,000 simulated conversations in FULL, CONCAT and SHARDED. Every model drops, by 39% on average. Aptitude falls 16% while unreliability rises 112%, so models get lost and do not recover. Earlier multi-turn benchmarks were episodic, and the Translation control shows episodic tasks do not degrade. Temperature 0 and recaps only partly help. We close with limits, our own reading of Table 1, and tools.&quot;,
+  &quot;slides&quot;: [
+    {
+      &quot;id&quot;: &quot;s1&quot;,
+      &quot;title&quot;: &quot;LLMs Get Lost in Conversation&quot;,
+      &quot;purpose&quot;: &quot;Title slide with paper, authors, venue and talk framing.&quot;,
+      &quot;key_points&quot;: [
+        &quot;Laban et al., LLMs Get Lost in Multi-Turn Conversation&quot;,
+        &quot;15 LLMs, six generation tasks&quot;,
+        &quot;Single-turn versus multi-turn underspecified instructions&quot;
+      ],
+      &quot;device&quot;: &quot;none&quot;,
+      &quot;concept&quot;: null,
+      &quot;figure_ref&quot;: null,
+      &quot;table_ref&quot;: null,
+      &quot;plot_request&quot;: null,
+      &quot;diagram_request&quot;: null,
+      &quot;layout&quot;: &quot;title&quot;,
+      &quot;anchors&quot;: [
+        &quot;p.1&quot;
+      ],
+      &quot;minutes&quot;: 0.5
+    },
+    {
+      &quot;id&quot;: &quot;s2&quot;,
+      &quot;title&quot;: &quot;A math problem a model solves in one turn gets lost when its facts arrive over several turns&quot;,
+      &quot;purpose&quot;: &quot;Open with a concrete multi-turn co
+...</pre></details></section><section class="card"><h2>analyze</h2>
+<p class="meta">claude-haiku-5.5 ×2, deepseek-v4-flash ×2 · 4 calls (0 cached) · 125,479 in / 16,149 out tokens · $0.0174 · 715s
+ · 6 errors, 2 fallbacks</p>
+<details><summary>output preview</summary><pre># Analysis notes
+
+## replot-table1 (replot): OK
+- request: Grouped bars of FULL, CONCAT and SHARDED averaged performance per model, sorted by FULL score, from Table 1 as printed.
+- files: replot-table1.csv, replot-table1.svg
+- caption: Re-plot of Laban et al., 2025, Table 1; data: artifacts/replot-table1.csv
+- notes: Grouped bars of FULL, CONCAT and SHARDED averages per model, sorted by FULL (descending). FULL runs from 78.1 (2.5-Pro) down to 43.3 (3.1-8B); SHARDED is lower for every model, from 47.3 (2.5-Pro) to 21.2 (OLMo2). Assumptions: the parsed Table 1 is read as three setting blocks of six tasks each, which the &#x27;-&#x27; placement supports but the garbled header does not confirm. Averages are over the tasks printed; Phi-4 and OLMo2 have a &#x27;-&#x27; for Summary, so their averages use five tasks (flagged in the CSV n_tasks columns).
+
+## explain-a90-u (explanatory_graph): FAILED
+- request: Strip plot of 10 simulation scores for one instruction in FULL and SHARDED, marking the 10th and 90th percentiles to show A90 and U.
+- notes: 
+
+## our-drop-vs-full (our_result): FAILED
+- request: Scatter of FULL score against point drop to SHARDED for each model, values read from Table 1.
+- notes: Not plotted. tables.json holds Table 1 as 20 unlabeled numbers per model. The parsed column headers are lost, so I cannot tell which values are FULL and which are SHARDED. The 18 task values appear to be si
+...</pre></details></section><section class="card"><h2>author</h2>
+<p class="meta">claude-sonnet-5.5 ×2 · 2 calls (0 cached) · 122,554 in / 62,448 out tokens · $0.8696 · 383s
+</p>
+<details><summary>output preview</summary><pre>---
+theme: ./theme
+routerMode: hash
+canvasWidth: 1280
+aspectRatio: 16/9
+fonts:
+  provider: none
+  sans: Inter
+  mono: JetBrains Mono
+layout: title
+---
+# LLMs Get Lost in Multi-Turn Conversation
+
+Fifteen LLMs lose 39% on average when instructions arrive in pieces
+
+&lt;!--
+Hi everyone. Today we&#x27;re covering a paper by Laban and colleagues, called LLMs Get Lost in Multi-Turn Conversation. People rarely type a complete request in one go. They start with a rough idea and add details over several turns. The authors tested fifteen models on six generation tasks. Every model got worse when the details arrived in pieces, by thirty-nine percent on average. We&#x27;ll go through how they tested it, what they found, and where we&#x27;d be careful. We start with a concrete example.
+--&gt;
+
+---
+layout: claim-figure
+---
+# A solvable math problem gets lost over turns
+
+&lt;img src=&quot;/figures/fig8.svg&quot; /&gt;
+&lt;SourceCaption&gt;Laban et al., 2025, Fig. 8: Math task, Llama3.1-8B-Instruct&lt;/SourceCaption&gt;
+
+Performance is the task score. Across 15 LLMs and six tasks: 90% single-turn, 65% multi-turn.
+
+&lt;!--
+Let&#x27;s start with an example from the paper. This is a math task, simulated with Llama3.1-8B-Instruct. The figure shows one simulated conversation: the user turns, which add one fact at a time, and the assistant replies in between. The text inside is small, so look at the first and last user turns and see how much the problem h
+...</pre></details></section><section class="card"><h2>render_loop</h2>
+<p class="meta">gemini-3-flash-preview ×95, deepseek-v4-flash ×5, claude-sonnet-5.5 ×4 · 104 calls (34 cached) · 365,831 in / 103,844 out tokens · $1.3090 · 1492s
+ · 5 errors, 0 fallbacks</p><table><tr><th>round</th><th>issues</th><th>high</th><th>by source</th></tr><tr><td>1</td><td>43</td><td>17</td><td>{&quot;vision_slide&quot;: 32, &quot;vision_deck&quot;: 2, &quot;student&quot;: 9}</td></tr><tr><td>2</td><td>41</td><td>14</td><td>{&quot;automatic&quot;: 1, &quot;vision_slide&quot;: 31, &quot;vision_deck&quot;: 2, &quot;student&quot;: 7}</td></tr><tr><td>3</td><td>1</td><td>1</td><td>{&quot;automatic&quot;: 1}</td></tr><tr><td>4</td><td>1</td><td>1</td><td>{&quot;automatic&quot;: 1}</td></tr><tr><td>5</td><td>1</td><td>0</td><td>{&quot;automatic&quot;: 1}</td></tr><tr><td>6</td><td>1</td><td>0</td><td>{&quot;automatic&quot;: 1}</td></tr></table>
+<details><summary>output preview</summary><pre>{
+  &quot;mode&quot;: &quot;full&quot;,
+  &quot;rounds_run&quot;: 6,
+  &quot;final_high&quot;: 0,
+  &quot;final_by_category&quot;: {
+    &quot;scattered_bold&quot;: 1
+  },
+  &quot;finished&quot;: true,
+  &quot;rounds&quot;: [
+    {
+      &quot;round&quot;: 1,
+      &quot;n_issues&quot;: 43,
+      &quot;n_high&quot;: 17,
+      &quot;by_source&quot;: {
+        &quot;vision_slide&quot;: 32,
+        &quot;vision_deck&quot;: 2,
+        &quot;student&quot;: 9
+      },
+      &quot;by_category&quot;: {
+        &quot;Insufficient Color Contrast for Readability&quot;: 1,
+        &quot;Improper Font Sizing&quot;: 2,
+        &quot;Content Overflow/Cut-off&quot;: 10,
+        &quot;Object Alignment Issues&quot;: 8,
+        &quot;Occluded Content&quot;: 4,
+        &quot;Unbalanced Space Distribution or Gapping&quot;: 6,
+        &quot;Poor Text Hierarchy&quot;: 1,
+        &quot;Inconsistent Layout Across Slides&quot;: 1,
+        &quot;Content Logical Flow Issues&quot;: 1,
+        &quot;undefined_term&quot;: 4,
+        &quot;missing_step&quot;: 3,
+        &quot;unclear_figure&quot;: 1,
+        &quot;forward_reference&quot;: 1
+      },
+      &quot;issues&quot;: [
+        {
+          &quot;round&quot;: 1,
+          &quot;source&quot;: &quot;vision_slide&quot;,
+          &quot;slide&quot;: 1,
+          &quot;category&quot;: &quot;Insufficient Color Contrast for Readability&quot;,
+          &quot;severity&quot;: &quot;high&quot;,
+          &quot;detail&quot;: &quot;The thin white and yellow text has poor contrast against the busy background image. | fix: Increase the font weight of the subtitle (element 2).; Add a semi-transparent dark overlay or a subtle text shadow behind the white and yellow text to separate it from the complex background image.; Consider changing the yellow text to
+...</pre></details></section><section class="card"><h2>factcheck</h2>
+<p class="meta">deepseek-v4-flash ×21, claude-sonnet-5.5 ×6 · 27 calls (10 cached) · 282,953 in / 130,043 out tokens · $1.4394 · 675s
+ · 3 errors, 0 fallbacks</p>
+<details><summary>output preview</summary><pre>{
+  &quot;n_extracted&quot;: 68,
+  &quot;n_matched&quot;: 68,
+  &quot;unmatched&quot;: [],
+  &quot;waived&quot;: []
+}</pre></details></section><section class="card"><h2>judge</h2>
+<p class="meta">deepseek-r1-0528 ×1, gemini-3-flash-preview ×14, gemini-3.1-pro-preview ×10 · 25 calls (0 cached) · 438,170 in / 36,210 out tokens · $0.6258 · 1676s
+ · 43 errors, 14 fallbacks</p>
+<details><summary>output preview</summary><pre>{
+  &quot;judge_role&quot;: &quot;judge&quot;,
+  &quot;judge_model&quot;: &quot;google/gemini-3.1-pro-preview&quot;,
+  &quot;repeats&quot;: 2,
+  &quot;scores&quot;: {
+    &quot;faithfulness&quot;: 25.0,
+    &quot;explanation&quot;: 20.0,
+    &quot;coverage&quot;: 20.0,
+    &quot;narrative&quot;: 15.0,
+    &quot;design&quot;: 10.0,
+    &quot;beyond&quot;: 5.0
+  },
+  &quot;total&quot;: 95.0,
+  &quot;hard_fail&quot;: false,
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;B1&quot;,
+      &quot;dimension&quot;: &quot;beyond&quot;,
+      &quot;points&quot;: 5,
+      &quot;hard_gate&quot;: false,
+      &quot;passes&quot;: [
+        true,
+        true
+      ],
+      &quot;auto&quot;: false,
+      &quot;issue&quot;: &quot;&quot;,
+      &quot;suggested_fix&quot;: &quot;&quot;,
+      &quot;evidence_slide&quot;: 7,
+      &quot;evidence_paper_quote&quot;: null,
+      &quot;pass&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;B2&quot;,
+      &quot;dimension&quot;: &quot;beyond&quot;,
+      &quot;points&quot;: 5,
+      &quot;hard_gate&quot;: false,
+      &quot;passes&quot;: [
+        false,
+        true
+      ],
+      &quot;auto&quot;: false,
+      &quot;issue&quot;: &quot;The Tools &amp; Workflow slide diagram omits several models used in the pipeline (e.g., deepseek-v4-flash in Analyze, deepseek-v4-flash and claude-sonnet-5.5 in Critic loop, claude-sonnet-5.5 in Fact-check, deepseek-r1-0528 and gemini-3.1-pro-preview in Judge). Additionally, the notes incorrectly mention a Qwen model run through Ollama.&quot;,
+      &quot;suggested_fix&quot;: &quot;Update the diagram to include all models used per stage according to the pipeline facts, and remove the mention of the Qwen model from the notes.&quot;,
+      &quot;evidence_slide&quot;: 14,
+      &quot;evidence_paper_quote&quot;: null,
+      &quot;pass&quot;: false
+    },
+    
+...</pre></details></section><section class="card"><h2>export</h2>
+<p class="meta">no model (code only) · 0 calls (0 cached) · 0 in / 0 out tokens · $0.0000 · 106s
+</p>
+<details><summary>output preview</summary><pre></pre></details></section>
+<script type="module">import m from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';m.initialize({startOnLoad:true,theme:'neutral'});</script>

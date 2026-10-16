@@ -1,0 +1,16 @@
+parameter,value
+prompts,100
+ci_level_pct,95
+samples_per_prompt,50
+top_p,0.9
+temperature,1.0
+max_new_tokens_chat,2048
+max_new_tokens_base,512
+truncate_words,64
+embedding_main,Qwen/Qwen3-Embedding-0.6B
+embedding_second,sentence-transformers/all-mpnet-base-v2
+models_compared,8
+model_families,3
+olmo_stages,4
+gpu,Tesla T4
+random_pair_similarity_ours,0.151

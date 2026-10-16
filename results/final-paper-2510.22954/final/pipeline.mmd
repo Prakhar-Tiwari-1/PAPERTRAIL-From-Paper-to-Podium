@@ -1,0 +1,26 @@
+flowchart LR
+  classDef base fill:#FAFAF7,stroke:#1F2328,color:#1F2328
+  classDef accent fill:#0B6E99,stroke:#0B6E99,color:#FFFFFF
+  n0["Ingest<br/>no model"]
+  class n0 base
+  n1["Understand<br/>claude-sonnet-5.5, deepseek-v4-flash<br/>5 calls, $0.45"]
+  class n1 base
+  n0 --> n1
+  n2["Analyze<br/>claude-haiku-5.5<br/>4 calls, $0.02"]
+  class n2 base
+  n1 --> n2
+  n3["Author<br/>claude-sonnet-5.5<br/>2 calls, $1.14"]
+  class n3 base
+  n2 --> n3
+  n4["Critic loop<br/>gemini-3-flash, claude-sonnet-5.5<br/>44 calls, $1.26"]
+  class n4 accent
+  n3 --> n4
+  n5["Fact-check<br/>deepseek-v4-flash, claude-sonnet-5.5<br/>19 calls, $0.43"]
+  class n5 base
+  n4 --> n5
+  n6["Judge<br/>gemini-3-flash, gemini-3.1-pro<br/>13 calls, $0.31"]
+  class n6 base
+  n5 --> n6
+  n7["Export<br/>no model"]
+  class n7 base
+  n6 --> n7

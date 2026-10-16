@@ -1,0 +1,31 @@
+{
+  "run": "20261012-181956",
+  "run_usd": 4.73157,
+  "calls": 123,
+  "by_model": {
+    "deepseek/deepseek-v4-flash": 0.031493,
+    "anthropic/claude-sonnet-5.5": 3.925592,
+    "anthropic/claude-haiku-5.5": 0.013352,
+    "google/gemini-3-flash-preview": 0.289123,
+    "deepseek/deepseek-r1-0528": 0.017964,
+    "google/gemini-3.1-pro-preview": 0.454046
+  },
+  "by_role": {
+    "digest": 0.005909,
+    "difficulty": 0.136326,
+    "prior_work": 0.002527,
+    "planner": 0.325548,
+    "analyst": 0.017441,
+    "author": 3.463718,
+    "vision_critic": 0.135361,
+    "student_critic": 0.007401,
+    "fact_extractor": 0.011566,
+    "checklist": 0.017964,
+    "judge": 0.607809
+  },
+  "caps": {
+    "per_run_usd": 5.0,
+    "total_usd": 8.0,
+    "estimate_margin": 1.0
+  }
+}

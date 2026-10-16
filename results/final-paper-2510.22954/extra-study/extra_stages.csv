@@ -1,0 +1,9 @@
+model,family,stage,sim_full,sim_64w,sim_mpnet_64w,trigram_jaccard,avg_words,capped_pct
+OLMo base,OLMo 2 1B,base,0.418,0.476,0.349,0.005,209.753,30.1
+OLMo SFT,OLMo 2 1B,SFT,0.704,0.701,0.663,0.027,114.912,0.0
+OLMo DPO,OLMo 2 1B,DPO,0.763,0.749,0.728,0.03,187.729,0.0
+OLMo final,OLMo 2 1B,final,0.769,0.753,0.729,0.031,172.497,0.0
+Qwen base,Qwen2.5 1.5B,base,0.604,0.618,0.558,0.015,208.309,19.2
+Qwen inst,Qwen2.5 1.5B,inst,0.766,0.766,0.737,0.048,112.825,0.1
+SmolLM base,SmolLM2 1.7B,base,0.432,0.488,0.389,0.005,199.473,32.3
+SmolLM inst,SmolLM2 1.7B,inst,0.767,0.759,0.736,0.038,120.482,0.2

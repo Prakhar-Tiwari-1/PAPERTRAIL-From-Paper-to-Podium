@@ -1,0 +1,35 @@
+{
+  "run": "20261015-155838",
+  "run_usd": 3.686357,
+  "calls": 90,
+  "by_model": {
+    "deepseek/deepseek-v4-flash": 0.020511,
+    "anthropic/claude-sonnet-5.5": 3.25287,
+    "anthropic/claude-haiku-5.5": 0.023265,
+    "google/gemini-3-flash-preview": 0.137438,
+    "deepseek/deepseek-r1-0528": 0.015241,
+    "google/gemini-3.1-pro-preview": 0.237032
+  },
+  "by_role": {
+    "digest": 0.004412,
+    "difficulty": 0.1175,
+    "prior_work": 0.001983,
+    "planner": 0.325886,
+    "analyst": 0.021283,
+    "quiz": 0.059414,
+    "style": 0.010397,
+    "author": 1.144098,
+    "vision_critic": 0.068179,
+    "student_critic": 0.011127,
+    "reviser": 1.605972,
+    "fact_extractor": 0.004972,
+    "checklist": 0.015241,
+    "judge": 0.293341,
+    "style_compare": 0.002553
+  },
+  "caps": {
+    "per_run_usd": 10.0,
+    "total_usd": 16.25,
+    "estimate_margin": 1.0
+  }
+}
